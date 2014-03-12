@@ -1,0 +1,65 @@
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/OSDI/!svn/ver/9/u0256043/lab1/linux-0.11/include/linux
+END
+hdreg.h
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/OSDI/!svn/ver/9/u0256043/lab1/linux-0.11/include/linux/hdreg.h
+END
+mm.h
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/OSDI/!svn/ver/9/u0256043/lab1/linux-0.11/include/linux/mm.h
+END
+sys.h
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/OSDI/!svn/ver/9/u0256043/lab1/linux-0.11/include/linux/sys.h
+END
+kernel.h
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/OSDI/!svn/ver/9/u0256043/lab1/linux-0.11/include/linux/kernel.h
+END
+tty.h
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/OSDI/!svn/ver/9/u0256043/lab1/linux-0.11/include/linux/tty.h
+END
+head.h
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/OSDI/!svn/ver/9/u0256043/lab1/linux-0.11/include/linux/head.h
+END
+config.h
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/OSDI/!svn/ver/9/u0256043/lab1/linux-0.11/include/linux/config.h
+END
+sched.h
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/OSDI/!svn/ver/42/u0256043/lab1/linux-0.11/include/linux/sched.h
+END
+fdreg.h
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/OSDI/!svn/ver/9/u0256043/lab1/linux-0.11/include/linux/fdreg.h
+END
+fs.h
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/OSDI/!svn/ver/9/u0256043/lab1/linux-0.11/include/linux/fs.h
+END

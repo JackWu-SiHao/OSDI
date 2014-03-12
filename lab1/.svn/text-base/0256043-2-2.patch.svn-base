@@ -1,0 +1,70 @@
+Index: linux-0.11/boot/bootsect.s
+===================================================================
+--- linux-0.11/boot/bootsect.s	(revision 104)
++++ linux-0.11/boot/bootsect.s	(working copy)
+@@ -67,26 +67,39 @@
+ 	mov	$0xFF00, %sp		# arbitrary value >>512
+ 
+ 	# implement here, load hello to memory
+-# load_hello:
+-# 	mov $0x0000, %dx	# drive 0, head 0
+-# 	mov $0x0002, %cx	# cylinder 0, sector 2
+-# 	mov $0x0200, %bx 	# data buffer, 512KB for hello
+-# 	.equ    AX, 0x0200+HELLOLEN
+-# 	mov $AX, %ax
+-# 	mov $HELLOSEG, %es
+-# 	int $0x13
+-# 	.equ sel_cs0, 0x0100
+-# 	ljmp $sel_cs0,$0
++load_hello:
++	mov	$0x0000, %dx		# drive 0, head 0
++	mov	$0x0002, %cx		# sector 2, track 0    mov	$0x0003, %cx
++	mov	$0x0200, %bx		# address = 512, in INITSEG
++	.equ    AX, 0x0200+HELLOLEN     # .equ    AX, 0x0200+SETUPLEN
++	mov     $AX, %ax		# service 2, nr of sectors
++	int	$0x13			# read it
++	jnc	ok_load_hello		# ok - continue
++	mov	$0x0000, %dx
++	mov	$0x0000, %ax		# reset the diskette
++	int	$0x13
++	jmp	load_hello
+ 
++ok_load_hello:
++	mov	$0x00, %dl
++	mov	$0x0800, %ax		# AH=8 is get drive parameters
++	int	$0x13
++	mov	$0x00, %ch
++	#seg cs
++	mov	%cx, %cs:sectors+0	# %cs means sectors is in %cs
++	mov	$HELLOSEG, %ax       # mov	$INITSEG, %ax
++	mov	%ax, %es
++	jmp pass_setup           # should not pass here
+ 
++
+ # load the setup-sectors directly after the bootblock.
+ # Note that 'es' is already set up.
+ 
+ load_setup:
+ 	mov	$0x0000, %dx		# drive 0, head 0
+-	mov	$0x0002, %cx		# sector 3, track 0    mov	$0x0003, %cx
++	mov	$0x0003, %cx		# sector 3, track 0    mov	$0x0003, %cx
+ 	mov	$0x0200, %bx		# address = 512, in INITSEG
+-	.equ    AX, 0x0200+HELLOLEN     # .equ    AX, 0x0200+SETUPLEN
++	.equ    AX, 0x0200+SETUPLEN     # .equ    AX, 0x0200+SETUPLEN
+ 	mov     $AX, %ax		# service 2, nr of sectors
+ 	int	$0x13			# read it
+ 	jnc	ok_load_setup		# ok - continue
+@@ -105,11 +118,12 @@
+ 	mov	$0x00, %ch
+ 	#seg cs
+ 	mov	%cx, %cs:sectors+0	# %cs means sectors is in %cs
+-	mov	$HELLOSEG, %ax       # mov	$INITSEG, %ax
++	mov	$INITSEG, %ax       # mov	$INITSEG, %ax
+ 	mov	%ax, %es
+ 
+ # Print some inane message
+ 
++pass_setup:
+ 	mov	$0x03, %ah		# read cursor pos
+ 	xor	%bh, %bh
+ 	int	$0x10

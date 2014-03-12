@@ -1,0 +1,83 @@
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/OSDI/!svn/ver/9/u0256043/lab1/linux-0.11/lib
+END
+execve.c
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/OSDI/!svn/ver/9/u0256043/lab1/linux-0.11/lib/execve.c
+END
+open.c
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/OSDI/!svn/ver/9/u0256043/lab1/linux-0.11/lib/open.c
+END
+ctype.c
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/OSDI/!svn/ver/9/u0256043/lab1/linux-0.11/lib/ctype.c
+END
+wait.c
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/OSDI/!svn/ver/9/u0256043/lab1/linux-0.11/lib/wait.c
+END
+close.c
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/OSDI/!svn/ver/9/u0256043/lab1/linux-0.11/lib/close.c
+END
+errno.c
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/OSDI/!svn/ver/9/u0256043/lab1/linux-0.11/lib/errno.c
+END
+string.c
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/OSDI/!svn/ver/9/u0256043/lab1/linux-0.11/lib/string.c
+END
+malloc.c
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/OSDI/!svn/ver/9/u0256043/lab1/linux-0.11/lib/malloc.c
+END
+_exit.c
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/OSDI/!svn/ver/9/u0256043/lab1/linux-0.11/lib/_exit.c
+END
+dup.c
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/OSDI/!svn/ver/9/u0256043/lab1/linux-0.11/lib/dup.c
+END
+write.c
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/OSDI/!svn/ver/9/u0256043/lab1/linux-0.11/lib/write.c
+END
+setsid.c
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/OSDI/!svn/ver/9/u0256043/lab1/linux-0.11/lib/setsid.c
+END
+Makefile
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/OSDI/!svn/ver/9/u0256043/lab1/linux-0.11/lib/Makefile
+END

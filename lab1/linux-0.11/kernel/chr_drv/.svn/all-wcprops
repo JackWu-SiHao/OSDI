@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/OSDI/!svn/ver/9/u0256043/lab1/linux-0.11/kernel/chr_drv
+END
+serial.c
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/OSDI/!svn/ver/9/u0256043/lab1/linux-0.11/kernel/chr_drv/serial.c
+END
+keyboard.S
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/OSDI/!svn/ver/9/u0256043/lab1/linux-0.11/kernel/chr_drv/keyboard.S
+END
+console.c
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/OSDI/!svn/ver/9/u0256043/lab1/linux-0.11/kernel/chr_drv/console.c
+END
+tty_io.c
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/OSDI/!svn/ver/9/u0256043/lab1/linux-0.11/kernel/chr_drv/tty_io.c
+END
+tty_ioctl.c
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/OSDI/!svn/ver/9/u0256043/lab1/linux-0.11/kernel/chr_drv/tty_ioctl.c
+END
+rs_io.s
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/OSDI/!svn/ver/9/u0256043/lab1/linux-0.11/kernel/chr_drv/rs_io.s
+END
+Makefile
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/OSDI/!svn/ver/9/u0256043/lab1/linux-0.11/kernel/chr_drv/Makefile
+END

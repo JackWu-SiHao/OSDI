@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/OSDI/!svn/ver/9/u0256043/lab1/linux-0.11/mm
+END
+memory.c
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/OSDI/!svn/ver/9/u0256043/lab1/linux-0.11/mm/memory.c
+END
+Makefile
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/OSDI/!svn/ver/9/u0256043/lab1/linux-0.11/mm/Makefile
+END
+page.s
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/OSDI/!svn/ver/9/u0256043/lab1/linux-0.11/mm/page.s
+END

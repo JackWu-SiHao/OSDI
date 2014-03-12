@@ -1,0 +1,57 @@
+Index: osdi.img
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: linux-0.11/boot/bootsect.s
+===================================================================
+--- linux-0.11/boot/bootsect.s	(revision 105)
++++ linux-0.11/boot/bootsect.s	(working copy)
+@@ -47,8 +47,9 @@
+ # ROOT_DEV:	0x000 - same type of floppy as boot.
+ #		0x301 - first partition on first drive etc
+ 	.equ ROOT_DEV, 0x301
++
+ 	ljmp    $BOOTSEG, $_start
+-_start:
++_start:					# bootloader move itself to 0x9000
+ 	mov	$BOOTSEG, %ax
+ 	mov	%ax, %ds
+ 	mov	$INITSEG, %ax
+@@ -66,6 +67,16 @@
+ 	mov	%ax, %ss
+ 	mov	$0xFF00, %sp		# arbitrary value >>512
+ 
++
++# Multi booting support
++multi_boot:
++	mov $0x00, %ah
++	int $0x16
++	cmp $0x0031, %al   # press 1
++	je load_setup
++	cmp $0x0032, %al
++	jne multi_boot
++
+ 	# implement here, load hello to memory
+ load_hello:
+ 	mov	$0x0000, %dx		# drive 0, head 0
+@@ -94,7 +105,7 @@
+ 
+ # load the setup-sectors directly after the bootblock.
+ # Note that 'es' is already set up.
+-
++# protected mode
+ load_setup:
+ 	mov	$0x0000, %dx		# drive 0, head 0
+ 	mov	$0x0003, %cx		# sector 3, track 0    mov	$0x0003, %cx
+Index: linux-0.11/init/main.c
+===================================================================
+--- linux-0.11/init/main.c	(revision 42)
++++ linux-0.11/init/main.c	(working copy)
+@@ -138,6 +138,7 @@
+ 	floppy_init();
+ 	sti();
+ 	move_to_user_mode();
++	// after moving the user mode, cant do any kernel stuff
+ 	if (!fork()) {
+ 		init();
+ 	}

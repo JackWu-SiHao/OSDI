@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/OSDI/!svn/ver/9/u0256043/lab1/linux-0.11/include/asm
+END
+segment.h
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/OSDI/!svn/ver/9/u0256043/lab1/linux-0.11/include/asm/segment.h
+END
+system.h
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/OSDI/!svn/ver/9/u0256043/lab1/linux-0.11/include/asm/system.h
+END
+io.h
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/OSDI/!svn/ver/9/u0256043/lab1/linux-0.11/include/asm/io.h
+END
+memory.h
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/OSDI/!svn/ver/9/u0256043/lab1/linux-0.11/include/asm/memory.h
+END

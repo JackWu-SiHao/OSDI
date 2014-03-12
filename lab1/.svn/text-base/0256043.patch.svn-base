@@ -1,0 +1,68 @@
+Index: osdi.img
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: linux-0.11/include/linux/sched.h
+===================================================================
+--- linux-0.11/include/linux/sched.h	(revision 38)
++++ linux-0.11/include/linux/sched.h	(working copy)
+@@ -1,7 +1,7 @@
+ #ifndef _SCHED_H
+ #define _SCHED_H
+ //hoho
+-#define NR_TASKS 1//64
++#define NR_TASKS 64
+ #define HZ 100
+ 
+ #define FIRST_TASK task[0]
+Index: linux-0.11/init/main.c
+===================================================================
+--- linux-0.11/init/main.c	(revision 38)
++++ linux-0.11/init/main.c	(working copy)
+@@ -116,7 +116,7 @@
+ 	memory_end &= 0xfffff000;
+ 	if (memory_end > 16*1024*1024)
+ 		memory_end = 16*1024*1024;
+-	if (memory_end > 12*1024*1024) 
++	if (memory_end > 12*1024*1024)
+ 		buffer_memory_end = 4*1024*1024;
+ 	else if (memory_end > 6*1024*1024)
+ 		buffer_memory_end = 2*1024*1024;
+@@ -137,9 +137,8 @@
+ 	hd_init();
+ 	floppy_init();
+ 	sti();
+-	panic(""); //hahaha
+ 	move_to_user_mode();
+-	if (!fork()) {		/* we count on this going ok */
++	if (!fork()) {
+ 		init();
+ 	}
+ /*
+@@ -201,6 +200,7 @@
+ 			(void) open("/dev/tty0",O_RDWR,0);
+ 			(void) dup(0);
+ 			(void) dup(0);
++			printf("%s\n", "Hello 0256043");
+ 			_exit(execve("/bin/sh",argv,envp));
+ 		}
+ 		while (1)
+Index: linux-0.11/Makefile
+===================================================================
+--- linux-0.11/Makefile	(revision 38)
++++ linux-0.11/Makefile	(working copy)
+@@ -34,11 +34,11 @@
+ LIBS	=lib/lib.a
+ 
+ .c.s:
+-@$(CC) $(CFLAGS) -S -o $*.s $<
++	@$(CC) $(CFLAGS) -S -o $*.s $<
+ .s.o:
+-@$(AS)  -o $*.o $<
++	@$(AS)  -o $*.o $<
+ .c.o:
+-@$(CC) $(CFLAGS) -c -o $*.o $<
++	@$(CC) $(CFLAGS) -c -o $*.o $<
+ 
+ all:	Image	
+ 

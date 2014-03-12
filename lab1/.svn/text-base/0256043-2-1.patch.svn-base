@@ -1,0 +1,258 @@
+Index: osdi.img
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
+Index: linux-0.11/tools/build.sh
+===================================================================
+--- linux-0.11/tools/build.sh	(revision 38)
++++ linux-0.11/tools/build.sh	(working copy)
+@@ -7,7 +7,8 @@
+ setup=$2
+ system=$3
+ IMAGE=$4
+-root_dev=$5
++hello_img=$5
++root_dev=$6
+ 
+ # Set the biggest sys_size
+ # Changes from 0x20000 to 0x30000 by tigercn to avoid oversized code.
+@@ -26,15 +27,19 @@
+ [ ! -f "$bootsect" ] && echo "there is no bootsect binary file there" && exit -1
+ dd if=$bootsect bs=512 count=1 of=$IMAGE 2>&1 >/dev/null
+ 
++# Write hello(1 * 512bytes, one sector) to stdout
++[ ! -f "$hello_img" ] && echo "there is no hello binary file there" && exit -1
++dd if=$hello_img seek=1 bs=512 count=1 of=$IMAGE 2>&1 >/dev/null
++
+ # Write setup(4 * 512bytes, four sectors) to stdout
+ [ ! -f "$setup" ] && echo "there is no setup binary file there" && exit -1
+-dd if=$setup seek=1 bs=512 count=4 of=$IMAGE 2>&1 >/dev/null
++dd if=$setup seek=2 bs=512 count=4 of=$IMAGE 2>&1 >/dev/null
+ 
+ # Write system(< SYS_SIZE) to stdout
+ [ ! -f "$system" ] && echo "there is no system binary file there" && exit -1
+ system_size=`wc -c $system |cut -d" " -f1`
+ [ $system_size -gt $SYS_SIZE ] && echo "the system binary is too big" && exit -1
+-dd if=$system seek=5 bs=512 count=$((2888-1-4)) of=$IMAGE 2>&1 >/dev/null
++dd if=$system seek=6 bs=512 count=$((2888-1-4)) of=$IMAGE 2>&1 >/dev/null
+ 
+ # Set "device" for the root image file
+ echo -ne "\x$DEFAULT_MINOR_ROOT\x$DEFAULT_MAJOR_ROOT" | dd ibs=1 obs=1 count=2 seek=508 of=$IMAGE conv=notrunc  2>&1 >/dev/null
+Index: linux-0.11/boot/bootsect.s
+===================================================================
+--- linux-0.11/boot/bootsect.s	(revision 38)
++++ linux-0.11/boot/bootsect.s	(working copy)
+@@ -6,6 +6,7 @@
+ # versions of linux
+ #
+ 	.equ SYSSIZE, 0x3000
++	.equ HELLOSIZE, 0x0200
+ #
+ #	bootsect.s		(C) 1991 Linus Torvalds
+ #
+@@ -13,7 +14,7 @@
+ # iself out of the way to address 0x90000, and jumps there.
+ #
+ # It then loads 'setup' directly after itself (0x90200), and the system
+-# at 0x10000, using BIOS interrupts. 
++# at 0x10000, using BIOS interrupts.
+ #
+ # NOTE! currently system is at most 8*65536 bytes long. This should be no
+ # problem, even in the future. I want to keep it simple. This 512 kB
+@@ -34,11 +35,14 @@
+ 	.text
+ 
+ 	.equ SETUPLEN, 4		# nr of setup-sectors
++	.equ HELLOLEN, 1
+ 	.equ BOOTSEG, 0x07c0		# original address of boot-sector
+ 	.equ INITSEG, 0x9000		# we move boot here - out of the way
+ 	.equ SETUPSEG, 0x9020		# setup starts here
+ 	.equ SYSSEG, 0x1000		# system loaded at 0x10000 (65536).
++	.equ HELLOSEG, 0x1000
+ 	.equ ENDSEG, SYSSEG + SYSSIZE	# where to stop loading
++	.equ HELLOENDSEG, HELLOSEG + HELLOSIZE
+ 
+ # ROOT_DEV:	0x000 - same type of floppy as boot.
+ #		0x301 - first partition on first drive etc
+@@ -52,7 +56,7 @@
+ 	mov	$256, %cx
+ 	sub	%si, %si
+ 	sub	%di, %di
+-	rep	
++	rep
+ 	movsw
+ 	ljmp	$INITSEG, $go
+ go:	mov	%cs, %ax
+@@ -62,14 +66,27 @@
+ 	mov	%ax, %ss
+ 	mov	$0xFF00, %sp		# arbitrary value >>512
+ 
++	# implement here, load hello to memory
++# load_hello:
++# 	mov $0x0000, %dx	# drive 0, head 0
++# 	mov $0x0002, %cx	# cylinder 0, sector 2
++# 	mov $0x0200, %bx 	# data buffer, 512KB for hello
++# 	.equ    AX, 0x0200+HELLOLEN
++# 	mov $AX, %ax
++# 	mov $HELLOSEG, %es
++# 	int $0x13
++# 	.equ sel_cs0, 0x0100
++# 	ljmp $sel_cs0,$0
++
++
+ # load the setup-sectors directly after the bootblock.
+ # Note that 'es' is already set up.
+ 
+ load_setup:
+ 	mov	$0x0000, %dx		# drive 0, head 0
+-	mov	$0x0002, %cx		# sector 2, track 0
++	mov	$0x0002, %cx		# sector 3, track 0    mov	$0x0003, %cx
+ 	mov	$0x0200, %bx		# address = 512, in INITSEG
+-	.equ    AX, 0x0200+SETUPLEN
++	.equ    AX, 0x0200+HELLOLEN     # .equ    AX, 0x0200+SETUPLEN
+ 	mov     $AX, %ax		# service 2, nr of sectors
+ 	int	$0x13			# read it
+ 	jnc	ok_load_setup		# ok - continue
+@@ -88,7 +105,7 @@
+ 	mov	$0x00, %ch
+ 	#seg cs
+ 	mov	%cx, %cs:sectors+0	# %cs means sectors is in %cs
+-	mov	$INITSEG, %ax
++	mov	$HELLOSEG, %ax       # mov	$INITSEG, %ax
+ 	mov	%ax, %es
+ 
+ # Print some inane message
+@@ -96,7 +113,7 @@
+ 	mov	$0x03, %ah		# read cursor pos
+ 	xor	%bh, %bh
+ 	int	$0x10
+-	
++
+ 	mov	$24, %cx
+ 	mov	$0x0007, %bx		# page 0, attribute 7 (normal)
+ 	#lea	msg1, %bp
+@@ -147,7 +164,7 @@
+ #
+ # in:	es - starting address segment (normally 0x1000)
+ #
+-sread:	.word 1+ SETUPLEN	# sectors read of current track
++sread:	.word 2+ SETUPLEN	# sectors read of current track
+ head:	.word 0			# current head
+ track:	.word 0			# current track
+ 
+@@ -183,7 +200,7 @@
+ 	mov 	$1, %ax
+ 	sub 	head, %ax
+ 	jne 	ok4_read
+-	incw    track 
++	incw    track
+ ok4_read:
+ 	mov	%ax, head
+ 	xor	%ax, %ax
+@@ -254,7 +271,7 @@
+ 	.word ROOT_DEV
+ boot_flag:
+ 	.word 0xAA55
+-	
++
+ 	.text
+ 	endtext:
+ 	.data
+Index: linux-0.11/boot/Makefile
+===================================================================
+--- linux-0.11/boot/Makefile	(revision 38)
++++ linux-0.11/boot/Makefile	(working copy)
+@@ -2,7 +2,7 @@
+ 
+ LDFLAGS	+= -Ttext 0
+ 
+-all: bootsect setup
++all: bootsect setup hello
+ 
+ bootsect: bootsect.s
+ 	@$(AS) -o bootsect.o bootsect.s
+@@ -18,5 +18,10 @@
+ head.o: head.s
+ 	@$(AS) -o head.o head.s
+ 
++hello: hello.s
++	@$(AS) -o hello.o hello.s
++	@$(LD) $(LDFLAGS) -o hello hello.o
++	@objcopy -R .pdr -R .comment -R.note -S -O binary hello
++
+ clean:
+-	@rm -f bootsect bootsect.o setup setup.o head.o
++	@rm -f bootsect bootsect.o setup setup.o head.o hello hello.o
+Index: linux-0.11/Makefile
+===================================================================
+--- linux-0.11/Makefile	(revision 42)
++++ linux-0.11/Makefile	(working copy)
+@@ -26,7 +26,7 @@
+ # This can be either FLOPPY, /dev/xxxx or empty, in which case the
+ # default of /dev/hd6 is used by 'build'.
+ #
+-ROOT_DEV= #FLOPPY 
++ROOT_DEV= #FLOPPY
+ 
+ ARCHIVES=kernel/kernel.o mm/mm.o fs/fs.o
+ DRIVERS =kernel/blk_drv/blk_drv.a kernel/chr_drv/chr_drv.a
+@@ -40,17 +40,20 @@
+ .c.o:
+ 	@$(CC) $(CFLAGS) -c -o $*.o $<
+ 
+-all:	Image	
++all:	Image
+ 
+-Image: boot/bootsect boot/setup tools/system
++Image: boot/bootsect boot/setup tools/system boot/hello
+ 	@cp -f tools/system system.tmp
+ 	@strip system.tmp
+ 	@objcopy -O binary -R .note -R .comment system.tmp tools/kernel
+-	@tools/build.sh boot/bootsect boot/setup tools/kernel Image $(ROOT_DEV)
++	@tools/build.sh boot/bootsect boot/setup tools/kernel Image boot/hello $(ROOT_DEV)
+ 	@rm system.tmp
+ 	@rm tools/kernel -f
+ 	@sync
+ 
++boot/hello: boot/hello.s
++	@make hello -C boot
++
+ disk: Image
+ 	@dd bs=8192 if=Image of=/dev/fd0
+ 
+@@ -64,8 +67,8 @@
+ 	$(DRIVERS) \
+ 	$(MATH) \
+ 	$(LIBS) \
+-	-o tools/system 
+-	@nm tools/system | grep -v '\(compiled\)\|\(\.o$$\)\|\( [aU] \)\|\(\.\.ng$$\)\|\(LASH[RL]DI\)'| sort > System.map 
++	-o tools/system
++	@nm tools/system | grep -v '\(compiled\)\|\(\.o$$\)\|\( [aU] \)\|\(\.\.ng$$\)\|\(LASH[RL]DI\)'| sort > System.map
+ 
+ kernel/math/math.a:
+ 	@make -C kernel/math
+@@ -102,7 +105,7 @@
+ clean:
+ 	@rm -f Image System.map tmp_make core boot/bootsect boot/setup
+ 	@rm -f init/*.o tools/system boot/*.o typescript* info bochsout.txt
+-	@for i in mm fs kernel lib boot; do make clean -C $$i; done 
++	@for i in mm fs kernel lib boot; do make clean -C $$i; done
+ info:
+ 	@make clean
+ 	@script -q -c "make all"
+@@ -136,13 +139,13 @@
+ 	@qemu -m 16M -boot a -fda Image -hda $(HDA_IMG)
+ 
+ bochs-start:
+-	@$(BOCHS) -q -f tools/bochs/bochsrc/bochsrc-hd.bxrc	
++	@$(BOCHS) -q -f tools/bochs/bochsrc/bochsrc-hd.bxrc
+ 
+ debug:
+ 	@qemu -m 16M -boot a -fda Image -hda $(HDA_IMG) -s -S
+ 
+ bochs-debug:
+-	@$(BOCHS) -q -f tools/bochs/bochsrc/bochsrc-hd-dbg.bxrc	
++	@$(BOCHS) -q -f tools/bochs/bochsrc/bochsrc-hd-dbg.bxrc
+ 
+ bochs:
+ ifeq ($(BOCHS),)

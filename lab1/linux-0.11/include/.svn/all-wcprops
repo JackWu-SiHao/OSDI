@@ -1,0 +1,83 @@
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/OSDI/!svn/ver/9/u0256043/lab1/linux-0.11/include
+END
+stddef.h
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/OSDI/!svn/ver/9/u0256043/lab1/linux-0.11/include/stddef.h
+END
+signal.h
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/OSDI/!svn/ver/9/u0256043/lab1/linux-0.11/include/signal.h
+END
+time.h
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/OSDI/!svn/ver/9/u0256043/lab1/linux-0.11/include/time.h
+END
+termios.h
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/OSDI/!svn/ver/9/u0256043/lab1/linux-0.11/include/termios.h
+END
+utime.h
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/OSDI/!svn/ver/9/u0256043/lab1/linux-0.11/include/utime.h
+END
+ctype.h
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/OSDI/!svn/ver/9/u0256043/lab1/linux-0.11/include/ctype.h
+END
+stdarg.h
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/OSDI/!svn/ver/9/u0256043/lab1/linux-0.11/include/stdarg.h
+END
+errno.h
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/OSDI/!svn/ver/9/u0256043/lab1/linux-0.11/include/errno.h
+END
+fcntl.h
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/OSDI/!svn/ver/9/u0256043/lab1/linux-0.11/include/fcntl.h
+END
+string.h
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/OSDI/!svn/ver/9/u0256043/lab1/linux-0.11/include/string.h
+END
+unistd.h
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/OSDI/!svn/ver/9/u0256043/lab1/linux-0.11/include/unistd.h
+END
+a.out.h
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/OSDI/!svn/ver/9/u0256043/lab1/linux-0.11/include/a.out.h
+END
+const.h
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/OSDI/!svn/ver/9/u0256043/lab1/linux-0.11/include/const.h
+END

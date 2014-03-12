@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/OSDI/!svn/ver/9/u0256043/lab1/linux-0.11/include/sys
+END
+stat.h
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/OSDI/!svn/ver/9/u0256043/lab1/linux-0.11/include/sys/stat.h
+END
+utsname.h
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/OSDI/!svn/ver/9/u0256043/lab1/linux-0.11/include/sys/utsname.h
+END
+times.h
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/OSDI/!svn/ver/9/u0256043/lab1/linux-0.11/include/sys/times.h
+END
+types.h
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/OSDI/!svn/ver/9/u0256043/lab1/linux-0.11/include/sys/types.h
+END
+wait.h
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/OSDI/!svn/ver/9/u0256043/lab1/linux-0.11/include/sys/wait.h
+END
