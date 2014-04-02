@@ -47,7 +47,7 @@ static ssize_t my_read(struct file *filep,char *buff,size_t count,loff_t *offp )
 	/* function to copy kernel space buffer to user space*/
 	if ( copy_to_user(buff,my_data,strlen(my_data)) != 0 )
 		printk( "Kernel -> userspace copy failed!\n" );
-	return strlen(my_data);
+	return count;
 
 }
 static ssize_t my_write(struct file *filep,const char *buff,size_t count,loff_t *offp )
