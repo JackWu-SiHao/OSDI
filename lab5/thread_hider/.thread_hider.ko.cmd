@@ -1,1 +1,0 @@
-cmd_/home/osdi/Downloads/lab5/thread_hider/thread_hider.ko := ld -r -m elf_i386 -T /home/osdi/Downloads/linux-2.6.39.2/scripts/module-common.lds --build-id  -o /home/osdi/Downloads/lab5/thread_hider/thread_hider.ko /home/osdi/Downloads/lab5/thread_hider/thread_hider.o /home/osdi/Downloads/lab5/thread_hider/thread_hider.mod.o
