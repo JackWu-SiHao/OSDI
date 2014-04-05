@@ -1,8 +1,9 @@
 #include <linux/module.h>
 #include <linux/kernel.h>
-#include <linux/mm.h>
 #include <linux/kthread.h>  // for threads
 #include <linux/sched.h>  // for task_struct
+#include <linux/rcupdate.h>
+#include <linux/oom.h>
 
 #define TASKS_PTR_SIZE 1024
 
@@ -14,20 +15,26 @@ int thread_init(void);
 void thread_cleanup(void);
 
 int thread_function(void *data) {
-	daemonize("thread_function");
+	// daemonize("thread_function");
 	struct task_struct *tasks_ptr[TASKS_PTR_SIZE];
 	struct task_struct *task;
+	struct task_struct *p;
 	unsigned long max_mm_rss;
 	unsigned int readPos = 0;
 
 	printk(KERN_INFO "In Memory Killer\n");
-
+	rcu_read_lock();
 	for_each_process(task) {
+		p = find_lock_task_mm(task);
+		if(!p)
+			continue;
 		printk(KERN_INFO "Name:%s, PID[%d], RSS:[%lu]\n", task->comm, task->pid, get_mm_rss(task->mm));
 		// printk(KERN_INFO "Name:%s, PID[%d]\n", task->comm, task->pid);
 		tasks_ptr[readPos++] = task;
+		task_unlock(task);
 	}
 
+	rcu_read_unlock();
 	set_current_state(TASK_INTERRUPTIBLE);
 	schedule_timeout(10*HZ);
 	return 0;
