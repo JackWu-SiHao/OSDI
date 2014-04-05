@@ -14,7 +14,7 @@ int thread_init(void);
 void thread_cleanup(void);
 
 int thread_function(void *data) {
-
+	daemonize("thread_function");
 	struct task_struct *tasks_ptr[TASKS_PTR_SIZE];
 	struct task_struct *task;
 	unsigned long max_mm_rss;
@@ -23,7 +23,8 @@ int thread_function(void *data) {
 	printk(KERN_INFO "In Memory Killer\n");
 
 	for_each_process(task) {
-		printk(KERN_INFO "Name:%s, PID[%d], RSS:%lu\n", task->comm, task->pid, get_mm_rss(task->mm));
+		printk(KERN_INFO "Name:%s, PID[%d], RSS:[%lu]\n", task->comm, task->pid, get_mm_rss(task->mm));
+		// printk(KERN_INFO "Name:%s, PID[%d]\n", task->comm, task->pid);
 		tasks_ptr[readPos++] = task;
 	}
 

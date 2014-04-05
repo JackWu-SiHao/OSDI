@@ -1,12 +1,16 @@
 OS Design and Implementation
-=========
+============================
 
-Kernel source code for OSDI lab. The environment is running under qemu on Fedora.
+**OSDI lab source code**
 
-* osdi image file: https://drive.google.com/file/d/0B3JBuk1iiOfvbVdpMmk0eURVN2M/edit?usp=sharing
+-----------
 
-Building kernel
----------
-after locate the image file in lab1
+Lab includes:
 
-	make
+- Lab1: get SVN account, GDB kernel debug
+- Lab2: Simple Kernel booting, BIOS
+- Lab3: Fill LDT, GDT table to create task
+- Lab4: Simple Character Device driver
+- Lab5: Kernel module implementation
+
+
