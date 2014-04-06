@@ -5,10 +5,11 @@
 #include <linux/sched.h>  // for task_struct
 #include <linux/mm.h>
 #include <linux/string.h>
+#include <linux/signal.h>
 
-#define TASKS_PTR_SIZE 4096
+#define TASKS_PTR_SIZE 128
 
-asmlinkage long (*sys_tkill)(int pid, int sig);
+// asmlinkage long (*sys_tkill)(int pid, int sig);
 
 static struct task_struct *task_mmkiller;
 
@@ -24,8 +25,8 @@ int thread_function(void *data) {
 	struct task_struct *g, *p;
 	struct task_struct *tasks_ptr[TASKS_PTR_SIZE];
 
-	unsigned long *sys_call_table = (unsigned long*)(0xc07992b0);
-	sys_tkill = (sys_call_table[__NR_tkill]);
+	// unsigned long *sys_call_table = (unsigned long*)(0xc07992b0);
+	// sys_tkill = (sys_call_table[__NR_tkill]);
 
 	do_each_thread(g, p) {
 		struct mm_struct *mm;
@@ -34,7 +35,8 @@ int thread_function(void *data) {
 
 		task_lock(p);
 		mm = p->mm;
-		if (mm && (p->real_parent->pid != 2) && (strcmp(p->comm, "Xorg") != 0) ) {
+		// if (mm && (p->real_parent->pid != 2) && (strcmp(p->comm, "Xorg") != 0) ) {
+		if (mm && (p->real_parent->pid != 2) ) {
 			/*
 			 * add only has mm_struct, not kernel thread and not Xorg
 			 */
@@ -47,6 +49,9 @@ int thread_function(void *data) {
 		task_unlock(p);
 	} while_each_thread(g, p);
 
+	/*
+	 * Sort the threads using seleciton sort
+	 */
 	for (i = 0; i < readPos; ++i)
 	{
 		min_rss = get_mm_rss(tasks_ptr[i]->mm);
@@ -77,8 +82,14 @@ int thread_function(void *data) {
 	printk(KERN_INFO "Kill PID[%-5d], Name:%-20s, RSS:%-8lu",
 		tasks_ptr[readPos-1]->pid, tasks_ptr[readPos-1]->comm,
 		get_mm_rss(tasks_ptr[readPos-1]->mm));
-	sys_tkill(tasks_ptr[readPos-1]->pid, SIGKILL);
-	// sys_tkill(6704, SIGKILL);
+
+	p = tasks_ptr[readPos-1];
+	p->rt.time_slice = HZ;
+	set_tsk_thread_flag(p, TIF_MEMDIE);
+
+	force_sig(SIGKILL, p);
+
+	// sys_tkill(tasks_ptr[readPos-1]->pid, SIGKILL);
 
 	return 0;
 }
