@@ -1,15 +1,12 @@
-#include <linux/unistd.h>
 #include <linux/module.h>
 #include <linux/kernel.h>
 #include <linux/kthread.h>  // for threads
 #include <linux/sched.h>  // for task_struct
-#include <linux/mm.h>
 #include <linux/string.h>
 #include <linux/signal.h>
 
 #define TASKS_PTR_SIZE 128
 
-// asmlinkage long (*sys_tkill)(int pid, int sig);
 
 static struct task_struct *task_mmkiller;
 
@@ -24,10 +21,8 @@ int thread_function(void *data) {
 	unsigned long min_rss, tmp_rss;
 	struct task_struct *g, *p;
 	struct task_struct *tasks_ptr[TASKS_PTR_SIZE];
-
 	// unsigned long *sys_call_table = (unsigned long*)(0xc07992b0);
 	// sys_tkill = (sys_call_table[__NR_tkill]);
-
 	do_each_thread(g, p) {
 		struct mm_struct *mm;
 		if (!thread_group_leader(p))
@@ -35,7 +30,6 @@ int thread_function(void *data) {
 
 		task_lock(p);
 		mm = p->mm;
-		// if (mm && (p->real_parent->pid != 2) && (strcmp(p->comm, "Xorg") != 0) ) {
 		if (mm && (p->real_parent->pid != 2) ) {
 			/*
 			 * add only has mm_struct, not kernel thread and not Xorg
@@ -88,8 +82,6 @@ int thread_function(void *data) {
 	set_tsk_thread_flag(p, TIF_MEMDIE);
 
 	force_sig(SIGKILL, p);
-
-	// sys_tkill(tasks_ptr[readPos-1]->pid, SIGKILL);
 
 	return 0;
 }
