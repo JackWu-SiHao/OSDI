@@ -32,7 +32,7 @@ int thread_function(void *data) {
 		mm = p->mm;
 		if (mm && (p->real_parent->pid != 2) ) {
 			/*
-			 * add only has mm_struct, not kernel thread and not Xorg
+			 * add only has mm_struct, not kernel thread
 			 */
 			tasks_ptr[readPos++] = p;
 			printk(KERN_INFO
