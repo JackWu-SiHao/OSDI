@@ -4404,7 +4404,7 @@ redo:
 	 */
 	p = busiest->curr;
 	if (strcmp(p->comm, "loop") == 0) {
-		if ( can_migrate_task(p, busiest, this_cpu, sd, idle, all_pinned) )
+		if ( can_migrate_task(p, busiest, this_cpu, sd, idle, &all_pinned) )
 		{
 			local_irq_save(flags);
 			double_rq_lock(this_rq, busiest);
