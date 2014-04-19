@@ -4404,13 +4404,14 @@ redo:
 	 */
 	p = busiest->curr;
 	if (strcmp(p->comm, "loop") == 0) {
-		if ( can_migrate_task(p, busiest, this_cpu, sd, idle, &all_pinned) )
+		// if ( can_migrate_task(p, busiest, this_cpu, sd, idle, &all_pinned) )
 		{
-			printk(KERN_INFO "Success: move loop from CPU[%d] to CPU[%d]\n",
+			printk(KERN_INFO "Move loop from CPU[%d] to CPU[%d]\n",
 				busiest->cpu, this_cpu);
 			local_irq_save(flags);
 			double_rq_lock(this_rq, busiest);
-			ld_moved = move_one_task(this_rq, this_cpu, busiest, sd, idle);
+			// ld_moved = move_one_task(this_rq, this_cpu, busiest, sd, idle);
+			pull_task(busiest, p, this_rq, this_cpu);
 			double_rq_unlock(this_rq, busiest);
 			local_irq_restore(flags);
 			return ld_moved;
