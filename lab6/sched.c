@@ -4341,6 +4341,7 @@ static DEFINE_PER_CPU(cpumask_var_t, load_balance_tmpmask);
  * Check this_cpu to ensure it is balanced within domain. Attempt to move
  * tasks if there is an imbalance.
  */
+
 static int load_balance(int this_cpu, struct rq *this_rq,
 			struct sched_domain *sd, enum cpu_idle_type idle,
 			int *balance)
@@ -4351,13 +4352,9 @@ static int load_balance(int this_cpu, struct rq *this_rq,
 	struct rq *busiest;
 	unsigned long flags;
 	struct cpumask *cpus = __get_cpu_var(load_balance_tmpmask);
-	struct task_struct *p;
 
-	/*
-	 * Print CPU and current process
-	 */
-	 // printk(KERN_INFO "Current CPU[%d], Current Process:[%s]",
-	 // 	this_cpu, this_rq->curr->comm);
+	struct rq *cpu1_rq;
+	struct task_struct *task;
 
 	cpumask_copy(cpus, cpu_active_mask);
 
@@ -4402,20 +4399,53 @@ redo:
 	 * My load balance for loop process.
 	 * Move "loop" to this_cpu's rq
 	 */
-	p = busiest->curr;
-	if (strcmp(p->comm, "loop") == 0) {
-		// if ( can_migrate_task(p, busiest, this_cpu, sd, idle, &all_pinned) )
-		{
-			printk(KERN_INFO "Move loop from CPU[%d] to CPU[%d]\n",
-				busiest->cpu, this_cpu);
-			local_irq_save(flags);
-			double_rq_lock(this_rq, busiest);
-			// ld_moved = move_one_task(this_rq, this_cpu, busiest, sd, idle);
-			pull_task(busiest, p, this_rq, this_cpu);
-			double_rq_unlock(this_rq, busiest);
-			local_irq_restore(flags);
-			return ld_moved;
+	if (this_cpu == 0) {
+		cpu1_rq = cpu_rq(1);
+		if ( cpu1_rq->nr_running > 1 ) {
+			mutex_lock(&sched_domains_mutex);
+			double_rq_lock(this_rq, cpu1_rq);
+			for_each_process(task) {
+				if( strcmp(task->comm, "loop") == 0 ) {
+					if ( task->state == TASK_RUNNING &&
+						!task_running(this_rq, task) &&
+						can_migrate_task(task, cpu1_rq, this_cpu, sd, idle, &all_pinned)) {
+						pull_task(cpu1_rq, task, this_rq, this_cpu);
+					}
+				}
+			}
+			mutex_unlock(&sched_domains_mutex);
+			double_rq_unlock(this_rq, cpu1_rq);
 		}
+	}
+	return 0;
+
+
+
+	if (strcmp(busiest->curr->comm, "loop") == 0 ) {
+		// if ( can_migrate_task(p, busiest, this_cpu, sd, idle, &all_pinned) )
+		printk(KERN_INFO "Before moving: CPU[%d] has [%lu]\n",
+			this_cpu, this_rq->nr_running);
+
+		local_irq_save(flags);
+		// mutex_lock(&sched_domains_mutex);
+		double_rq_lock(this_rq, busiest);
+		ld_moved = move_tasks(this_rq, this_cpu, busiest,
+			imbalance, sd, idle, &all_pinned);
+		// ld_moved = move_one_task(this_rq, this_cpu, busiest, sd, idle);
+		// pull_task(busiest, p, this_rq, this_cpu);
+		double_rq_unlock(this_rq, busiest);
+		// mutex_unlock(&sched_domains_mutex);
+		local_irq_restore(flags);
+		sd->nr_balance_failed = 0;
+		update_shares(sd);
+
+		/*
+		 * Print CPU and current rq process number
+		 */
+		printk(KERN_INFO "After Moving CPU[%d] has [%lu]\n",
+			this_cpu, this_rq->nr_running);
+
+		return ld_moved;
 	}
 
 	if (busiest->nr_running > 1) {
