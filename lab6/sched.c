@@ -4399,9 +4399,13 @@ redo:
 	 * My load balance for loop process.
 	 * Move "loop" to this_cpu's rq
 	 */
-	if (this_cpu == 0) {
-		cpu1_rq = cpu_rq(1);
+	cpu1_rq = cpu_rq(1);
+	if (this_cpu == 0 && strcmp(cpu1_rq->curr->comm, "loop") == 0 ) {
+
 		if ( cpu1_rq->nr_running > 1 ) {
+			printk(KERN_INFO "Before moving: CPU[%d] has [%lu]\nCPU[1] has [%lu]\n",
+				this_cpu, this_rq->nr_running, cpu1_rq->nr_running);
+			local_irq_save(flags);
 			mutex_lock(&sched_domains_mutex);
 			double_rq_lock(this_rq, cpu1_rq);
 			for_each_process(task) {
@@ -4413,40 +4417,43 @@ redo:
 					}
 				}
 			}
-			mutex_unlock(&sched_domains_mutex);
 			double_rq_unlock(this_rq, cpu1_rq);
+			mutex_unlock(&sched_domains_mutex);
+			local_irq_restore(flags);
+			printk(KERN_INFO "After moving: CPU[%d] has [%lu]\nCPU[1] has [%lu]\n",
+				this_cpu, this_rq->nr_running, cpu1_rq->nr_running);
 		}
+		return 1;
 	}
-	return 0;
 
 
 
-	if (strcmp(busiest->curr->comm, "loop") == 0 ) {
-		// if ( can_migrate_task(p, busiest, this_cpu, sd, idle, &all_pinned) )
-		printk(KERN_INFO "Before moving: CPU[%d] has [%lu]\n",
-			this_cpu, this_rq->nr_running);
+	// if (strcmp(busiest->curr->comm, "loop") == 0 ) {
+	// 	// if ( can_migrate_task(p, busiest, this_cpu, sd, idle, &all_pinned) )
+	// 	printk(KERN_INFO "Before moving: CPU[%d] has [%lu]\n",
+	// 		this_cpu, this_rq->nr_running);
 
-		local_irq_save(flags);
-		// mutex_lock(&sched_domains_mutex);
-		double_rq_lock(this_rq, busiest);
-		ld_moved = move_tasks(this_rq, this_cpu, busiest,
-			imbalance, sd, idle, &all_pinned);
-		// ld_moved = move_one_task(this_rq, this_cpu, busiest, sd, idle);
-		// pull_task(busiest, p, this_rq, this_cpu);
-		double_rq_unlock(this_rq, busiest);
-		// mutex_unlock(&sched_domains_mutex);
-		local_irq_restore(flags);
-		sd->nr_balance_failed = 0;
-		update_shares(sd);
+	// 	local_irq_save(flags);
+	// 	// mutex_lock(&sched_domains_mutex);
+	// 	double_rq_lock(this_rq, busiest);
+	// 	ld_moved = move_tasks(this_rq, this_cpu, busiest,
+	// 		imbalance, sd, idle, &all_pinned);
+	// 	// ld_moved = move_one_task(this_rq, this_cpu, busiest, sd, idle);
+	// 	// pull_task(busiest, p, this_rq, this_cpu);
+	// 	double_rq_unlock(this_rq, busiest);
+	// 	// mutex_unlock(&sched_domains_mutex);
+	// 	local_irq_restore(flags);
+	// 	sd->nr_balance_failed = 0;
+	// 	update_shares(sd);
 
-		/*
-		 * Print CPU and current rq process number
-		 */
-		printk(KERN_INFO "After Moving CPU[%d] has [%lu]\n",
-			this_cpu, this_rq->nr_running);
+	// 	/*
+	// 	 * Print CPU and current rq process number
+	// 	 */
+	// 	printk(KERN_INFO "After Moving CPU[%d] has [%lu]\n",
+	// 		this_cpu, this_rq->nr_running);
 
-		return ld_moved;
-	}
+	// 	return ld_moved;
+	// }
 
 	if (busiest->nr_running > 1) {
 		/*
