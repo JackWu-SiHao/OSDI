@@ -4416,11 +4416,11 @@ redo:
 					if ( task->state == TASK_RUNNING && !task_running(this_rq, task) &&
 						can_migrate_task(task, src_cpu_rq, this_cpu, sd, idle, &all_pinned))
 					{
-						printk(KERN_INFO "[Lab6]-before: CPU[%d]:[%lu], CPU[1]:[%lu]\n",
-							this_cpu, this_rq->nr_running, src_cpu_rq->nr_running);
+						printk(KERN_INFO "[Lab6]-before: CPU[%d]:[%lu], CPU[%d]:[%lu]\n",
+							this_cpu, this_rq->nr_running, src_cpu, src_cpu_rq->nr_running);
 						pull_task(src_cpu_rq, task, this_rq, this_cpu);
-						printk(KERN_INFO "[Lab6]-after:  CPU[%d]:[%lu], CPU[1]:[%lu]\n",
-							this_cpu, this_rq->nr_running, src_cpu_rq->nr_running);
+						printk(KERN_INFO "[Lab6]-after:  CPU[%d]:[%lu], CPU[%d]:[%lu]\n",
+							this_cpu, this_rq->nr_running, src_cpu, src_cpu_rq->nr_running);
 					}
 				}
 				task_unlock(task);
@@ -4432,34 +4432,6 @@ redo:
 		return 1;
 	}
 
-
-
-	// if (strcmp(busiest->curr->comm, "loop") == 0 ) {
-	// 	// if ( can_migrate_task(p, busiest, this_cpu, sd, idle, &all_pinned) )
-	// 	printk(KERN_INFO "Before moving: CPU[%d] has [%lu]\n",
-	// 		this_cpu, this_rq->nr_running);
-
-	// 	local_irq_save(flags);
-	// 	// mutex_lock(&sched_domains_mutex);
-	// 	double_rq_lock(this_rq, busiest);
-	// 	ld_moved = move_tasks(this_rq, this_cpu, busiest,
-	// 		imbalance, sd, idle, &all_pinned);
-	// 	// ld_moved = move_one_task(this_rq, this_cpu, busiest, sd, idle);
-	// 	// pull_task(busiest, p, this_rq, this_cpu);
-	// 	double_rq_unlock(this_rq, busiest);
-	// 	// mutex_unlock(&sched_domains_mutex);
-	// 	local_irq_restore(flags);
-	// 	sd->nr_balance_failed = 0;
-	// 	update_shares(sd);
-
-	// 	/*
-	// 	 * Print CPU and current rq process number
-	// 	 */
-	// 	printk(KERN_INFO "After Moving CPU[%d] has [%lu]\n",
-	// 		this_cpu, this_rq->nr_running);
-
-	// 	return ld_moved;
-	// }
 
 	if (busiest->nr_running > 1) {
 		/*
@@ -5588,7 +5560,7 @@ void scheduler_tick(void)
 	struct task_struct *curr = rq->curr;
 
 	time_counter++;
-	if( time_counter > 10000) {
+	if( time_counter > 50000) {
 		printk(KERN_INFO "soucr CPU switch!!\n");
 		src_cpu ^= 1;
 		time_counter = 0;
