@@ -81,6 +81,9 @@
 #define CREATE_TRACE_POINTS
 #include <trace/events/sched.h>
 
+static int time_counter = 0;
+static int src_cpu = 1;
+
 /*
  * Convert user-nice values [ -20 ... 0 ... 19 ]
  * to static priority [ MAX_RT_PRIO..MAX_PRIO-1 ],
@@ -4342,6 +4345,7 @@ static DEFINE_PER_CPU(cpumask_var_t, load_balance_tmpmask);
  * tasks if there is an imbalance.
  */
 
+
 static int load_balance(int this_cpu, struct rq *this_rq,
 			struct sched_domain *sd, enum cpu_idle_type idle,
 			int *balance)
@@ -4353,7 +4357,7 @@ static int load_balance(int this_cpu, struct rq *this_rq,
 	unsigned long flags;
 	struct cpumask *cpus = __get_cpu_var(load_balance_tmpmask);
 
-	struct rq *cpu1_rq;
+	struct rq *src_cpu_rq;
 	struct task_struct *task;
 
 	cpumask_copy(cpus, cpu_active_mask);
@@ -4399,29 +4403,31 @@ redo:
 	 * My load balance for loop process.
 	 * Move "loop" to this_cpu's rq
 	 */
-	cpu1_rq = cpu_rq(1);
-	if (this_cpu == 0 && strcmp(cpu1_rq->curr->comm, "loop") == 0 ) {
 
-		if ( cpu1_rq->nr_running > 1 ) {
-			printk(KERN_INFO "Before moving: CPU[%d] has [%lu]\nCPU[1] has [%lu]\n",
-				this_cpu, this_rq->nr_running, cpu1_rq->nr_running);
+	src_cpu_rq = cpu_rq(src_cpu);
+	if (this_cpu != src_cpu && strcmp(src_cpu_rq->curr->comm, "loop") == 0 ) {
+		if ( src_cpu_rq->nr_running > 1 ) {
 			local_irq_save(flags);
-			mutex_lock(&sched_domains_mutex);
-			double_rq_lock(this_rq, cpu1_rq);
+			// mutex_lock(&sched_domains_mutex);
+			double_rq_lock(this_rq, src_cpu_rq);
 			for_each_process(task) {
+				task_lock(task);
 				if( strcmp(task->comm, "loop") == 0 ) {
-					if ( task->state == TASK_RUNNING &&
-						!task_running(this_rq, task) &&
-						can_migrate_task(task, cpu1_rq, this_cpu, sd, idle, &all_pinned)) {
-						pull_task(cpu1_rq, task, this_rq, this_cpu);
+					if ( task->state == TASK_RUNNING && !task_running(this_rq, task) &&
+						can_migrate_task(task, src_cpu_rq, this_cpu, sd, idle, &all_pinned))
+					{
+						printk(KERN_INFO "[Lab6]-before: CPU[%d]:[%lu], CPU[1]:[%lu]\n",
+							this_cpu, this_rq->nr_running, src_cpu_rq->nr_running);
+						pull_task(src_cpu_rq, task, this_rq, this_cpu);
+						printk(KERN_INFO "[Lab6]-after:  CPU[%d]:[%lu], CPU[1]:[%lu]\n",
+							this_cpu, this_rq->nr_running, src_cpu_rq->nr_running);
 					}
 				}
+				task_unlock(task);
 			}
-			double_rq_unlock(this_rq, cpu1_rq);
-			mutex_unlock(&sched_domains_mutex);
+			double_rq_unlock(this_rq, src_cpu_rq);
+			// mutex_unlock(&sched_domains_mutex);
 			local_irq_restore(flags);
-			printk(KERN_INFO "After moving: CPU[%d] has [%lu]\nCPU[1] has [%lu]\n",
-				this_cpu, this_rq->nr_running, cpu1_rq->nr_running);
 		}
 		return 1;
 	}
@@ -5574,11 +5580,19 @@ inline cputime_t task_gtime(struct task_struct *p)
  * It also gets called by the fork code, when changing the parent's
  * timeslices.
  */
+
 void scheduler_tick(void)
 {
 	int cpu = smp_processor_id();
 	struct rq *rq = cpu_rq(cpu);
 	struct task_struct *curr = rq->curr;
+
+	time_counter++;
+	if( time_counter > 10000) {
+		printk(KERN_INFO "soucr CPU switch!!\n");
+		src_cpu ^= 1;
+		time_counter = 0;
+	}
 
 	sched_clock_tick();
 
