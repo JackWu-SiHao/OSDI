@@ -13,4 +13,5 @@ Lab includes:
 - Lab4: Simple Character Device driver
 - Lab5: Kernel module - Thread Hider and Memory Killer
 - Lab6: Scheduing - load balance
+- Lab7: A Simple Page Frame Reclaiming Algorithm
 
