@@ -53,6 +53,10 @@ struct brd_device {
     struct radix_tree_root  brd_pages;
 };
 
+static bool enable_snapshot = false;
+static pgoff_t index_array[4096] = {0};
+static unsigned int index_array_curr = 0;
+
 /*
  * Look up and return a brd's page for a given sector.
  * Read a page
@@ -64,7 +68,7 @@ static struct page *brd_lookup_page(struct brd_device *brd,
     gfp_t gfp_flags;
     struct page *page;
     struct page *shadow_page;
-    printk(KERN_INFO "Enter brd lookup page!!\n");
+    // printk(KERN_INFO "Enter brd lookup page!!\n");
     /*
      * The page lifetime is protected by the fact that we have opened the
      * device node -- brd pages will never be deleted under us, so we
@@ -84,11 +88,12 @@ static struct page *brd_lookup_page(struct brd_device *brd,
     page = radix_tree_lookup(&brd->brd_pages, idx);
 
     if(enable_snapshot) {
+        /* under enable snapshot, all read/write on shadow page */
         if(is_read) {
             if(shadow_page) {
                 /* read from shadow page */
                 rcu_read_unlock();
-                BUG_ON(shadow_page && shadow_page->index != mask_idx);
+                // BUG_ON(shadow_page && shadow_page->index != mask_idx);
                 return shadow_page;
             } else {
                 /* read from original page */
@@ -99,14 +104,15 @@ static struct page *brd_lookup_page(struct brd_device *brd,
             if(shadow_page) {
                 /* write to shadow page */
                 rcu_read_unlock();
-                BUG_ON(shadow_page && shadow_page->index != mask_idx);
+                // BUG_ON(shadow_page && shadow_page->index != mask_idx);
+                index_array[index_array_curr++] = mask_idx;
                 return shadow_page;
             } else {
                 /* allocate a shadow page and write to it */
                 rcu_read_unlock();
                 shadow_page = alloc_page(gfp_flags);
                 if(!shadow_page)
-                    return NULL
+                    return NULL;
 
                 if (radix_tree_preload(GFP_NOIO)) {
                     __free_page(shadow_page);
@@ -118,13 +124,14 @@ static struct page *brd_lookup_page(struct brd_device *brd,
                     /* insert fails */
                     __free_page(shadow_page);
                     shadow_page = radix_tree_lookup(&brd->brd_pages, mask_idx);
-                    BUG_ON(!shadow_page);
-                    BUG_ON(shadow->index != mask_idx);
+                    // BUG_ON(!shadow_page);
+                    // BUG_ON(shadow_page->index != mask_idx);
                 } else
                     shadow_page->index = mask_idx;
 
                 spin_unlock(&brd->brd_lock);
                 radix_tree_preload_end();
+                index_array[index_array_curr++] = mask_idx;
                 return shadow_page;
 
                 }
@@ -132,7 +139,7 @@ static struct page *brd_lookup_page(struct brd_device *brd,
         }
 
     } else {
-        /* disable snapshot */
+        /* disable snapshot, read/write on original radix_tree */
     }
 
 GoOut:
@@ -203,38 +210,22 @@ static struct page *brd_insert_page(struct brd_device *brd, sector_t sector)
  */
 static void brd_free_shadow_pages(struct brd_device *brd)
 {
-    unsigned long pos = 0;
-    struct page *pages[FREE_BATCH];
-    int nr_pages;
+    struct page *page;
+    int i;
+    void *ret;
 
-    printk(KERN_INFO "Enter brd free_shadow page\n");
+    printk(KERN_INFO "Enter brd free_shadow page, index size:[%u]\n",
+        index_array_curr);
 
-    do {
-        int i;
-
-        /* perform multiple lookup on radix tree */
-        nr_pages = radix_tree_gang_lookup(&brd->brd_pages,
-                (void **)pages, pos, FREE_BATCH);
-
-        for (i = 0; i < nr_pages; i++) {
-            void *ret;
-
-            BUG_ON(((pages[i]->index) | MASK_PAGE) < pos);
-            pos = ((pages[i]->index) | MASK_PAGE);
-            ret = radix_tree_delete(&brd->brd_pages, pos);
-            BUG_ON(!ret || ret != pages[i]);
-            __free_page(pages[i]);
+    for (i = 0; i < index_array_curr; ++i)
+    {
+        page = radix_tree_lookup(&brd->brd_pages, index_array[i]);
+        if(page) {
+            ret = radix_tree_delete(&brd->brd_pages, index_array[i]);
+            BUG_ON(!ret || ret != page);
+            __free_page(page);
         }
-
-        /* start to call radix_tree_gang_lookup with next index */
-        pos++;
-
-        /*
-         * This assumes radix_tree_gang_lookup always returns as
-         * many pages as possible. If the radix-tree code changes,
-         * so will this have to.
-         */
-    } while (nr_pages == FREE_BATCH);
+    }
 }
 
 /*
@@ -449,9 +440,6 @@ static int brd_direct_access (struct block_device *bdev, sector_t sector,
 }
 #endif
 
-
-static bool enable_snapshot = false;
-
 static int brd_ioctl(struct block_device *bdev, fmode_t mode,
             unsigned int cmd, unsigned long arg)
 {
@@ -467,7 +455,11 @@ static int brd_ioctl(struct block_device *bdev, fmode_t mode,
     switch(arg) {
         case 0: break;
         case 1: enable_snapshot = true; break;
-        case 2: enable_snapshot = false; break;
+        case 2: enable_snapshot = false;
+            mutex_lock(&bdev->bd_mutex);
+            brd_free_shadow_pages(brd);
+            mutex_unlock(&bdev->bd_mutex);
+            break;
         default: break;
     }
 
