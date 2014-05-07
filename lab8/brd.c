@@ -93,56 +93,15 @@ static struct page *brd_lookup_page(struct brd_device *brd,
             if(shadow_page) {
                 /* read from shadow page */
                 rcu_read_unlock();
-                // BUG_ON(shadow_page && shadow_page->index != mask_idx);
                 return shadow_page;
-            } else {
-                /* read from original page */
-                goto GoOut;
             }
+             /* read from original page */
         } else {
             /* is write */
-            if(shadow_page) {
-                /* write to shadow page */
-                rcu_read_unlock();
-                // BUG_ON(shadow_page && shadow_page->index != mask_idx);
-                index_array[index_array_curr++] = mask_idx;
-                return shadow_page;
-            } else {
-                /* allocate a shadow page and write to it */
-                rcu_read_unlock();
-                shadow_page = alloc_page(gfp_flags);
-                if(!shadow_page)
-                    return NULL;
-
-                if (radix_tree_preload(GFP_NOIO)) {
-                    __free_page(shadow_page);
-                    return NULL;
-
-                spin_lock(&brd->brd_lock);
-
-                if (radix_tree_insert(&brd->brd_pages, mask_idx, shadow_page)) {
-                    /* insert fails */
-                    __free_page(shadow_page);
-                    shadow_page = radix_tree_lookup(&brd->brd_pages, mask_idx);
-                    // BUG_ON(!shadow_page);
-                    // BUG_ON(shadow_page->index != mask_idx);
-                } else
-                    shadow_page->index = mask_idx;
-
-                spin_unlock(&brd->brd_lock);
-                radix_tree_preload_end();
-                index_array[index_array_curr++] = mask_idx;
-                return shadow_page;
-
-                }
-            }
+            rcu_read_unlock();
+            return shadow_page;
         }
-
-    } else {
-        /* disable snapshot, read/write on original radix_tree */
     }
-
-GoOut:
     rcu_read_unlock();
     BUG_ON(page && page->index != idx);
 
@@ -160,7 +119,7 @@ static struct page *brd_insert_page(struct brd_device *brd, sector_t sector)
     struct page *page;
     gfp_t gfp_flags;
 
-    printk(KERN_INFO "Enter brd insert page\n");
+    // printk(KERN_INFO "Enter brd insert page\n");
     page = brd_lookup_page(brd, sector, false);
     if (page)
         return page;
@@ -190,6 +149,10 @@ static struct page *brd_insert_page(struct brd_device *brd, sector_t sector)
     spin_lock(&brd->brd_lock);
     idx = sector >> PAGE_SECTORS_SHIFT;
 
+    /* create a shoadow page of enable shapshot */
+    if(enable_snapshot)
+        idx |= MASK_PAGE;
+
     /* return 0 if radix_tree_insert success */
     if (radix_tree_insert(&brd->brd_pages, idx, page)) {
         __free_page(page);
@@ -201,6 +164,9 @@ static struct page *brd_insert_page(struct brd_device *brd, sector_t sector)
     spin_unlock(&brd->brd_lock);
 
     radix_tree_preload_end();
+
+    if(enable_snapshot)
+        index_array[index_array_curr++] = idx;
 
     return page;
 }
@@ -237,8 +203,6 @@ static void brd_free_pages(struct brd_device *brd)
     unsigned long pos = 0;
     struct page *pages[FREE_BATCH];
     int nr_pages;
-
-    printk(KERN_INFO "Enter brd free page\n");
 
     do {
         int i;
@@ -390,8 +354,6 @@ static int brd_make_request(struct request_queue *q, struct bio *bio)
     sector_t sector;
     int i;
     int err = -EIO;
-
-    printk(KERN_INFO "Enter brd make request\n");
 
     sector = bio->bi_sector;
     if (sector + (bio->bi_size >> SECTOR_SHIFT) >
