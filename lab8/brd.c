@@ -25,6 +25,7 @@
 #define PAGE_SECTORS_SHIFT  (PAGE_SHIFT - SECTOR_SHIFT)
 #define PAGE_SECTORS        (1 << PAGE_SECTORS_SHIFT)
 #define MASK_PAGE           0x10000000
+#define FREE_BATCH          16
 
 /*
  * Each block ramdisk device has a radix_tree brd_pages of pages that stores
@@ -198,10 +199,48 @@ static struct page *brd_insert_page(struct brd_device *brd, sector_t sector)
 }
 
 /*
+ * free all shadow pages when rollback is called
+ */
+static void brd_free_shadow_pages(struct brd_device *brd)
+{
+    unsigned long pos = 0;
+    struct page *pages[FREE_BATCH];
+    int nr_pages;
+
+    printk(KERN_INFO "Enter brd free_shadow page\n");
+
+    do {
+        int i;
+
+        /* perform multiple lookup on radix tree */
+        nr_pages = radix_tree_gang_lookup(&brd->brd_pages,
+                (void **)pages, pos, FREE_BATCH);
+
+        for (i = 0; i < nr_pages; i++) {
+            void *ret;
+
+            BUG_ON(((pages[i]->index) | MASK_PAGE) < pos);
+            pos = ((pages[i]->index) | MASK_PAGE);
+            ret = radix_tree_delete(&brd->brd_pages, pos);
+            BUG_ON(!ret || ret != pages[i]);
+            __free_page(pages[i]);
+        }
+
+        /* start to call radix_tree_gang_lookup with next index */
+        pos++;
+
+        /*
+         * This assumes radix_tree_gang_lookup always returns as
+         * many pages as possible. If the radix-tree code changes,
+         * so will this have to.
+         */
+    } while (nr_pages == FREE_BATCH);
+}
+
+/*
  * Free all backing store pages and radix tree. This must only be called when
  * there are no other users of the device.
  */
-#define FREE_BATCH 16
 static void brd_free_pages(struct brd_device *brd)
 {
     unsigned long pos = 0;
