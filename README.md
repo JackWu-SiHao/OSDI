@@ -14,4 +14,4 @@ Lab includes:
 - Lab5: Kernel module - Thread Hider and Memory Killer
 - Lab6: Scheduing - load balance
 - Lab7: A Simple Page Frame Reclaiming Algorithm
-
+- Lab8: Block Device drivers - ramdisk
