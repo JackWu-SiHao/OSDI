@@ -59,8 +59,10 @@ struct brd_device {
 static struct page *brd_lookup_page(struct brd_device *brd,
     sector_t sector, bool is_read)
 {
-    pgoff_t idx;
+    pgoff_t idx, mask_idx;
+    gfp_t gfp_flags;
     struct page *page;
+    struct page *shadow_page;
     printk(KERN_INFO "Enter brd lookup page!!\n");
     /*
      * The page lifetime is protected by the fact that we have opened the
@@ -75,9 +77,65 @@ static struct page *brd_lookup_page(struct brd_device *brd,
      */
     rcu_read_lock();
     idx = sector >> PAGE_SECTORS_SHIFT; /* sector to page index */
+    gfp_flags = GFP_NOIO | __GFP_ZERO;
+    mask_idx = (idx | MASK_PAGE);
+    shadow_page = radix_tree_lookup(&brd->brd_pages, mask_idx);
     page = radix_tree_lookup(&brd->brd_pages, idx);
-    rcu_read_unlock();
 
+    if(enable_snapshot) {
+        if(is_read) {
+            if(shadow_page) {
+                /* read from shadow page */
+                rcu_read_unlock();
+                BUG_ON(shadow_page && shadow_page->index != mask_idx);
+                return shadow_page;
+            } else {
+                /* read from original page */
+                goto GoOut;
+            }
+        } else {
+            /* is write */
+            if(shadow_page) {
+                /* write to shadow page */
+                rcu_read_unlock();
+                BUG_ON(shadow_page && shadow_page->index != mask_idx);
+                return shadow_page;
+            } else {
+                /* allocate a shadow page and write to it */
+                rcu_read_unlock();
+                shadow_page = alloc_page(gfp_flags);
+                if(!shadow_page)
+                    return NULL
+
+                if (radix_tree_preload(GFP_NOIO)) {
+                    __free_page(shadow_page);
+                    return NULL;
+
+                spin_lock(&brd->brd_lock);
+
+                if (radix_tree_insert(&brd->brd_pages, mask_idx, shadow_page)) {
+                    /* insert fails */
+                    __free_page(shadow_page);
+                    shadow_page = radix_tree_lookup(&brd->brd_pages, mask_idx);
+                    BUG_ON(!shadow_page);
+                    BUG_ON(shadow->index != mask_idx);
+                } else
+                    shadow_page->index = mask_idx;
+
+                spin_unlock(&brd->brd_lock);
+                radix_tree_preload_end();
+                return shadow_page;
+
+                }
+            }
+        }
+
+    } else {
+        /* disable snapshot */
+    }
+
+GoOut:
+    rcu_read_unlock();
     BUG_ON(page && page->index != idx);
 
     return page;
