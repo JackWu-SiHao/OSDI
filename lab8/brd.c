@@ -54,8 +54,8 @@ struct brd_device {
 };
 
 static bool enable_snapshot = false;
-static pgoff_t index_array[4096] = {0};
-static unsigned int index_array_curr = 0;
+static pgoff_t shadow_page_index_ary[1024] = {0};
+static unsigned int ary_counter = 0;
 
 /*
  * Look up and return a brd's page for a given sector.
@@ -166,7 +166,7 @@ static struct page *brd_insert_page(struct brd_device *brd, sector_t sector)
     radix_tree_preload_end();
 
     if(enable_snapshot)
-        index_array[index_array_curr++] = idx;
+        shadow_page_index_ary[ary_counter++] = idx;
 
     return page;
 }
@@ -181,17 +181,18 @@ static void brd_free_shadow_pages(struct brd_device *brd)
     void *ret;
 
     printk(KERN_INFO "Enter brd free_shadow page, index size:[%u]\n",
-        index_array_curr);
+        ary_counter);
 
-    for (i = 0; i < index_array_curr; ++i)
+    for (i = 0; i < ary_counter; ++i)
     {
-        page = radix_tree_lookup(&brd->brd_pages, index_array[i]);
+        page = radix_tree_lookup(&brd->brd_pages, shadow_page_index_ary[i]);
         if(page) {
-            ret = radix_tree_delete(&brd->brd_pages, index_array[i]);
+            ret = radix_tree_delete(&brd->brd_pages, shadow_page_index_ary[i]);
             BUG_ON(!ret || ret != page);
             __free_page(page);
         }
     }
+    ary_counter = 0;
 }
 
 /*
