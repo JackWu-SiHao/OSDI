@@ -22,6 +22,11 @@ static int __init init_read(void)
     }
 
     // Design your write pattern here!!
+    for (i = 0; i < 24; i+=4)
+    {
+        // four case for request builder
+    }
+
     for(i=1; i<=24; i++){
 
         /* if the last request in a request group */
