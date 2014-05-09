@@ -14,4 +14,5 @@ Lab includes:
 - Lab5: Kernel module - Thread Hider and Memory Killer
 - Lab6: Scheduing - load balance
 - Lab7: A Simple Page Frame Reclaiming Algorithm
-- Lab8: Block Device drivers - ramdisk
+- Lab8: Block Device - RamDisk snapshot and rollback
+- Lab9: I/O scheduler - Shortest seek time first(SSTF)
