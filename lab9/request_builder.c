@@ -24,32 +24,21 @@ static int __init init_read(void)
     // Design your write pattern here!!
     for (i = 0; i < 24; i+=4)
     {
-        // four case for request builder
-    }
-
-    for(i=1; i<=24; i++){
-
-        /* if the last request in a request group */
-        if(i%4 == 0) {
-            if(isAscending) {
-                isAscending = false;
-                __breadahead(bdev, (i*4)*512, set_size);
-
-            }
-            else {
-                isAscending = true;
-                __breadahead(bdev, ((24-i)*4-1)*512, set_size);
-            }
+        if (isAscending)
+        {
+            __breadahead(bdev, (i*2)*512, set_size);
+            __breadahead(bdev, ((i+1)*2)*512, set_size);
+            __breadahead(bdev, ((i+2)*2)*512, set_size);
+            __breadahead(bdev, ((i+3)*4)*512, set_size);
+            isAscending = false;
         }
-
-        /* not the last request in a request group*/
-        else {
-            if(isAscending) {
-                __breadahead(bdev, (i*2)*512, set_size);
-            }
-            else {
-                __breadahead(bdev, ((24-i)*2-1)*512, set_size);
-            }
+        else
+        {
+            __breadahead(bdev, ((i+3)*2-1)*512, set_size);
+            __breadahead(bdev, ((i+2)*2-1)*512, set_size);
+            __breadahead(bdev, ((i+1)*2-1)*512, set_size);
+            __breadahead(bdev, (i*4-1)*512, set_size);
+            isAscending = true;
         }
     }
     return 0;
