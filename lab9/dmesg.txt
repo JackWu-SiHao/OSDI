@@ -1,70 +1,110 @@
-[ 1843.892896] init!!!
-[ 1843.892916] @ add 2048 , last_pos 161792, end_sector 161793
-[ 1843.892917] queue size:1    
-[ 1843.892919] have choose one:2048 
-[ 1843.892920] chosen_req:2048 
-[ 1843.892921] Sorted queue:
-[ 1843.892922] 2048 
-[ 1843.892927] @ add 59392, last_pos 2048 , end_sector 161793
-[ 1843.892928] queue size:2    
-[ 1843.892929] have choose one:59392
-[ 1843.892930] chosen_req:59392
-[ 1843.892931] have choose one:2048 
-[ 1843.892932] chosen_req:2048 
-[ 1843.892933] Sorted queue:
-[ 1843.892934] 2048 
-[ 1843.892935] 59392 
-[ 1843.892940] @ add 10240, last_pos 2048 , end_sector 161793
-[ 1843.892941] queue size:3    
-[ 1843.892942] have choose one:59392
-[ 1843.892943] have choose one:10240
-[ 1843.892944] chosen_req:10240
-[ 1843.892945] have choose one:2048 
-[ 1843.892946] chosen_req:2048 
-[ 1843.892947] have choose one:10240
-[ 1843.892948] chosen_req:10240
-[ 1843.892949] Sorted queue:
-[ 1843.892950] 10240 
-[ 1843.892950] 2048 
-[ 1843.892951] 59392 
-[ 1843.892958] @ add 26624, last_pos 10240, end_sector 161793
-[ 1843.892960] queue size:4    
-[ 1843.892961] have choose one:2048 
-[ 1843.892962] chosen_req:2048 
-[ 1843.892962] have choose one:10240
-[ 1843.892963] chosen_req:10240
-[ 1843.892964] have choose one:2048 
-[ 1843.892965] chosen_req:2048 
-[ 1843.892966] have choose one:10240
-[ 1843.892967] chosen_req:10240
-[ 1843.892968] Sorted queue:
-[ 1843.892969] 10240 
-[ 1843.892970] 2048 
-[ 1843.892970] 59392 
-[ 1843.892971] 26624 
-[ 1843.892973] @ dispatch:10240
-[ 1843.893029] @ dispatch:2048 
-[ 1843.893050] @ dispatch:59392
-[ 1843.893098] @ dispatch:26624
-[ 1843.893148] @ add 22528, last_pos 26624, end_sector 26625
-[ 1843.893149] queue size:1    
-[ 1843.893150] have choose one:22528
-[ 1843.893151] chosen_req:22528
-[ 1843.893152] Sorted queue:
-[ 1843.893153] 22528 
-[ 1843.893169] @ dispatch:22528
-[ 1843.893200] @ add 6144 , last_pos 22528, end_sector 22529
-[ 1843.893201] queue size:1    
-[ 1843.893202] have choose one:6144 
-[ 1843.893203] chosen_req:6144 
-[ 1843.893204] Sorted queue:
-[ 1843.893205] 6144 
-[ 1843.893208] grow_buffers: requested out-of-range block 18446744073709522944 for device sdb1
-[ 1843.893226] @ dispatch:6144 
-[ 1843.893253] @ add 30720, last_pos 6144 , end_sector 6145 
-[ 1843.893254] queue size:1    
-[ 1843.893255] have choose one:30720
-[ 1843.893256] chosen_req:30720
-[ 1843.893257] Sorted queue:
-[ 1843.893258] 30720 
-[ 1843.893298] @ dispatch:30720
+[  152.284487] SELinux: initialized (dev sdb1, type ext2), uses xattr
+[  153.297954] @ add 7192 , last_pos 0    , end_sector 2056 
+[  153.297956] queue size:1    
+[  153.297958] have choose one:7192 
+[  153.297959] chosen_req:7192 
+[  153.297960] Sorted queue:
+[  153.297961] 7192 
+[  153.297964] @ dispatch:7192 
+[  153.297965] queue after dispatch:
+[  153.297966] queue empty
+[  153.297967] queue after elv_dispatch_sort:
+[  153.297968] queue empty
+[  153.297969] dispatch_count:0    
+[  253.558523] init!!!
+[  253.558658] @ add 2048 , last_pos 0    , end_sector 7200 
+[  253.558660] queue size:1    
+[  253.558662] have choose one:2048 
+[  253.558663] chosen_req:2048 
+[  253.558663] Sorted queue:
+[  253.558664] 2048 
+[  253.558670] @ add 59392, last_pos 2048 , end_sector 7200 
+[  253.558671] queue size:2    
+[  253.558672] have choose one:59392
+[  253.558673] chosen_req:59392
+[  253.558674] have choose one:2048 
+[  253.558675] chosen_req:2048 
+[  253.558676] Sorted queue:
+[  253.558677] 2048 
+[  253.558678] 59392 
+[  253.558682] @ add 10240, last_pos 2048 , end_sector 7200 
+[  253.558683] queue size:3    
+[  253.558684] have choose one:59392
+[  253.558685] have choose one:10240
+[  253.558686] chosen_req:10240
+[  253.558687] have choose one:2048 
+[  253.558688] chosen_req:2048 
+[  253.558689] have choose one:10240
+[  253.558690] chosen_req:10240
+[  253.558691] Sorted queue:
+[  253.558691] 10240 
+[  253.558692] 2048 
+[  253.558693] 59392 
+[  253.558697] @ add 26624, last_pos 10240, end_sector 7200 
+[  253.558698] queue size:4    
+[  253.558699] have choose one:2048 
+[  253.558700] chosen_req:2048 
+[  253.558701] have choose one:10240
+[  253.558702] chosen_req:10240
+[  253.558703] have choose one:2048 
+[  253.558704] chosen_req:2048 
+[  253.558705] have choose one:10240
+[  253.558706] chosen_req:10240
+[  253.558707] Sorted queue:
+[  253.558708] 10240 
+[  253.558709] 2048 
+[  253.558710] 59392 
+[  253.558710] 26624 
+[  253.558712] @ dispatch:10240
+[  253.558713] queue after dispatch:
+[  253.558714] [2048 ], 
+[  253.558715] [59392], 
+[  253.558716] [26624], 
+[  253.558717] queue after elv_dispatch_sort:
+[  253.558718] [4121527644], 
+[  253.558719] dispatch_count:1    
+[  253.558733] ------------[ cut here ]------------
+[  253.558735] kernel BUG at block/blk-timeout.c:172!
+[  253.558737] invalid opcode: 0000 [#1] SMP 
+[  253.558739] last sysfs file: /sys/devices/system/cpu/cpu5/cache/index2/shared_cpu_map
+[  253.558741] Modules linked in: request_builder(+) ext2 sunrpc fuse ip6t_REJECT nf_conntrack_ipv6 ip6table_filter ip6_tables ipv6 uinput snd_ens1371 i2c_piix4 gameport snd_rawmidi snd_ac97_codec ac97_bus snd_seq snd_seq_device snd_pcm ppdev parport_pc pcnet32 parport i2c_core snd_timer snd soundcore snd_page_alloc mii pcspkr joydev microcode floppy mptspi mptscsih mptbase scsi_transport_spi [last unloaded: scsi_wait_scan]
+[  253.558757] 
+[  253.558760] Pid: 3295, comm: insmod Not tainted (2.6.32.60 #6) VMware Virtual Platform
+[  253.558762] EIP: 0060:[<c05afb18>] EFLAGS: 00210013 CPU: 4
+[  253.558768] EIP is at blk_add_timer+0x25/0x98
+[  253.558769] EAX: 00000000 EBX: f4911e08 ECX: 00008400 EDX: f4911eb4
+[  253.558771] ESI: f4911e20 EDI: f5a98530 EBP: ed745dc0 ESP: ed745db8
+[  253.558773]  DS: 007b ES: 007b FS: 00d8 GS: 00e0 SS: 0068
+[  253.558775] Process insmod (pid: 3295, ti=ed744000 task=f2d76580 task.ti=ed744000)
+[  253.558776] Stack:
+[  253.558777]  f4911e08 f5a98530 ed745dcc c05ac565 f4911e08 ed745de4 c05ac656 f4911e08
+[  253.558781] <0> f5866400 f5f4c800 f5a98530 ed745e10 c06614dc ed745e04 c04486dd 00200082
+[  253.558784] <0> f58664b0 f4bfac80 f5866428 f5a98530 f4bfac80 00000200 ed745e1c c05ac24a
+[  253.558788] Call Trace:
+[  253.558792]  [<c05ac565>] ? blk_start_request+0x33/0x36
+[  253.558795]  [<c05ac656>] ? blk_peek_request+0xee/0x15a
+[  253.558798]  [<c06614dc>] ? scsi_request_fn+0x5b/0x3b9
+[  253.558802]  [<c04486dd>] ? del_timer+0x5e/0x66
+[  253.558805]  [<c05ac24a>] ? __generic_unplug_device+0x2b/0x2e
+[  253.558808]  [<c05a4d44>] ? elv_insert+0x16f/0x177
+[  253.558810]  [<c05a4dde>] ? __elv_add_request+0x92/0x99
+[  253.558812]  [<c05aab63>] ? drive_stat_acct+0x97/0xa1
+[  253.558815]  [<c05acac9>] ? __make_request+0x2ed/0x360
+[  253.558817]  [<c042af3d>] ? need_resched+0x19/0x23
+[  253.558820]  [<c05ab069>] ? generic_make_request+0x212/0x263
+[  253.558823]  [<c04a5670>] ? mempool_alloc_slab+0x13/0x15
+[  253.558825]  [<c04a5895>] ? mempool_alloc+0x5c/0xeb
+[  253.558828]  [<c05ab180>] ? submit_bio+0xc6/0xdf
+[  253.558831]  [<c04fa5d3>] ? bio_alloc_bioset+0x2a/0xc1
+[  253.558833]  [<c04f6a0f>] ? submit_bh+0xe7/0x107
+[  253.558835]  [<c04f7b9c>] ? ll_rw_block+0xab/0xe0
+[  253.558837]  [<c04f9126>] ? __breadahead+0x2d/0x37
+[  253.558840]  [<f747409c>] ? init_read+0x9c/0x10c [request_builder]
+[  253.558843]  [<f7474000>] ? init_read+0x0/0x10c [request_builder]
+[  253.558846]  [<c0401267>] ? do_one_initcall+0x4f/0x138
+[  253.558849]  [<c04599ff>] ? blocking_notifier_call_chain+0x11/0x13
+[  253.558851]  [<c046b575>] ? sys_init_module+0xae/0x1de
+[  253.558855]  [<c040339b>] ? sysenter_do_call+0x12/0x28
+[  253.558856] Code: b0 00 00 00 5d c3 55 89 e5 56 53 0f 1f 44 00 00 8b 70 20 89 c3 83 7e 5c 00 74 7f 8b 80 ac 00 00 00 8d 93 ac 00 00 00 39 d0 74 04 <0f> 0b eb fe f6 43 2c 01 74 04 0f 0b eb fe 83 bb b4 00 00 00 00 
+[  253.558875] EIP: [<c05afb18>] blk_add_timer+0x25/0x98 SS:ESP 0068:ed745db8
+[  253.558879] ---[ end trace 8422c990ba44edc1 ]---
