@@ -7,12 +7,13 @@
 #include <linux/module.h>
 #include <linux/init.h>
 
+#define MAX_POS 1048576
+
 struct noop_data {
     /* a doublely-linked list queue */
     struct list_head queue;
 };
 
-#define MAX_POS 1048576
 
 static unsigned long long dispatched_rq_pos = 0;
 static unsigned long long min_pos = MAX_POS;
@@ -78,7 +79,7 @@ static void noop_add_request(struct request_queue *q, struct request *rq)
 
 
     /* print rq's sector position */
-    printk(KERN_INFO "@ add %-5llu\n", blk_rq_pos(rq));
+    printk(KERN_INFO "@ add %-5llu, last_pos %-5llu\n", blk_rq_pos(rq), dispatched_rq_pos);
     list_add_tail(&rq->queuelist, &nd->queue);
 
     /* get queue size */
@@ -94,8 +95,10 @@ static void noop_add_request(struct request_queue *q, struct request *rq)
             /* find the SS request */
             list_for_each_entry(req, &nd->queue, queuelist) {
                 pos_diff = get_diff_abs(blk_rq_pos(req), dispatched_rq_pos);
-                if(pos_diff == 0)
+                if(pos_diff == 0) {
                     can_move = true;
+                    continue;
+                }
 
                 if((pos_diff < min_pos) && (pos_diff != 0) && can_move ) {
                     printk(KERN_INFO "have choose one:%-5llu\n", blk_rq_pos(req));
@@ -116,7 +119,7 @@ static void noop_add_request(struct request_queue *q, struct request *rq)
             can_move = false;
             dispatched_rq_pos = blk_rq_pos(chosen_req);
             list_move(&chosen_req->queuelist, &nd->queue);
-            chosen_req = NULL;
+            //chosen_req = NULL;
         }
 
         printk(KERN_INFO "Sorted queue:");
