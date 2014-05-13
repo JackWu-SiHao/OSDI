@@ -22,21 +22,21 @@ static int __init init_read(void)
     }
 
     // Design your write pattern here!!
-    for (i = 0; i < 24; i+=4)
+    for (i = 0; i < 8; i+=4)
     {
         if (isAscending)
         {
             __breadahead(bdev, (i*2)*4096, set_size);
-            __breadahead(bdev, ((i+3)*2)*4096, set_size);
+            __breadahead(bdev, ((i+7)*2)*4096, set_size);
             __breadahead(bdev, ((i+1)*2)*4096, set_size);
-            __breadahead(bdev, ((i+2)*2)*4096, set_size);
+            __breadahead(bdev, ((i+3)*2)*4096, set_size);
             isAscending = false;
         }
         else
         {
             __breadahead(bdev, ((i-1)*2-1)*4096, set_size);
-            __breadahead(bdev, ((i-2)*2-1)*4096, set_size);
             __breadahead(bdev, ((i-3)*2-1)*4096, set_size);
+            __breadahead(bdev, ((i-7)*2-1)*4096, set_size);
             __breadahead(bdev, ((i)*2-1)*4096, set_size);
             isAscending = true;
         }
