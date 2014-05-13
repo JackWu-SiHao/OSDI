@@ -17,6 +17,7 @@ struct noop_data {
 
 static unsigned long long dispatched_rq_pos = 0;
 static unsigned long long min_pos = MAX_POS;
+static bool is_first_dispatch = true;
 
 
 static unsigned long long get_diff_abs(unsigned long long a, unsigned long long b)
@@ -63,6 +64,12 @@ static int noop_dispatch(struct request_queue *q, int force)
 
         /* TODO: we may need to modify this so as not to mess up the SSFT result */
         elv_dispatch_sort(q, rq);
+        
+        if(is_first_dispatch) {
+            dispatched_rq_pos = 0;
+            is_first_dispatch = false;
+        }
+        
         return 1;
     }
     return 0;
