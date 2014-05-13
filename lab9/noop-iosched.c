@@ -99,89 +99,91 @@ static void noop_add_request(struct request_queue *q, struct request *rq)
         blk_rq_pos(rq), last_rq_pos, q->end_sector);
     list_add_tail(&rq->queuelist, &nd->queue);
 
-    /* get queue size */
-    if(!list_empty(&nd->queue)) {
-        list_for_each_entry(req, &nd->queue, queuelist)
-            queue_size++;
-    }
-
-    printk(KERN_INFO "queue size:%-5u\n", queue_size);
-
-    /* find first request with mininum pos to the last time's dispathed request */
-    if(!list_empty(&nd->queue)) {
-        /* default min_req set to first entry of queue */
-        min_req = list_entry(&nd->queue, struct request, queuelist);
-
-        list_for_each_entry(req, &nd->queue, queuelist) {
-            if( get_diff_abs(blk_rq_pos(req), last_rq_pos) < curr_min ) {
-                curr_min = get_diff_abs(blk_rq_pos(req), last_rq_pos);
-                min_req = req;
-            }
+    if(!is_first_dispatch) {
+        /* get queue size */
+        if(!list_empty(&nd->queue)) {
+            list_for_each_entry(req, &nd->queue, queuelist)
+                queue_size++;
         }
-    }
 
-    if(min_req)
-        printk(KERN_INFO "min_req:%-5llu\n", blk_rq_pos(min_req));
-    else
-        printk(KERN_INFO "min_req is NULL\n");
+        printk(KERN_INFO "queue size:%-5u\n", queue_size);
 
-    /* Now we get the mininum position(min_req) request to the last time's
-     * dispatched request. Then move min_req to the head of queue. And the rest
-     * of the requests in the queue need to do SSTF sort based on min_rq
-     */
-
-    if(min_req) {
-        prev_rq_pos = blk_rq_pos(min_req);
-        list_move(&min_req->queuelist, &nd->queue);
-    }
-
-    if(!list_empty(&nd->queue)) {
-        for( i = 0; i < queue_size; ++i) {
-
-            /* set default value */
-            can_move = false;
-            curr_min = MAX_POS;
-            chosen_req = list_entry(&nd->queue, struct request, queuelist);
+        /* find first request with mininum pos to the last time's dispathed request */
+        if(!list_empty(&nd->queue)) {
+            /* default min_req set to first entry of queue */
+            min_req = list_entry(&nd->queue, struct request, queuelist);
 
             list_for_each_entry(req, &nd->queue, queuelist) {
+                if( get_diff_abs(blk_rq_pos(req), last_rq_pos) < curr_min ) {
+                    curr_min = get_diff_abs(blk_rq_pos(req), last_rq_pos);
+                    min_req = req;
+                }
+            }
+        }
 
-                /* start to move request until we reach the first min request(min_req)
-                 */
-                if( req == min_req ) {
-                    can_move = true;
-                    continue;
+        if(min_req)
+            printk(KERN_INFO "min_req:%-5llu\n", blk_rq_pos(min_req));
+        else
+            printk(KERN_INFO "min_req is NULL\n");
+
+        /* Now we get the mininum position(min_req) request to the last time's
+         * dispatched request. Then move min_req to the head of queue. And the rest
+         * of the requests in the queue need to do SSTF sort based on min_rq
+         */
+
+        if(min_req) {
+            prev_rq_pos = blk_rq_pos(min_req);
+            list_move(&min_req->queuelist, &nd->queue);
+        }
+
+        if(!list_empty(&nd->queue)) {
+            for( i = 0; i < queue_size; ++i) {
+
+                /* set default value */
+                can_move = false;
+                curr_min = MAX_POS;
+                chosen_req = list_entry(&nd->queue, struct request, queuelist);
+
+                list_for_each_entry(req, &nd->queue, queuelist) {
+
+                    /* start to move request until we reach the first min request(min_req)
+                     */
+                    if( req == min_req ) {
+                        can_move = true;
+                        continue;
+                    }
+
+                    if( can_move ) {
+                        pos_diff = get_diff_abs(blk_rq_pos(req), prev_rq_pos);
+                        if( pos_diff < curr_min ) {
+                            printk(KERN_INFO "have choose one:%-5llu\n", blk_rq_pos(req));
+                            curr_min = pos_diff;
+                            chosen_req = req;
+                        }
+                    }
                 }
 
-                if( can_move ) {
-                    pos_diff = get_diff_abs(blk_rq_pos(req), prev_rq_pos);
-                    if( pos_diff < curr_min ) {
-                        printk(KERN_INFO "have choose one:%-5llu\n", blk_rq_pos(req));
-                        curr_min = pos_diff;
-                        chosen_req = req;
+                /* should not enter this */
+                if(!chosen_req) {
+                    chosen_req = list_entry(&nd->queue, struct request, queuelist);
+                    printk(KERN_INFO "Error chosen_req:%-5llu\n", blk_rq_pos(chosen_req));
+                    BUG_ON(1);
+                } else {
+                    prev_rq_pos = blk_rq_pos(chosen_req);
+                    list_move(&chosen_req->queuelist, &nd->queue);
+
+                    printk(KERN_INFO "chosen_req:%-5llu\n", prev_rq_pos);
+                    printk(KERN_INFO "after move:");
+                    list_for_each_entry(req_tmp, &nd->queue, queuelist) {
+                        printk(KERN_INFO "%llu ", blk_rq_pos(req_tmp));
                     }
                 }
             }
 
-            /* should not enter this */
-            if(!chosen_req) {
-                chosen_req = list_entry(&nd->queue, struct request, queuelist);
-                printk(KERN_INFO "Error chosen_req:%-5llu\n", blk_rq_pos(chosen_req));
-                BUG_ON(1);
-            } else {
-                prev_rq_pos = blk_rq_pos(chosen_req);
-                list_move(&chosen_req->queuelist, &nd->queue);
-
-                printk(KERN_INFO "chosen_req:%-5llu\n", prev_rq_pos);
-                printk(KERN_INFO "after move:");
-                list_for_each_entry(req_tmp, &nd->queue, queuelist) {
-                    printk(KERN_INFO "%llu ", blk_rq_pos(req_tmp));
-                }
+            printk(KERN_INFO "Sorted queue:");
+            list_for_each_entry(req, &nd->queue, queuelist) {
+                printk(KERN_INFO "%llu ", blk_rq_pos(req));
             }
-        }
-
-        printk(KERN_INFO "Sorted queue:");
-        list_for_each_entry(req, &nd->queue, queuelist) {
-            printk(KERN_INFO "%llu ", blk_rq_pos(req));
         }
     }
 }
