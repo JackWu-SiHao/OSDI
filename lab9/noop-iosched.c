@@ -12,9 +12,10 @@ struct noop_data {
     struct list_head queue;
 };
 
-static struct request *dispatched_rq = NULL; // the request dispatched first
+#define MAX_POS 1048576
+
 static unsigned long long dispatched_rq_pos = 0;
-static unsigned long long min_diff = 65536;
+static unsigned long long min_pos = MAX_POS;
 
 
 static unsigned long long get_diff_abs(unsigned long long a, unsigned long long b)
@@ -37,140 +38,92 @@ static int noop_dispatch(struct request_queue *q, int force)
 
     /* task queue: request_queue->elecator->elevator_data->queue */
     if (!list_empty(&nd->queue)) {
-        struct request *rq = NULL;
-        struct request *rq_next = NULL;
-        struct request *rq_prev = NULL;
-        unsigned long long next_pos, prev_pos;
+        struct request *rq;
 
         /* get request from the task queue */
-
-        printk(KERN_INFO "queue before dispatch:");
-        list_for_each_entry(rq, &nd->queue, queuelist) {
-            printk(KERN_INFO "[%-5llu], ", blk_rq_pos(rq));
-        }
-
-        /* should not enter this, give a rq to dispatch anyway */
-        if(!dispatched_rq) {
-            rq = list_entry(nd->queue.next, struct request, queuelist);
-            printk(KERN_ALERT "error dispatch:%-5llu\n", blk_rq_pos(rq));
-            goto done;
-        }
-
-
-        printk(KERN_INFO "@ dispatch:%-5llu\n", blk_rq_pos(dispatched_rq));
-        rq = dispatched_rq;
-
-        // /* check dispatched_rq->next exists */
-        // if(rq->queuelist.next != rq->queuelist && rq->queuelist.next != NULL) {
-        //  rq_next = list_entry(rq->queuelist.next, struct request, queuelist);
-        //  next_pos = blk_rq_pos(rq_next);
+        // printk(KERN_INFO "queue before dispatch:");
+        // list_for_each_entry(rq, &nd->queue, queuelist) {
+        //  printk(KERN_INFO "[%-5llu], ", blk_rq_pos(rq));
         // }
 
-        // /* check dispatched_rq->prev exists */
-        // if(rq->queuelist.prev != rq->queuelist && rq->queuelist.prev != NULL) {
-        //  rq_prev = list_entry(rq->queuelist.prev, struct request, queuelist);
-        //  prev_pos = blk_rq_pos(rq_prev);
-        // }
+        rq = list_entry(nd->queue.next, struct request, queuelist);
+        dispatched_rq_pos = blk_rq_pos(rq);
+        printk(KERN_INFO "@ dispatch:%-5llu\n", dispatched_rq_pos);
 
-
-        rq_next = list_entry(rq->queuelist.next, struct request, queuelist);
-        rq_prev = list_entry(rq->queuelist.prev, struct request, queuelist);
-
-        /* both next and prev exist */
-        if(rq_next && rq_prev) {
-            next_pos = blk_rq_pos(rq_next);
-            prev_pos = blk_rq_pos(rq_prev);
-            printk(KERN_INFO "next_pos:%-5llu\n", next_pos);
-            printk(KERN_INFO "prev_pos:%-5llu\n", prev_pos);
-
-            if(get_diff_abs(next_pos,dispatched_rq_pos) < get_diff_abs(prev_pos,dispatched_rq_pos)) {
-                dispatched_rq = rq_next;
-                dispatched_rq_pos = next_pos;
-            } else {
-                dispatched_rq = rq_prev;
-                dispatched_rq_pos = prev_pos;
-            }
-
-        } else if(rq_next && !rq_prev) {
-            next_pos = blk_rq_pos(rq_next);
-            printk(KERN_INFO "next_pos:%-5llu\n", next_pos);
-
-            dispatched_rq = rq_next;
-            dispatched_rq_pos = next_pos;
-
-        } else if(!rq_next && rq_prev) {
-            prev_pos = blk_rq_pos(rq_prev);
-            printk(KERN_INFO "prev_pos:%-5llu\n", prev_pos);
-
-            dispatched_rq = rq_prev;
-            dispatched_rq_pos = prev_pos;
-
-        } else {
-            // at this point, queue should be empty. Should call add_request
-        }
-
-
-done:
         list_del_init(&rq->queuelist);  // struct list_head queuelist;
 
-        printk(KERN_INFO "queue after dispatch:");
-        if(!list_empty(&nd->queue)) {
-            list_for_each_entry(rq, &nd->queue, queuelist) {
-                printk(KERN_INFO "[%-5llu], ", blk_rq_pos(rq));
-            }
-        } else
-            printk(KERN_INFO "queue empty\n");
+        // printk(KERN_INFO "queue after dispatch:");
+        // if(!list_empty(&nd->queue)) {
+        //  list_for_each_entry(rq, &nd->queue, queuelist) {
+        //      printk(KERN_INFO "[%-5llu], ", blk_rq_pos(rq));
+        //  }
+        // } else
+        //  printk(KERN_INFO "queue empty\n");
 
         /* TODO: we may need to modify this so as not to mess up the SSFT result */
         elv_dispatch_sort(q, rq);
         return 1;
     }
-
-    /* finish dispatch */
-    else {
-        dispatched_rq = NULL;
-        min_diff = 65536;
-        return 0;
-    }
+    return 0;
 }
 
 static void noop_add_request(struct request_queue *q, struct request *rq)
 {
     struct noop_data *nd = q->elevator->elevator_data;
-    struct request *req;
+    struct request *req = NULL;
+    struct request *chosen_req = NULL;
     unsigned long long pos_diff;
+    unsigned int queue_size = 0, i;
+    bool can_move = true;
 
 
     /* print rq's sector position */
     printk(KERN_INFO "@ add %-5llu\n", blk_rq_pos(rq));
-
-    /* check wether rq is the request to be dispatched first */
-    pos_diff = get_diff_abs(blk_rq_pos(rq), dispatched_rq_pos);
-    if(pos_diff < min_diff) {
-        printk(KERN_INFO "dispatched_rq_pos:");
-        dispatched_rq = rq;
-        min_diff = pos_diff;
-    }
-
-    /*  insertion sort to the elevator queue*/
-    if(!list_empty(&nd->queue)) {
-        list_for_each_entry(req, &nd->queue, queuelist) {
-            if(blk_rq_pos(rq) < blk_rq_pos(req)) {
-                list_add_tail(&rq->queuelist, &req->queuelist);
-                return;
-            }
-        }
-    }
-
-    /* add to tail if rq has the largest pos or queue is empty*/
     list_add_tail(&rq->queuelist, &nd->queue);
 
-    // printk(KERN_INFO "Sorted queue:");
-    // if(!list_empty(&nd->queue)) {
-    //  list_for_each_entry(req, &nd->queue, queuelist) {
-    //      printk(KERN_INFO "%llu ", blk_rq_pos(req));
-    //  }
-    // }
+    /* get queue size */
+    if(!list_empty(&nd->queue)) {
+        list_for_each_entry(req, &nd->queue, queuelist)
+            queue_size++;
+    }
+
+    printk(KERN_INFO "queue size:%-5u\n", queue_size);
+
+    if(!list_empty(&nd->queue)) {
+        for( i = 0; i < queue_size; ++i) {
+            /* find the SS request */
+            list_for_each_entry(req, &nd->queue, queuelist) {
+                pos_diff = get_diff_abs(blk_rq_pos(req), dispatched_rq_pos);
+                if(pos_diff == 0)
+                    can_move = true;
+
+                if((pos_diff < min_pos) && (pos_diff != 0) && can_move ) {
+                    printk(KERN_INFO "have choose one:%-5llu\n", blk_rq_pos(req));
+                    min_pos = pos_diff;
+                    chosen_req = req;
+                }
+            }
+
+            /* should not enter this */
+            if(!chosen_req) {
+                chosen_req = list_entry(&nd->queue.next, struct request, queuelist);
+                printk(KERN_INFO "Error chosen_req:%-5llu\n", blk_rq_pos(chosen_req));
+            } else {
+                printk(KERN_INFO "chosen_req:%-5llu\n", blk_rq_pos(chosen_req));
+            }
+
+            min_pos = MAX_POS;
+            can_move = false;
+            dispatched_rq_pos = blk_rq_pos(chosen_req);
+            list_move(&chosen_req->queuelist, &nd->queue);
+            chosen_req = NULL;
+        }
+
+        printk(KERN_INFO "Sorted queue:");
+        list_for_each_entry(req, &nd->queue, queuelist) {
+            printk(KERN_INFO "%llu ", blk_rq_pos(req));
+        }
+    }
 }
 
 static int noop_queue_empty(struct request_queue *q)
