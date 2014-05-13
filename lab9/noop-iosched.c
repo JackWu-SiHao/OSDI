@@ -18,6 +18,7 @@ struct noop_data {
 static unsigned long long dispatched_rq_pos = 0;
 static unsigned long long min_pos = MAX_POS;
 static bool is_first_dispatch = true;
+static unsigned int dispatch_count = 0;
 
 
 static unsigned long long get_diff_abs(unsigned long long a, unsigned long long b)
@@ -42,34 +43,39 @@ static int noop_dispatch(struct request_queue *q, int force)
     if (!list_empty(&nd->queue)) {
         struct request *rq;
 
-        /* get request from the task queue */
-        // printk(KERN_INFO "queue before dispatch:");
-        // list_for_each_entry(rq, &nd->queue, queuelist) {
-        //  printk(KERN_INFO "[%-5llu], ", blk_rq_pos(rq));
-        // }
-
         rq = list_entry(nd->queue.next, struct request, queuelist);
         dispatched_rq_pos = blk_rq_pos(rq);
         printk(KERN_INFO "@ dispatch:%-5llu\n", dispatched_rq_pos);
 
         list_del_init(&rq->queuelist);  // struct list_head queuelist;
 
-        // printk(KERN_INFO "queue after dispatch:");
-        // if(!list_empty(&nd->queue)) {
-        //  list_for_each_entry(rq, &nd->queue, queuelist) {
-        //      printk(KERN_INFO "[%-5llu], ", blk_rq_pos(rq));
-        //  }
-        // } else
-        //  printk(KERN_INFO "queue empty\n");
+        printk(KERN_INFO "queue after dispatch:");
+        if(!list_empty(&nd->queue)) {
+            list_for_each_entry(rq, &nd->queue, queuelist) {
+                printk(KERN_INFO "[%-5llu], ", blk_rq_pos(rq));
+            }
+        } else
+            printk(KERN_INFO "queue empty\n");
 
         /* TODO: we may need to modify this so as not to mess up the SSFT result */
         elv_dispatch_sort(q, rq);
-        
+
+        printk(KERN_INFO "queue after elv_dispatch_sort:");
+        if(!list_empty(&nd->queue)) {
+            list_for_each_entry(rq, &nd->queue, queuelist) {
+                printk(KERN_INFO "[%-5llu], ", blk_rq_pos(rq));
+            }
+        } else
+            printk(KERN_INFO "queue empty\n");
+
         if(is_first_dispatch) {
             dispatched_rq_pos = 0;
             is_first_dispatch = false;
         }
-        
+
+        printk(KERN_INFO "dispatch_count:%-5u\n", dispatch_count);
+        dispatch_count++;
+
         return 1;
     }
     return 0;
@@ -86,7 +92,8 @@ static void noop_add_request(struct request_queue *q, struct request *rq)
 
 
     /* print rq's sector position */
-    printk(KERN_INFO "@ add %-5llu, last_pos %-5llu\n", blk_rq_pos(rq), dispatched_rq_pos);
+    printk(KERN_INFO "@ add %-5llu, last_pos %-5llu, end_sector %-5llu\n",
+        blk_rq_pos(rq), dispatched_rq_pos, q->end_sector);
     list_add_tail(&rq->queuelist, &nd->queue);
 
     /* get queue size */
