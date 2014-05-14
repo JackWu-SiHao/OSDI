@@ -1,1072 +1,132 @@
-[  999.509703] elv_dispatch_sort: before elv_rqhash_del
-[  999.509706] elv_dispatch_sort: after elv_rqhash_del
-[  999.509708] elv_dispatch_sort: before list_add
-[  999.509709] elv_dispatch_sort: after list_add
-[  999.527968] elv_dispatch_sort: before elv_rqhash_del
-[  999.527971] elv_dispatch_sort: after elv_rqhash_del
-[  999.527973] elv_dispatch_sort: before list_add
-[  999.527974] elv_dispatch_sort: after list_add
-[ 1000.731130] elv_dispatch_sort: before elv_rqhash_del
-[ 1000.731133] elv_dispatch_sort: after elv_rqhash_del
-[ 1000.731135] elv_dispatch_sort: before list_add
-[ 1000.731136] elv_dispatch_sort: after list_add
-[ 1000.731293] elv_dispatch_sort: before elv_rqhash_del
-[ 1000.731294] elv_dispatch_sort: after elv_rqhash_del
-[ 1000.731295] elv_dispatch_sort: before list_add
-[ 1000.731296] elv_dispatch_sort: after list_add
-[ 1003.234427] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.234431] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.234432] elv_dispatch_sort: before list_add
-[ 1003.234433] elv_dispatch_sort: after list_add
-[ 1003.243423] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.243425] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.243426] elv_dispatch_sort: before list_add
-[ 1003.243427] elv_dispatch_sort: after list_add
-[ 1003.246409] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.246411] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.246412] elv_dispatch_sort: before list_add
-[ 1003.246413] elv_dispatch_sort: after list_add
-[ 1003.262021] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.262023] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.262024] elv_dispatch_sort: before list_add
-[ 1003.262025] elv_dispatch_sort: after list_add
-[ 1003.263208] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.263210] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.263211] elv_dispatch_sort: before list_add
-[ 1003.263212] elv_dispatch_sort: after list_add
-[ 1003.263446] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.263447] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.263448] elv_dispatch_sort: before list_add
-[ 1003.263449] elv_dispatch_sort: after list_add
-[ 1003.263512] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.263513] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.263514] elv_dispatch_sort: before list_add
-[ 1003.263515] elv_dispatch_sort: after list_add
-[ 1003.273898] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.273900] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.273901] elv_dispatch_sort: before list_add
-[ 1003.273902] elv_dispatch_sort: after list_add
-[ 1003.281738] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.281740] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.281741] elv_dispatch_sort: before list_add
-[ 1003.281742] elv_dispatch_sort: after list_add
-[ 1003.288037] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.288039] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.288040] elv_dispatch_sort: before list_add
-[ 1003.288041] elv_dispatch_sort: after list_add
-[ 1003.290189] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.290191] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.290192] elv_dispatch_sort: before list_add
-[ 1003.290193] elv_dispatch_sort: after list_add
-[ 1003.291377] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.291377] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.291377] elv_dispatch_sort: before list_add
-[ 1003.291377] elv_dispatch_sort: after list_add
-[ 1003.291888] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.291889] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.291890] elv_dispatch_sort: before list_add
-[ 1003.291891] elv_dispatch_sort: after list_add
-[ 1003.292010] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.292011] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.292012] elv_dispatch_sort: before list_add
-[ 1003.292013] elv_dispatch_sort: after list_add
-[ 1003.292102] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.292104] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.292105] elv_dispatch_sort: before list_add
-[ 1003.292106] elv_dispatch_sort: after list_add
-[ 1003.292199] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.292200] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.292201] elv_dispatch_sort: before list_add
-[ 1003.292202] elv_dispatch_sort: after list_add
-[ 1003.292367] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.292369] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.292370] elv_dispatch_sort: before list_add
-[ 1003.292371] elv_dispatch_sort: after list_add
-[ 1003.292949] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.292951] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.292952] elv_dispatch_sort: before list_add
-[ 1003.292953] elv_dispatch_sort: after list_add
-[ 1003.293090] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.293092] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.293093] elv_dispatch_sort: before list_add
-[ 1003.293094] elv_dispatch_sort: after list_add
-[ 1003.293177] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.293178] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.293179] elv_dispatch_sort: before list_add
-[ 1003.293180] elv_dispatch_sort: after list_add
-[ 1003.293276] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.293277] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.293278] elv_dispatch_sort: before list_add
-[ 1003.293279] elv_dispatch_sort: after list_add
-[ 1003.293690] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.293692] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.293693] elv_dispatch_sort: before list_add
-[ 1003.293693] elv_dispatch_sort: after list_add
-[ 1003.300388] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.300390] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.300391] elv_dispatch_sort: before list_add
-[ 1003.300392] elv_dispatch_sort: after list_add
-[ 1003.333526] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.333528] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.333529] elv_dispatch_sort: before list_add
-[ 1003.333530] elv_dispatch_sort: after list_add
-[ 1003.337008] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.337010] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.337011] elv_dispatch_sort: before list_add
-[ 1003.337012] elv_dispatch_sort: after list_add
-[ 1003.349510] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.349512] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.349514] elv_dispatch_sort: before list_add
-[ 1003.349515] elv_dispatch_sort: after list_add
-[ 1003.367008] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.367010] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.367011] elv_dispatch_sort: before list_add
-[ 1003.367012] elv_dispatch_sort: after list_add
-[ 1003.367116] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.367118] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.367119] elv_dispatch_sort: before list_add
-[ 1003.367120] elv_dispatch_sort: after list_add
-[ 1003.367200] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.367201] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.367203] elv_dispatch_sort: before list_add
-[ 1003.367203] elv_dispatch_sort: after list_add
-[ 1003.367413] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.367415] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.367416] elv_dispatch_sort: before list_add
-[ 1003.367417] elv_dispatch_sort: after list_add
-[ 1003.367499] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.367500] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.367501] elv_dispatch_sort: before list_add
-[ 1003.367502] elv_dispatch_sort: after list_add
-[ 1003.367577] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.367578] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.367580] elv_dispatch_sort: before list_add
-[ 1003.367580] elv_dispatch_sort: after list_add
-[ 1003.367655] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.367657] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.367658] elv_dispatch_sort: before list_add
-[ 1003.367659] elv_dispatch_sort: after list_add
-[ 1003.367732] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.367734] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.367735] elv_dispatch_sort: before list_add
-[ 1003.367736] elv_dispatch_sort: after list_add
-[ 1003.367809] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.367823] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.367824] elv_dispatch_sort: before list_add
-[ 1003.367824] elv_dispatch_sort: after list_add
-[ 1003.367892] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.367893] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.367894] elv_dispatch_sort: before list_add
-[ 1003.367895] elv_dispatch_sort: after list_add
-[ 1003.367964] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.367965] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.367966] elv_dispatch_sort: before list_add
-[ 1003.367967] elv_dispatch_sort: after list_add
-[ 1003.368042] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.368043] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.368044] elv_dispatch_sort: before list_add
-[ 1003.368045] elv_dispatch_sort: after list_add
-[ 1003.368114] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.368115] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.368116] elv_dispatch_sort: before list_add
-[ 1003.368117] elv_dispatch_sort: after list_add
-[ 1003.368186] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.368187] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.368188] elv_dispatch_sort: before list_add
-[ 1003.368189] elv_dispatch_sort: after list_add
-[ 1003.368256] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.368257] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.368258] elv_dispatch_sort: before list_add
-[ 1003.368259] elv_dispatch_sort: after list_add
-[ 1003.368328] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.368329] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.368330] elv_dispatch_sort: before list_add
-[ 1003.368331] elv_dispatch_sort: after list_add
-[ 1003.368435] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.368437] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.368439] elv_dispatch_sort: before list_add
-[ 1003.368440] elv_dispatch_sort: after list_add
-[ 1003.368575] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.368577] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.368578] elv_dispatch_sort: before list_add
-[ 1003.368579] elv_dispatch_sort: after list_add
-[ 1003.368678] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.368679] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.368680] elv_dispatch_sort: before list_add
-[ 1003.368681] elv_dispatch_sort: after list_add
-[ 1003.368758] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.368759] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.368760] elv_dispatch_sort: before list_add
-[ 1003.368761] elv_dispatch_sort: after list_add
-[ 1003.368837] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.368839] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.368840] elv_dispatch_sort: before list_add
-[ 1003.368841] elv_dispatch_sort: after list_add
-[ 1003.368917] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.368918] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.368919] elv_dispatch_sort: before list_add
-[ 1003.368920] elv_dispatch_sort: after list_add
-[ 1003.369005] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.369006] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.369007] elv_dispatch_sort: before list_add
-[ 1003.369008] elv_dispatch_sort: after list_add
-[ 1003.369081] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.369083] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.369084] elv_dispatch_sort: before list_add
-[ 1003.369084] elv_dispatch_sort: after list_add
-[ 1003.369168] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.369170] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.369171] elv_dispatch_sort: before list_add
-[ 1003.369172] elv_dispatch_sort: after list_add
-[ 1003.369251] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.369252] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.369253] elv_dispatch_sort: before list_add
-[ 1003.369254] elv_dispatch_sort: after list_add
-[ 1003.369329] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.369330] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.369331] elv_dispatch_sort: before list_add
-[ 1003.369332] elv_dispatch_sort: after list_add
-[ 1003.369431] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.369433] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.369434] elv_dispatch_sort: before list_add
-[ 1003.369435] elv_dispatch_sort: after list_add
-[ 1003.369517] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.369519] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.369520] elv_dispatch_sort: before list_add
-[ 1003.369521] elv_dispatch_sort: after list_add
-[ 1003.369595] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.369597] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.369598] elv_dispatch_sort: before list_add
-[ 1003.369599] elv_dispatch_sort: after list_add
-[ 1003.369683] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.369685] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.369686] elv_dispatch_sort: before list_add
-[ 1003.369687] elv_dispatch_sort: after list_add
-[ 1003.369763] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.369765] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.369766] elv_dispatch_sort: before list_add
-[ 1003.369767] elv_dispatch_sort: after list_add
-[ 1003.369844] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.369845] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.369846] elv_dispatch_sort: before list_add
-[ 1003.369847] elv_dispatch_sort: after list_add
-[ 1003.369939] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.369940] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.369941] elv_dispatch_sort: before list_add
-[ 1003.369942] elv_dispatch_sort: after list_add
-[ 1003.370011] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.370012] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.370013] elv_dispatch_sort: before list_add
-[ 1003.370013] elv_dispatch_sort: after list_add
-[ 1003.370081] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.370083] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.370084] elv_dispatch_sort: before list_add
-[ 1003.370084] elv_dispatch_sort: after list_add
-[ 1003.370159] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.370160] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.370161] elv_dispatch_sort: before list_add
-[ 1003.370162] elv_dispatch_sort: after list_add
-[ 1003.370230] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.370231] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.370232] elv_dispatch_sort: before list_add
-[ 1003.370233] elv_dispatch_sort: after list_add
-[ 1003.370303] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.370304] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.370305] elv_dispatch_sort: before list_add
-[ 1003.370306] elv_dispatch_sort: after list_add
-[ 1003.370411] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.370412] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.370413] elv_dispatch_sort: before list_add
-[ 1003.370414] elv_dispatch_sort: after list_add
-[ 1003.370494] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.370496] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.370497] elv_dispatch_sort: before list_add
-[ 1003.370498] elv_dispatch_sort: after list_add
-[ 1003.370578] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.370579] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.370580] elv_dispatch_sort: before list_add
-[ 1003.370581] elv_dispatch_sort: after list_add
-[ 1003.370661] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.370662] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.370664] elv_dispatch_sort: before list_add
-[ 1003.370665] elv_dispatch_sort: after list_add
-[ 1003.370740] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.370741] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.370742] elv_dispatch_sort: before list_add
-[ 1003.370744] elv_dispatch_sort: after list_add
-[ 1003.370824] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.370825] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.370826] elv_dispatch_sort: before list_add
-[ 1003.370827] elv_dispatch_sort: after list_add
-[ 1003.370991] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.370992] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.370994] elv_dispatch_sort: before list_add
-[ 1003.370995] elv_dispatch_sort: after list_add
-[ 1003.371079] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.371081] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.371082] elv_dispatch_sort: before list_add
-[ 1003.371083] elv_dispatch_sort: after list_add
-[ 1003.371159] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.371160] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.371161] elv_dispatch_sort: before list_add
-[ 1003.371162] elv_dispatch_sort: after list_add
-[ 1003.371246] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.371247] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.371248] elv_dispatch_sort: before list_add
-[ 1003.371249] elv_dispatch_sort: after list_add
-[ 1003.371331] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.371333] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.371334] elv_dispatch_sort: before list_add
-[ 1003.371335] elv_dispatch_sort: after list_add
-[ 1003.371432] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.371434] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.371435] elv_dispatch_sort: before list_add
-[ 1003.371436] elv_dispatch_sort: after list_add
-[ 1003.371515] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.371517] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.371518] elv_dispatch_sort: before list_add
-[ 1003.371519] elv_dispatch_sort: after list_add
-[ 1003.371597] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.371598] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.371599] elv_dispatch_sort: before list_add
-[ 1003.371600] elv_dispatch_sort: after list_add
-[ 1003.371677] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.371678] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.371679] elv_dispatch_sort: before list_add
-[ 1003.371680] elv_dispatch_sort: after list_add
-[ 1003.371755] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.371757] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.371758] elv_dispatch_sort: before list_add
-[ 1003.371759] elv_dispatch_sort: after list_add
-[ 1003.371839] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.371841] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.371842] elv_dispatch_sort: before list_add
-[ 1003.371843] elv_dispatch_sort: after list_add
-[ 1003.371918] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.371919] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.371920] elv_dispatch_sort: before list_add
-[ 1003.371921] elv_dispatch_sort: after list_add
-[ 1003.371997] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.371998] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.371999] elv_dispatch_sort: before list_add
-[ 1003.372000] elv_dispatch_sort: after list_add
-[ 1003.372082] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.372084] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.372085] elv_dispatch_sort: before list_add
-[ 1003.372086] elv_dispatch_sort: after list_add
-[ 1003.372160] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.372162] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.372163] elv_dispatch_sort: before list_add
-[ 1003.372164] elv_dispatch_sort: after list_add
-[ 1003.372250] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.372251] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.372252] elv_dispatch_sort: before list_add
-[ 1003.372253] elv_dispatch_sort: after list_add
-[ 1003.372334] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.372335] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.372337] elv_dispatch_sort: before list_add
-[ 1003.372349] elv_dispatch_sort: after list_add
-[ 1003.372431] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.372433] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.372434] elv_dispatch_sort: before list_add
-[ 1003.372435] elv_dispatch_sort: after list_add
-[ 1003.372514] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.372515] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.372516] elv_dispatch_sort: before list_add
-[ 1003.372517] elv_dispatch_sort: after list_add
-[ 1003.372600] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.372601] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.372602] elv_dispatch_sort: before list_add
-[ 1003.372603] elv_dispatch_sort: after list_add
-[ 1003.372680] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.372681] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.372682] elv_dispatch_sort: before list_add
-[ 1003.372683] elv_dispatch_sort: after list_add
-[ 1003.372758] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.372759] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.372760] elv_dispatch_sort: before list_add
-[ 1003.372761] elv_dispatch_sort: after list_add
-[ 1003.372869] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.372870] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.372872] elv_dispatch_sort: before list_add
-[ 1003.372872] elv_dispatch_sort: after list_add
-[ 1003.372975] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.372976] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.372977] elv_dispatch_sort: before list_add
-[ 1003.372978] elv_dispatch_sort: after list_add
-[ 1003.373074] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.373075] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.373076] elv_dispatch_sort: before list_add
-[ 1003.373077] elv_dispatch_sort: after list_add
-[ 1003.373661] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.373663] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.373664] elv_dispatch_sort: before list_add
-[ 1003.373665] elv_dispatch_sort: after list_add
-[ 1003.418305] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.418307] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.418309] elv_dispatch_sort: before list_add
-[ 1003.418310] elv_dispatch_sort: after list_add
-[ 1003.445450] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.445453] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.445454] elv_dispatch_sort: before list_add
-[ 1003.445455] elv_dispatch_sort: after list_add
-[ 1003.445656] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.445657] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.445658] elv_dispatch_sort: before list_add
-[ 1003.445659] elv_dispatch_sort: after list_add
-[ 1003.468095] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.468098] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.468099] elv_dispatch_sort: before list_add
-[ 1003.468100] elv_dispatch_sort: after list_add
-[ 1003.489649] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.489651] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.489652] elv_dispatch_sort: before list_add
-[ 1003.489653] elv_dispatch_sort: after list_add
-[ 1003.492273] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.492275] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.492276] elv_dispatch_sort: before list_add
-[ 1003.492277] elv_dispatch_sort: after list_add
-[ 1003.493024] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.493026] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.493027] elv_dispatch_sort: before list_add
-[ 1003.493028] elv_dispatch_sort: after list_add
-[ 1003.511280] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.511282] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.511283] elv_dispatch_sort: before list_add
-[ 1003.511284] elv_dispatch_sort: after list_add
-[ 1003.511658] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.511660] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.511661] elv_dispatch_sort: before list_add
-[ 1003.511662] elv_dispatch_sort: after list_add
-[ 1003.513991] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.513993] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.513994] elv_dispatch_sort: before list_add
-[ 1003.513995] elv_dispatch_sort: after list_add
-[ 1003.518359] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.518362] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.518363] elv_dispatch_sort: before list_add
-[ 1003.518364] elv_dispatch_sort: after list_add
-[ 1003.525553] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.525555] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.525556] elv_dispatch_sort: before list_add
-[ 1003.525557] elv_dispatch_sort: after list_add
-[ 1003.525984] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.525986] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.525987] elv_dispatch_sort: before list_add
-[ 1003.525988] elv_dispatch_sort: after list_add
-[ 1003.526431] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.526433] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.526434] elv_dispatch_sort: before list_add
-[ 1003.526435] elv_dispatch_sort: after list_add
-[ 1003.534456] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.534458] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.534459] elv_dispatch_sort: before list_add
-[ 1003.534460] elv_dispatch_sort: after list_add
-[ 1003.553274] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.553275] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.553276] elv_dispatch_sort: before list_add
-[ 1003.553277] elv_dispatch_sort: after list_add
-[ 1003.555215] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.555217] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.555218] elv_dispatch_sort: before list_add
-[ 1003.555219] elv_dispatch_sort: after list_add
-[ 1003.555617] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.555619] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.555620] elv_dispatch_sort: before list_add
-[ 1003.555621] elv_dispatch_sort: after list_add
-[ 1003.576832] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.576834] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.576835] elv_dispatch_sort: before list_add
-[ 1003.576836] elv_dispatch_sort: after list_add
-[ 1003.605171] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.605173] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.605174] elv_dispatch_sort: before list_add
-[ 1003.605175] elv_dispatch_sort: after list_add
-[ 1003.617686] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.617688] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.617689] elv_dispatch_sort: before list_add
-[ 1003.617690] elv_dispatch_sort: after list_add
-[ 1003.629973] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.629975] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.629976] elv_dispatch_sort: before list_add
-[ 1003.629977] elv_dispatch_sort: after list_add
-[ 1003.646879] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.646881] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.646882] elv_dispatch_sort: before list_add
-[ 1003.646883] elv_dispatch_sort: after list_add
-[ 1003.647067] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.647069] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.647070] elv_dispatch_sort: before list_add
-[ 1003.647071] elv_dispatch_sort: after list_add
-[ 1003.647742] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.647744] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.647746] elv_dispatch_sort: before list_add
-[ 1003.647747] elv_dispatch_sort: after list_add
-[ 1003.650009] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.650012] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.650013] elv_dispatch_sort: before list_add
-[ 1003.650014] elv_dispatch_sort: after list_add
-[ 1003.650914] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.650916] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.650917] elv_dispatch_sort: before list_add
-[ 1003.650918] elv_dispatch_sort: after list_add
-[ 1003.651822] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.651824] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.651825] elv_dispatch_sort: before list_add
-[ 1003.651826] elv_dispatch_sort: after list_add
-[ 1003.653345] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.653348] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.653349] elv_dispatch_sort: before list_add
-[ 1003.653350] elv_dispatch_sort: after list_add
-[ 1003.654193] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.654195] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.654197] elv_dispatch_sort: before list_add
-[ 1003.654198] elv_dispatch_sort: after list_add
-[ 1003.655156] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.655158] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.655159] elv_dispatch_sort: before list_add
-[ 1003.655160] elv_dispatch_sort: after list_add
-[ 1003.656108] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.656110] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.656111] elv_dispatch_sort: before list_add
-[ 1003.656112] elv_dispatch_sort: after list_add
-[ 1003.662091] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.662093] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.662094] elv_dispatch_sort: before list_add
-[ 1003.662095] elv_dispatch_sort: after list_add
-[ 1003.662446] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.662448] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.662448] elv_dispatch_sort: before list_add
-[ 1003.662449] elv_dispatch_sort: after list_add
-[ 1003.664146] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.664148] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.664149] elv_dispatch_sort: before list_add
-[ 1003.664150] elv_dispatch_sort: after list_add
-[ 1003.664532] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.664534] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.664535] elv_dispatch_sort: before list_add
-[ 1003.664536] elv_dispatch_sort: after list_add
-[ 1003.668539] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.668541] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.668542] elv_dispatch_sort: before list_add
-[ 1003.668543] elv_dispatch_sort: after list_add
-[ 1003.668738] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.668739] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.668740] elv_dispatch_sort: before list_add
-[ 1003.668741] elv_dispatch_sort: after list_add
-[ 1003.668832] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.668833] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.668834] elv_dispatch_sort: before list_add
-[ 1003.668835] elv_dispatch_sort: after list_add
-[ 1003.668930] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.668931] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.668932] elv_dispatch_sort: before list_add
-[ 1003.668933] elv_dispatch_sort: after list_add
-[ 1003.669015] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.669017] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.669018] elv_dispatch_sort: before list_add
-[ 1003.669019] elv_dispatch_sort: after list_add
-[ 1003.669559] SELinux: initialized (dev sdb1, type ext2), uses xattr
-[ 1003.670219] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.670221] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.670223] elv_dispatch_sort: before list_add
-[ 1003.670224] elv_dispatch_sort: after list_add
-[ 1003.671953] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.671955] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.671956] elv_dispatch_sort: before list_add
-[ 1003.671957] elv_dispatch_sort: after list_add
-[ 1003.713510] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.713513] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.713514] elv_dispatch_sort: before list_add
-[ 1003.713515] elv_dispatch_sort: after list_add
-[ 1003.735971] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.735973] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.735974] elv_dispatch_sort: before list_add
-[ 1003.735975] elv_dispatch_sort: after list_add
-[ 1003.758868] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.758871] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.758872] elv_dispatch_sort: before list_add
-[ 1003.758873] elv_dispatch_sort: after list_add
-[ 1003.792007] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.792010] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.792012] elv_dispatch_sort: before list_add
-[ 1003.792013] elv_dispatch_sort: after list_add
-[ 1003.792195] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.792197] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.792198] elv_dispatch_sort: before list_add
-[ 1003.792199] elv_dispatch_sort: after list_add
-[ 1003.815852] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.815854] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.815855] elv_dispatch_sort: before list_add
-[ 1003.815856] elv_dispatch_sort: after list_add
-[ 1003.834667] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.834670] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.834671] elv_dispatch_sort: before list_add
-[ 1003.834672] elv_dispatch_sort: after list_add
-[ 1003.850390] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.850393] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.850394] elv_dispatch_sort: before list_add
-[ 1003.850395] elv_dispatch_sort: after list_add
-[ 1003.863146] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.863148] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.863149] elv_dispatch_sort: before list_add
-[ 1003.863150] elv_dispatch_sort: after list_add
-[ 1003.870602] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.870604] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.870605] elv_dispatch_sort: before list_add
-[ 1003.870606] elv_dispatch_sort: after list_add
-[ 1003.871613] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.871615] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.871616] elv_dispatch_sort: before list_add
-[ 1003.871617] elv_dispatch_sort: after list_add
-[ 1003.888647] elv_dispatch_sort: before elv_rqhash_del
-[ 1003.888649] elv_dispatch_sort: after elv_rqhash_del
-[ 1003.888651] elv_dispatch_sort: before list_add
-[ 1003.888652] elv_dispatch_sort: after list_add
-[ 1004.682439] @ add 7192 , last_rq_pos 0    , end_sector 2056 
-[ 1004.682444] @ dispatch:7192 
-[ 1004.682445] queue after dispatch:
-[ 1004.682446] queue empty
-[ 1004.682447] elv_dispatch_sort: before elv_rqhash_del
-[ 1004.682449] elv_dispatch_sort: after elv_rqhash_del
-[ 1004.682450] elv_dispatch_sort: before list_add
-[ 1004.682451] elv_dispatch_sort: after list_add
-[ 1004.682452] queue after elv_dispatch_sort:
-[ 1004.682453] queue empty
-[ 1004.682454] dispatch_count:0    
-[ 1005.989034] elv_dispatch_sort: before elv_rqhash_del
-[ 1005.989038] elv_dispatch_sort: after elv_rqhash_del
-[ 1005.989048] elv_dispatch_sort: before list_add
-[ 1005.989049] elv_dispatch_sort: after list_add
-[ 1005.989482] elv_dispatch_sort: before elv_rqhash_del
-[ 1005.989484] elv_dispatch_sort: after elv_rqhash_del
-[ 1005.989485] elv_dispatch_sort: before list_add
-[ 1005.989486] elv_dispatch_sort: after list_add
-[ 1010.998028] elv_dispatch_sort: before elv_rqhash_del
-[ 1010.998031] elv_dispatch_sort: after elv_rqhash_del
-[ 1010.998032] elv_dispatch_sort: before list_add
-[ 1010.998033] elv_dispatch_sort: after list_add
-[ 1016.997634] elv_dispatch_sort: before elv_rqhash_del
-[ 1016.997637] elv_dispatch_sort: after elv_rqhash_del
-[ 1016.997638] elv_dispatch_sort: before list_add
-[ 1016.997639] elv_dispatch_sort: after list_add
-[ 1017.266277] elv_dispatch_sort: before elv_rqhash_del
-[ 1017.266281] elv_dispatch_sort: after elv_rqhash_del
-[ 1017.266282] elv_dispatch_sort: before list_add
-[ 1017.266283] elv_dispatch_sort: after list_add
-[ 1017.266771] elv_dispatch_sort: before elv_rqhash_del
-[ 1017.266774] elv_dispatch_sort: after elv_rqhash_del
-[ 1017.266775] elv_dispatch_sort: before list_add
-[ 1017.266776] elv_dispatch_sort: after list_add
-[ 1022.000920] elv_dispatch_sort: before elv_rqhash_del
-[ 1022.000924] elv_dispatch_sort: after elv_rqhash_del
-[ 1022.000925] elv_dispatch_sort: before list_add
-[ 1022.000926] elv_dispatch_sort: after list_add
-[ 1022.001405] elv_dispatch_sort: before elv_rqhash_del
-[ 1022.001408] elv_dispatch_sort: after elv_rqhash_del
-[ 1022.001409] elv_dispatch_sort: before list_add
-[ 1022.001411] elv_dispatch_sort: after list_add
-[ 1024.763359] elv_dispatch_sort: before elv_rqhash_del
-[ 1024.763363] elv_dispatch_sort: after elv_rqhash_del
-[ 1024.763364] elv_dispatch_sort: before list_add
-[ 1024.763365] elv_dispatch_sort: after list_add
-[ 1024.763515] elv_dispatch_sort: before elv_rqhash_del
-[ 1024.763517] elv_dispatch_sort: after elv_rqhash_del
-[ 1024.763518] elv_dispatch_sort: before list_add
-[ 1024.763519] elv_dispatch_sort: after list_add
-[ 1027.266959] elv_dispatch_sort: before elv_rqhash_del
-[ 1027.266962] elv_dispatch_sort: after elv_rqhash_del
-[ 1027.266963] elv_dispatch_sort: before list_add
-[ 1027.266965] elv_dispatch_sort: after list_add
-[ 1027.267236] elv_dispatch_sort: before elv_rqhash_del
-[ 1027.267239] elv_dispatch_sort: after elv_rqhash_del
-[ 1027.267241] elv_dispatch_sort: before list_add
-[ 1027.267242] elv_dispatch_sort: after list_add
-[ 1027.267624] elv_dispatch_sort: before elv_rqhash_del
-[ 1027.267626] elv_dispatch_sort: after elv_rqhash_del
-[ 1027.267627] elv_dispatch_sort: before list_add
-[ 1027.267628] elv_dispatch_sort: after list_add
-[ 1032.267986] elv_dispatch_sort: before elv_rqhash_del
-[ 1032.267990] elv_dispatch_sort: after elv_rqhash_del
-[ 1032.267991] elv_dispatch_sort: before list_add
-[ 1032.267992] elv_dispatch_sort: after list_add
-[ 1032.268205] elv_dispatch_sort: before elv_rqhash_del
-[ 1032.268206] elv_dispatch_sort: after elv_rqhash_del
-[ 1032.268207] elv_dispatch_sort: before list_add
-[ 1032.268208] elv_dispatch_sort: after list_add
-[ 1032.268243] elv_dispatch_sort: before elv_rqhash_del
-[ 1032.268246] elv_dispatch_sort: after elv_rqhash_del
-[ 1032.268247] elv_dispatch_sort: before list_add
-[ 1032.268248] elv_dispatch_sort: after list_add
-[ 1032.268891] elv_dispatch_sort: before elv_rqhash_del
-[ 1032.268893] elv_dispatch_sort: after elv_rqhash_del
-[ 1032.268894] elv_dispatch_sort: before list_add
-[ 1032.268895] elv_dispatch_sort: after list_add
-[ 1032.269472] elv_dispatch_sort: before elv_rqhash_del
-[ 1032.269474] elv_dispatch_sort: after elv_rqhash_del
-[ 1032.269475] elv_dispatch_sort: before list_add
-[ 1032.269476] elv_dispatch_sort: after list_add
-[ 1032.269885] elv_dispatch_sort: before elv_rqhash_del
-[ 1032.269886] elv_dispatch_sort: after elv_rqhash_del
-[ 1032.269888] elv_dispatch_sort: before list_add
-[ 1032.269889] elv_dispatch_sort: after list_add
-[ 1032.270247] elv_dispatch_sort: before elv_rqhash_del
-[ 1032.270249] elv_dispatch_sort: after elv_rqhash_del
-[ 1032.270250] elv_dispatch_sort: before list_add
-[ 1032.270251] elv_dispatch_sort: after list_add
-[ 1032.270600] elv_dispatch_sort: before elv_rqhash_del
-[ 1032.270602] elv_dispatch_sort: after elv_rqhash_del
-[ 1032.270603] elv_dispatch_sort: before list_add
-[ 1032.270604] elv_dispatch_sort: after list_add
-[ 1032.270955] elv_dispatch_sort: before elv_rqhash_del
-[ 1032.270957] elv_dispatch_sort: after elv_rqhash_del
-[ 1032.270958] elv_dispatch_sort: before list_add
-[ 1032.270959] elv_dispatch_sort: after list_add
-[ 1032.271381] elv_dispatch_sort: before elv_rqhash_del
-[ 1032.271383] elv_dispatch_sort: after elv_rqhash_del
-[ 1032.271384] elv_dispatch_sort: before list_add
-[ 1032.271385] elv_dispatch_sort: after list_add
-[ 1032.271768] elv_dispatch_sort: before elv_rqhash_del
-[ 1032.271770] elv_dispatch_sort: after elv_rqhash_del
-[ 1032.271771] elv_dispatch_sort: before list_add
-[ 1032.271772] elv_dispatch_sort: after list_add
-[ 1032.272190] elv_dispatch_sort: before elv_rqhash_del
-[ 1032.272192] elv_dispatch_sort: after elv_rqhash_del
-[ 1032.272193] elv_dispatch_sort: before list_add
-[ 1032.272194] elv_dispatch_sort: after list_add
-[ 1032.272561] elv_dispatch_sort: before elv_rqhash_del
-[ 1032.272562] elv_dispatch_sort: after elv_rqhash_del
-[ 1032.272563] elv_dispatch_sort: before list_add
-[ 1032.272564] elv_dispatch_sort: after list_add
-[ 1032.272635] elv_dispatch_sort: before elv_rqhash_del
-[ 1032.272636] elv_dispatch_sort: after elv_rqhash_del
-[ 1032.272637] elv_dispatch_sort: before list_add
-[ 1032.272638] elv_dispatch_sort: after list_add
-[ 1037.994194] elv_dispatch_sort: before elv_rqhash_del
-[ 1037.994198] elv_dispatch_sort: after elv_rqhash_del
-[ 1037.994199] elv_dispatch_sort: before list_add
-[ 1037.994200] elv_dispatch_sort: after list_add
-[ 1037.994708] elv_dispatch_sort: before elv_rqhash_del
-[ 1037.994711] elv_dispatch_sort: after elv_rqhash_del
-[ 1037.994712] elv_dispatch_sort: before list_add
-[ 1037.994714] elv_dispatch_sort: after list_add
-[ 1042.268291] elv_dispatch_sort: before elv_rqhash_del
-[ 1042.268295] elv_dispatch_sort: after elv_rqhash_del
-[ 1042.268296] elv_dispatch_sort: before list_add
-[ 1042.268297] elv_dispatch_sort: after list_add
-[ 1043.994438] elv_dispatch_sort: before elv_rqhash_del
-[ 1043.994442] elv_dispatch_sort: after elv_rqhash_del
-[ 1043.994443] elv_dispatch_sort: before list_add
-[ 1043.994444] elv_dispatch_sort: after list_add
-[ 1043.994595] elv_dispatch_sort: before elv_rqhash_del
-[ 1043.994596] elv_dispatch_sort: after elv_rqhash_del
-[ 1043.994597] elv_dispatch_sort: before list_add
-[ 1043.994598] elv_dispatch_sort: after list_add
-[ 1047.268349] elv_dispatch_sort: before elv_rqhash_del
-[ 1047.268352] elv_dispatch_sort: after elv_rqhash_del
-[ 1047.268353] elv_dispatch_sort: before list_add
-[ 1047.268355] elv_dispatch_sort: after list_add
-[ 1047.268847] elv_dispatch_sort: before elv_rqhash_del
-[ 1047.268850] elv_dispatch_sort: after elv_rqhash_del
-[ 1047.268851] elv_dispatch_sort: before list_add
-[ 1047.268852] elv_dispatch_sort: after list_add
-[ 1049.994518] elv_dispatch_sort: before elv_rqhash_del
-[ 1049.994521] elv_dispatch_sort: after elv_rqhash_del
-[ 1049.994522] elv_dispatch_sort: before list_add
-[ 1049.994524] elv_dispatch_sort: after list_add
-[ 1049.995053] elv_dispatch_sort: before elv_rqhash_del
-[ 1049.995055] elv_dispatch_sort: after elv_rqhash_del
-[ 1049.995056] elv_dispatch_sort: before list_add
-[ 1049.995058] elv_dispatch_sort: after list_add
-[ 1054.997616] elv_dispatch_sort: before elv_rqhash_del
-[ 1054.997620] elv_dispatch_sort: after elv_rqhash_del
-[ 1054.997621] elv_dispatch_sort: before list_add
-[ 1054.997622] elv_dispatch_sort: after list_add
-[ 1054.998147] elv_dispatch_sort: before elv_rqhash_del
-[ 1054.998150] elv_dispatch_sort: after elv_rqhash_del
-[ 1054.998151] elv_dispatch_sort: before list_add
-[ 1054.998152] elv_dispatch_sort: after list_add
-[ 1057.270085] elv_dispatch_sort: before elv_rqhash_del
-[ 1057.270088] elv_dispatch_sort: after elv_rqhash_del
-[ 1057.270090] elv_dispatch_sort: before list_add
-[ 1057.270091] elv_dispatch_sort: after list_add
-[ 1057.270582] elv_dispatch_sort: before elv_rqhash_del
-[ 1057.270585] elv_dispatch_sort: after elv_rqhash_del
-[ 1057.270587] elv_dispatch_sort: before list_add
-[ 1057.270588] elv_dispatch_sort: after list_add
-[ 1060.995069] elv_dispatch_sort: before elv_rqhash_del
-[ 1060.995073] elv_dispatch_sort: after elv_rqhash_del
-[ 1060.995074] elv_dispatch_sort: before list_add
-[ 1060.995075] elv_dispatch_sort: after list_add
-[ 1060.995551] elv_dispatch_sort: before elv_rqhash_del
-[ 1060.995554] elv_dispatch_sort: after elv_rqhash_del
-[ 1060.995555] elv_dispatch_sort: before list_add
-[ 1060.995556] elv_dispatch_sort: after list_add
-[ 1061.841733] elv_dispatch_sort: before elv_rqhash_del
-[ 1061.841736] elv_dispatch_sort: after elv_rqhash_del
-[ 1061.841737] elv_dispatch_sort: before list_add
-[ 1061.841738] elv_dispatch_sort: after list_add
-[ 1061.859018] elv_dispatch_sort: before elv_rqhash_del
-[ 1061.859020] elv_dispatch_sort: after elv_rqhash_del
-[ 1061.859021] elv_dispatch_sort: before list_add
-[ 1061.859022] elv_dispatch_sort: after list_add
-[ 1061.869032] elv_dispatch_sort: before elv_rqhash_del
-[ 1061.869034] elv_dispatch_sort: after elv_rqhash_del
-[ 1061.869036] elv_dispatch_sort: before list_add
-[ 1061.869037] elv_dispatch_sort: after list_add
-[ 1061.869253] elv_dispatch_sort: before elv_rqhash_del
-[ 1061.869255] elv_dispatch_sort: after elv_rqhash_del
-[ 1061.869256] elv_dispatch_sort: before list_add
-[ 1061.869257] elv_dispatch_sort: after list_add
-[ 1061.871707] init!!!
-[ 1061.871895] @ add 2048 , last_rq_pos 0    , end_sector 7200 
-[ 1061.871897] queue after list_add_tail:
-[ 1061.871898] 2048 
-[ 1061.871899] queue size:1    
-[ 1061.871900] min_req:2048 
-[ 1061.871901] Sorted queue:
-[ 1061.871902] 2048 
-[ 1061.871908] @ add 59392, last_rq_pos 0    , end_sector 7200 
-[ 1061.871910] queue after list_add_tail:
-[ 1061.871911] 2048 
-[ 1061.871911] 59392 
-[ 1061.871912] queue size:2    
-[ 1061.871913] min_req:2048 
-[ 1061.871914] have choose one:59392
-[ 1061.871915] chosen_req:59392
-[ 1061.871916] after move:
-[ 1061.871917] 59392 
-[ 1061.871918] 2048 
-[ 1061.871919] Sorted queue:
-[ 1061.871920] 59392 
-[ 1061.871920] 2048 
-[ 1061.871925] @ add 10240, last_rq_pos 0    , end_sector 7200 
-[ 1061.871926] queue after list_add_tail:
-[ 1061.871927] 59392 
-[ 1061.871927] 2048 
-[ 1061.871928] 10240 
-[ 1061.871929] queue size:3    
-[ 1061.871930] min_req:2048 
-[ 1061.871931] have choose one:59392
-[ 1061.871932] have choose one:10240
-[ 1061.871933] chosen_req:10240
-[ 1061.871934] after move:
-[ 1061.871935] 10240 
-[ 1061.871935] 2048 
-[ 1061.871936] 59392 
-[ 1061.871937] have choose one:59392
-[ 1061.871938] chosen_req:59392
-[ 1061.871939] after move:
-[ 1061.871940] 59392 
-[ 1061.871940] 10240 
-[ 1061.871941] 2048 
-[ 1061.871942] Sorted queue:
-[ 1061.871943] 59392 
-[ 1061.871943] 10240 
-[ 1061.871944] 2048 
-[ 1061.871949] @ add 26624, last_rq_pos 0    , end_sector 7200 
-[ 1061.871950] queue after list_add_tail:
-[ 1061.871951] 59392 
-[ 1061.871951] 10240 
-[ 1061.871952] 2048 
-[ 1061.871953] 26624 
-[ 1061.871954] queue size:4    
-[ 1061.871955] min_req:2048 
-[ 1061.871956] have choose one:59392
-[ 1061.871957] have choose one:10240
-[ 1061.871958] chosen_req:10240
-[ 1061.871958] after move:
-[ 1061.871959] 10240 
-[ 1061.871960] 2048 
-[ 1061.871961] 59392 
-[ 1061.871961] 26624 
-[ 1061.871962] have choose one:59392
-[ 1061.871963] have choose one:26624
-[ 1061.871964] chosen_req:26624
-[ 1061.871965] after move:
-[ 1061.871966] 26624 
-[ 1061.871967] 10240 
-[ 1061.871967] 2048 
-[ 1061.871968] 59392 
-[ 1061.871969] have choose one:59392
-[ 1061.871970] chosen_req:59392
-[ 1061.871971] after move:
-[ 1061.871972] 59392 
-[ 1061.871972] 26624 
-[ 1061.871973] 10240 
-[ 1061.871974] 2048 
-[ 1061.871975] Sorted queue:
-[ 1061.871975] 59392 
-[ 1061.871976] 26624 
-[ 1061.871977] 10240 
-[ 1061.871978] 2048 
-[ 1061.871979] @ dispatch:59392
-[ 1061.871980] queue after dispatch:
-[ 1061.871981] [26624], 
-[ 1061.871982] [10240], 
-[ 1061.871983] [2048 ], 
-[ 1061.871984] elv_dispatch_sort: before elv_rqhash_del
-[ 1061.871985] elv_dispatch_sort: after elv_rqhash_del
-[ 1061.871986] elv_dispatch_sort: before list_add
-[ 1061.871987] elv_dispatch_sort: after list_add
-[ 1061.871988] queue after elv_dispatch_sort:
-[ 1061.871989] [26624], 
-[ 1061.871990] [10240], 
-[ 1061.871991] [2048 ], 
-[ 1061.871991] dispatch_count:1    
-[ 1061.872132] @ dispatch:26624
-[ 1061.872133] queue after dispatch:
-[ 1061.872134] [10240], 
-[ 1061.872135] [2048 ], 
-[ 1061.872136] elv_dispatch_sort: before elv_rqhash_del
-[ 1061.872137] elv_dispatch_sort: after elv_rqhash_del
-[ 1061.872138] elv_dispatch_sort: before list_add
-[ 1061.872139] elv_dispatch_sort: after list_add
-[ 1061.872140] queue after elv_dispatch_sort:
-[ 1061.872141] [10240], 
-[ 1061.872142] [2048 ], 
-[ 1061.872142] dispatch_count:2    
-[ 1061.872206] @ dispatch:10240
-[ 1061.872208] queue after dispatch:
-[ 1061.872210] [2048 ], 
-[ 1061.872212] elv_dispatch_sort: before elv_rqhash_del
-[ 1061.872215] elv_dispatch_sort: after elv_rqhash_del
-[ 1061.872228] elv_dispatch_sort: before list_add
-[ 1061.872255] elv_dispatch_sort: after list_add
-[ 1061.872263] queue after elv_dispatch_sort:
-[ 1061.872275] [2048 ], 
-[ 1061.872277] dispatch_count:3    
-[ 1061.872323] @ dispatch:2048 
-[ 1061.872326] queue after dispatch:
-[ 1061.872328] queue empty
-[ 1061.872329] elv_dispatch_sort: before elv_rqhash_del
-[ 1061.872332] elv_dispatch_sort: after elv_rqhash_del
-[ 1061.872368] elv_dispatch_sort: before list_add
-[ 1061.872375] elv_dispatch_sort: after list_add
-[ 1061.872377] queue after elv_dispatch_sort:
-[ 1061.872379] queue empty
-[ 1061.872381] dispatch_count:4    
-[ 1062.273903] elv_dispatch_sort: before elv_rqhash_del
-[ 1062.273906] elv_dispatch_sort: after elv_rqhash_del
-[ 1062.273907] elv_dispatch_sort: before list_add
-[ 1062.273908] elv_dispatch_sort: after list_add
-[ 1064.793746] elv_dispatch_sort: before elv_rqhash_del
-[ 1064.793750] elv_dispatch_sort: after elv_rqhash_del
-[ 1064.793751] elv_dispatch_sort: before list_add
-[ 1064.793752] elv_dispatch_sort: after list_add
-[ 1064.817415] elv_dispatch_sort: before elv_rqhash_del
-[ 1064.817417] elv_dispatch_sort: after elv_rqhash_del
-[ 1064.817418] elv_dispatch_sort: before list_add
-[ 1064.817419] elv_dispatch_sort: after list_add
-[ 1064.826027] elv_dispatch_sort: before elv_rqhash_del
-[ 1064.826030] elv_dispatch_sort: after elv_rqhash_del
-[ 1064.826031] elv_dispatch_sort: before list_add
-[ 1064.826032] elv_dispatch_sort: after list_add
-[ 1064.826182] elv_dispatch_sort: before elv_rqhash_del
-[ 1064.826184] elv_dispatch_sort: after elv_rqhash_del
-[ 1064.826185] elv_dispatch_sort: before list_add
-[ 1064.826186] elv_dispatch_sort: after list_add
-[ 1064.826638] elv_dispatch_sort: before elv_rqhash_del
-[ 1064.826640] elv_dispatch_sort: after elv_rqhash_del
-[ 1064.826641] elv_dispatch_sort: before list_add
-[ 1064.826642] elv_dispatch_sort: after list_add
-[ 1064.826732] elv_dispatch_sort: before elv_rqhash_del
-[ 1064.826734] elv_dispatch_sort: after elv_rqhash_del
-[ 1064.826735] elv_dispatch_sort: before list_add
-[ 1064.826736] elv_dispatch_sort: after list_add
-[ 1064.827643] elv_dispatch_sort: before elv_rqhash_del
-[ 1064.827646] elv_dispatch_sort: after elv_rqhash_del
-[ 1064.827647] elv_dispatch_sort: before list_add
-[ 1064.827648] elv_dispatch_sort: after list_add
-[ 1064.827649] elv_dispatch_sort: before elv_rqhash_del
-[ 1064.827650] elv_dispatch_sort: after elv_rqhash_del
-[ 1064.827651] elv_dispatch_sort: before list_add
-[ 1064.827652] elv_dispatch_sort: after list_add
-[ 1064.828351] elv_dispatch_sort: before elv_rqhash_del
-[ 1064.828354] elv_dispatch_sort: after elv_rqhash_del
-[ 1064.828355] elv_dispatch_sort: before list_add
-[ 1064.828356] elv_dispatch_sort: after list_add
-[ 1064.829059] elv_dispatch_sort: before elv_rqhash_del
-[ 1064.829061] elv_dispatch_sort: after elv_rqhash_del
-[ 1064.829063] elv_dispatch_sort: before list_add
-[ 1064.829064] elv_dispatch_sort: after list_add
-[ 1064.829452] elv_dispatch_sort: before elv_rqhash_del
-[ 1064.829455] elv_dispatch_sort: after elv_rqhash_del
-[ 1064.829456] elv_dispatch_sort: before list_add
-[ 1064.829457] elv_dispatch_sort: after list_add
-[ 1064.829868] elv_dispatch_sort: before elv_rqhash_del
-[ 1064.829870] elv_dispatch_sort: after elv_rqhash_del
-[ 1064.829871] elv_dispatch_sort: before list_add
-[ 1064.829872] elv_dispatch_sort: after list_add
-[ 1064.830011] elv_dispatch_sort: before elv_rqhash_del
-[ 1064.830012] elv_dispatch_sort: after elv_rqhash_del
-[ 1064.830014] elv_dispatch_sort: before list_add
-[ 1064.830014] elv_dispatch_sort: after list_add
-[ 1064.830496] elv_dispatch_sort: before elv_rqhash_del
-[ 1064.830498] elv_dispatch_sort: after elv_rqhash_del
-[ 1064.830499] elv_dispatch_sort: before list_add
-[ 1064.830500] elv_dispatch_sort: after list_add
-[ 1064.831466] elv_dispatch_sort: before elv_rqhash_del
-[ 1064.831468] elv_dispatch_sort: after elv_rqhash_del
-[ 1064.831469] elv_dispatch_sort: before list_add
-[ 1064.831470] elv_dispatch_sort: after list_add
-[ 1064.831575] elv_dispatch_sort: before elv_rqhash_del
-[ 1064.831576] elv_dispatch_sort: after elv_rqhash_del
-[ 1064.831577] elv_dispatch_sort: before list_add
-[ 1064.831578] elv_dispatch_sort: after list_add
-[ 1064.831628] elv_dispatch_sort: before elv_rqhash_del
-[ 1064.831629] elv_dispatch_sort: after elv_rqhash_del
-[ 1064.831630] elv_dispatch_sort: before list_add
-[ 1064.831631] elv_dispatch_sort: after list_add
-[ 1064.831670] elv_dispatch_sort: before elv_rqhash_del
-[ 1064.831671] elv_dispatch_sort: after elv_rqhash_del
-[ 1064.831672] elv_dispatch_sort: before list_add
-[ 1064.831673] elv_dispatch_sort: after list_add
-[ 1064.831714] elv_dispatch_sort: before elv_rqhash_del
-[ 1064.831716] elv_dispatch_sort: after elv_rqhash_del
-[ 1064.831717] elv_dispatch_sort: before list_add
-[ 1064.831718] elv_dispatch_sort: after list_add
-[ 1064.831776] elv_dispatch_sort: before elv_rqhash_del
-[ 1064.831777] elv_dispatch_sort: after elv_rqhash_del
-[ 1064.831778] elv_dispatch_sort: before list_add
-[ 1064.831779] elv_dispatch_sort: after list_add
-[ 1064.831830] elv_dispatch_sort: before elv_rqhash_del
-[ 1064.831831] elv_dispatch_sort: after elv_rqhash_del
-[ 1064.831832] elv_dispatch_sort: before list_add
-[ 1064.831833] elv_dispatch_sort: after list_add
-[ 1064.833529] elv_dispatch_sort: before elv_rqhash_del
-[ 1064.833531] elv_dispatch_sort: after elv_rqhash_del
-[ 1064.833532] elv_dispatch_sort: before list_add
-[ 1064.833533] elv_dispatch_sort: after list_add
-[ 1064.833624] elv_dispatch_sort: before elv_rqhash_del
-[ 1064.833626] elv_dispatch_sort: after elv_rqhash_del
-[ 1064.833627] elv_dispatch_sort: before list_add
-[ 1064.833628] elv_dispatch_sort: after list_add
-[ 1064.841673] elv_dispatch_sort: before elv_rqhash_del
-[ 1064.841676] elv_dispatch_sort: after elv_rqhash_del
-[ 1064.841677] elv_dispatch_sort: before list_add
-[ 1064.841678] elv_dispatch_sort: after list_add
-[ 1064.842204] elv_dispatch_sort: before elv_rqhash_del
-[ 1064.842205] elv_dispatch_sort: after elv_rqhash_del
-[ 1064.842206] elv_dispatch_sort: before list_add
-[ 1064.842207] elv_dispatch_sort: after list_add
-[ 1064.843053] elv_dispatch_sort: before elv_rqhash_del
-[ 1064.843055] elv_dispatch_sort: after elv_rqhash_del
-[ 1064.843057] elv_dispatch_sort: before list_add
-[ 1064.843058] elv_dispatch_sort: after list_add
-[ 1064.843227] elv_dispatch_sort: before elv_rqhash_del
-[ 1064.843229] elv_dispatch_sort: after elv_rqhash_del
-[ 1064.843230] elv_dispatch_sort: before list_add
-[ 1064.843231] elv_dispatch_sort: after list_add
-[ 1064.843274] elv_dispatch_sort: before elv_rqhash_del
-[ 1064.843276] elv_dispatch_sort: after elv_rqhash_del
-[ 1064.843277] elv_dispatch_sort: before list_add
-[ 1064.843278] elv_dispatch_sort: after list_add
-[ 1069.994976] elv_dispatch_sort: before elv_rqhash_del
-[ 1069.994979] elv_dispatch_sort: after elv_rqhash_del
-[ 1069.994980] elv_dispatch_sort: before list_add
-[ 1069.994981] elv_dispatch_sort: after list_add
-[ 1069.995458] elv_dispatch_sort: before elv_rqhash_del
-[ 1069.995461] elv_dispatch_sort: after elv_rqhash_del
-[ 1069.995462] elv_dispatch_sort: before list_add
-[ 1069.995463] elv_dispatch_sort: after list_add
+[  148.017002] EXT2-fs warning: mounting unchecked fs, running e2fsck is recommended
+[  148.017022] SELinux: initialized (dev sdb1, type ext2), uses xattr
+[  149.039183] @ add 7192 , last_rq_pos 0    , end_sector 3104 
+[  149.039187] @ dispatch:7192 
+[  149.039188] queue after dispatch:
+[  149.039189] queue empty
+[  149.039191] queue after elv_dispatch_sort:
+[  149.039192] queue empty
+[  149.039192] dispatch_count:0    
+[  169.250828] init!!!
+[  169.250848] @ add 2048 , last_rq_pos 0    , end_sector 7200 
+[  169.250849] queue after list_add_tail:
+[  169.250850] 2048 
+[  169.250852] queue size:1    
+[  169.250853] min_req:2048 
+[  169.250854] Sorted queue:
+[  169.250855] 2048 
+[  169.250861] @ dispatch:2048 
+[  169.250862] queue after dispatch:
+[  169.250863] queue empty
+[  169.250864] queue after elv_dispatch_sort:
+[  169.250865] queue empty
+[  169.250866] dispatch_count:1    
+[  169.316055] @ add 2048 , last_rq_pos 2048 , end_sector 2056 
+[  169.316058] queue after list_add_tail:
+[  169.316059] 2048 
+[  169.316060] queue size:1    
+[  169.316062] min_req:2048 
+[  169.316063] Sorted queue:
+[  169.316064] 2048 
+[  169.316070] @ add 59392, last_rq_pos 2048 , end_sector 2056 
+[  169.316071] queue after list_add_tail:
+[  169.316072] 2048 
+[  169.316073] 59392 
+[  169.316074] queue size:2    
+[  169.316075] min_req:2048 
+[  169.316076] have choose one:59392
+[  169.316077] chosen_req:59392
+[  169.316077] after move:
+[  169.316078] 59392 
+[  169.316079] 2048 
+[  169.316080] Sorted queue:
+[  169.316081] 59392 
+[  169.316081] 2048 
+[  169.316088] @ add 10240, last_rq_pos 2048 , end_sector 2056 
+[  169.316089] queue after list_add_tail:
+[  169.316090] 59392 
+[  169.316091] 2048 
+[  169.316092] 10240 
+[  169.316092] queue size:3    
+[  169.316094] min_req:2048 
+[  169.316095] have choose one:59392
+[  169.316095] have choose one:10240
+[  169.316096] chosen_req:10240
+[  169.316097] after move:
+[  169.316098] 10240 
+[  169.316099] 59392 
+[  169.316099] 2048 
+[  169.316100] have choose one:10240
+[  169.316101] chosen_req:10240
+[  169.316102] after move:
+[  169.316103] 10240 
+[  169.316131] 59392 
+[  169.316133] 2048 
+[  169.316134] Sorted queue:
+[  169.316135] 10240 
+[  169.316136] 59392 
+[  169.316136] 2048 
+[  169.316158] @ add 26624, last_rq_pos 2048 , end_sector 2056 
+[  169.316160] queue after list_add_tail:
+[  169.316161] 10240 
+[  169.316162] 59392 
+[  169.316163] 2048 
+[  169.316163] 26624 
+[  169.316165] queue size:4    
+[  169.316166] min_req:2048 
+[  169.316167] have choose one:10240
+[  169.316168] chosen_req:10240
+[  169.316169] after move:
+[  169.316170] 10240 
+[  169.316170] 59392 
+[  169.316171] 26624 
+[  169.316172] 2048 
+[  169.316173] have choose one:10240
+[  169.316174] chosen_req:10240
+[  169.316175] after move:
+[  169.316175] 10240 
+[  169.316176] 59392 
+[  169.316177] 26624 
+[  169.316178] 2048 
+[  169.316178] have choose one:10240
+[  169.316179] chosen_req:10240
+[  169.316180] after move:
+[  169.316181] 10240 
+[  169.316182] 59392 
+[  169.316182] 26624 
+[  169.316183] 2048 
+[  169.316184] Sorted queue:
+[  169.316185] 10240 
+[  169.316185] 59392 
+[  169.316186] 26624 
+[  169.316187] 2048 
+[  169.316189] @ dispatch:10240
+[  169.316190] queue after dispatch:
+[  169.316191] [59392], 
+[  169.316191] [26624], 
+[  169.316192] [2048 ], 
+[  169.316193] queue after elv_dispatch_sort:
+[  169.316194] [59392], 
+[  169.316195] [26624], 
+[  169.316196] [2048 ], 
+[  169.316197] dispatch_count:2    
+[  169.316337] @ dispatch:59392
+[  169.316339] queue after dispatch:
+[  169.316341] [26624], 
+[  169.316343] [2048 ], 
+[  169.316345] queue after elv_dispatch_sort:
+[  169.316359] [26624], 
+[  169.316385] [2048 ], 
+[  169.316392] dispatch_count:3    
+[  169.316463] @ dispatch:26624
+[  169.316464] queue after dispatch:
+[  169.316465] [2048 ], 
+[  169.316466] queue after elv_dispatch_sort:
+[  169.316467] [2048 ], 
+[  169.316468] dispatch_count:4    
+[  169.316493] @ dispatch:2048 
+[  169.316494] queue after dispatch:
+[  169.316495] queue empty
+[  169.316496] queue after elv_dispatch_sort:
+[  169.316497] queue empty
+[  169.316497] dispatch_count:5    

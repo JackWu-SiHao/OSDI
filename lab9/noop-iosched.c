@@ -142,7 +142,8 @@ static void noop_add_request(struct request_queue *q, struct request *rq)
 
         if(min_req) {
             prev_rq_pos = blk_rq_pos(min_req);
-            list_move(&min_req->queuelist, &nd->queue);
+            // list_move(&min_req->queuelist, &nd->queue);
+            list_move_tail(&min_req->queuelist, &nd->queue);
         }
 
         if(!list_empty(&nd->queue)) {
@@ -157,18 +158,19 @@ static void noop_add_request(struct request_queue *q, struct request *rq)
                     /* start to move request until we reach the first min request(min_req)
                      */
                     if( req == min_req ) {
-                        can_move = true;
-                        continue;
+                        break;
+                        // can_move = true;
+                        // continue;
                     }
 
-                    if( can_move ) {
+                    // if( can_move ) {
                         pos_diff = get_diff_abs(blk_rq_pos(req), prev_rq_pos);
                         if( pos_diff < curr_min ) {
                             printk(KERN_INFO "have choose one:%-5llu\n", blk_rq_pos(req));
                             curr_min = pos_diff;
                             chosen_req = req;
                         }
-                    }
+                    // }
                 }
 
                 /* should not enter this */
@@ -179,7 +181,7 @@ static void noop_add_request(struct request_queue *q, struct request *rq)
                     BUG_ON(1);
                 } else {
                     prev_rq_pos = blk_rq_pos(chosen_req);
-                    list_move(&chosen_req->queuelist, &nd->queue);
+                    list_move_tail(&chosen_req->queuelist, &nd->queue);
 
                     printk(KERN_INFO "chosen_req:%-5llu\n", prev_rq_pos);
                     printk(KERN_INFO "after move:");
