@@ -1,188 +1,180 @@
-[  472.017824] SELinux: initialized (dev sdb1, type ext2), uses xattr
-[  473.040295] @ add 7192 , last_rq_pos 0    , end_sector 2056 
-[  473.040301] @ dispatch:7192 
-[  473.040302] queue after dispatch:
-[  473.040303] queue empty
-[  473.040305] queue after elv_dispatch_sort:
-[  473.040306] queue empty
-[  473.040307] dispatch_count:0    
-[  487.675672] init!!!
-[  487.675802] @ add 2048 , last_rq_pos 0    , end_sector 7200 
-[  487.675804] queue size:1    
-[  487.675805] min_req:2048 
-[  487.675806] chosen_req:2048 
-[  487.675807] after move:
-[  487.675808] 2048 
-[  487.675809] Sorted queue:
-[  487.675810] 2048 
-[  487.675815] @ add 59392, last_rq_pos 0    , end_sector 7200 
-[  487.675817] queue size:2    
-[  487.675818] min_req:2048 
-[  487.675819] have choose one:59392
-[  487.675820] chosen_req:59392
-[  487.675821] after move:
-[  487.675822] 59392 
-[  487.675822] 2048 
-[  487.675824] chosen_req:2048 
-[  487.675824] after move:
-[  487.675825] 2048 
-[  487.675826] 59392 
-[  487.675827] Sorted queue:
-[  487.675828] 2048 
-[  487.675828] 59392 
-[  487.675833] @ add 10240, last_rq_pos 0    , end_sector 7200 
-[  487.675834] queue size:3    
-[  487.675835] min_req:2048 
-[  487.675836] have choose one:59392
-[  487.675837] have choose one:10240
-[  487.675838] chosen_req:10240
-[  487.675839] after move:
-[  487.675840] 10240 
-[  487.675841] 2048 
-[  487.675841] 59392 
-[  487.675842] have choose one:59392
-[  487.675843] chosen_req:59392
-[  487.675844] after move:
-[  487.675845] 59392 
-[  487.675846] 10240 
-[  487.675846] 2048 
-[  487.675847] chosen_req:2048 
-[  487.675848] after move:
-[  487.675849] 2048 
-[  487.675850] 59392 
-[  487.675850] 10240 
-[  487.675851] Sorted queue:
-[  487.675852] 2048 
-[  487.675853] 59392 
-[  487.675853] 10240 
-[  487.675857] @ add 26624, last_rq_pos 0    , end_sector 7200 
-[  487.675858] queue size:4    
-[  487.675859] min_req:2048 
-[  487.675860] have choose one:59392
-[  487.675861] have choose one:10240
-[  487.675862] chosen_req:10240
-[  487.675863] after move:
-[  487.675864] 10240 
-[  487.675864] 2048 
-[  487.675865] 59392 
-[  487.675866] 26624 
-[  487.675867] have choose one:59392
-[  487.675868] have choose one:26624
-[  487.675869] chosen_req:26624
-[  487.675869] after move:
-[  487.675870] 26624 
-[  487.675871] 10240 
-[  487.675872] 2048 
-[  487.675873] 59392 
-[  487.675873] have choose one:59392
-[  487.675874] chosen_req:59392
-[  487.675875] after move:
-[  487.675876] 59392 
-[  487.675877] 26624 
-[  487.675877] 10240 
-[  487.675878] 2048 
-[  487.675879] chosen_req:2048 
-[  487.675880] after move:
-[  487.675881] 2048 
-[  487.675881] 59392 
-[  487.675882] 26624 
-[  487.675883] 10240 
-[  487.675884] Sorted queue:
-[  487.675884] 2048 
-[  487.675885] 59392 
-[  487.675886] 26624 
-[  487.675887] 10240 
-[  487.675889] @ dispatch:2048 
-[  487.675890] queue after dispatch:
-[  487.675891] [59392], 
-[  487.675891] [26624], 
-[  487.675892] [10240], 
-[  487.675893] queue after elv_dispatch_sort:
-[  487.675894] [4121365132], 
-[  487.675895] dispatch_count:1    
-[  487.675900] BUG: sleeping function called from invalid context at arch/x86/mm/fault.c:1078
-[  487.675903] in_atomic(): 0, irqs_disabled(): 1, pid: 3428, name: insmod
-[  487.675906] Pid: 3428, comm: insmod Not tainted 2.6.32.60 #11
-[  487.675907] Call Trace:
-[  487.675920]  [<c042e1a8>] __might_sleep+0xc3/0xca
-[  487.675925]  [<c0795d83>] do_page_fault+0x158/0x2aa
-[  487.675928]  [<c0795c2b>] ? do_page_fault+0x0/0x2aa
-[  487.675931]  [<c07943eb>] error_code+0x73/0x78
-[  487.675935]  [<c05afadf>] ? blk_delete_timer+0x1b/0x2f
-[  487.675938]  [<c05ab323>] blk_finish_request+0x46/0x170
-[  487.675940]  [<c0624890>] ? add_disk_randomness+0x29/0x2b
-[  487.675943]  [<c05abeed>] ? blk_update_bidi_request+0x3f/0x46
-[  487.675945]  [<c05abf2c>] __blk_end_request_all+0x38/0x43
-[  487.675948]  [<c05ac662>] blk_peek_request+0xfa/0x15a
-[  487.675951]  [<c066161c>] scsi_request_fn+0x5b/0x3b9
-[  487.675954]  [<c04486dd>] ? del_timer+0x5e/0x66
-[  487.675956]  [<c05ac24a>] __generic_unplug_device+0x2b/0x2e
-[  487.675959]  [<c05a4d44>] elv_insert+0x16f/0x177
-[  487.675961]  [<c05a4dde>] __elv_add_request+0x92/0x99
-[  487.675963]  [<c05aab63>] ? drive_stat_acct+0x97/0xa1
-[  487.675965]  [<c05acac9>] __make_request+0x2ed/0x360
-[  487.675968]  [<c042af3d>] ? need_resched+0x19/0x23
-[  487.675971]  [<c05ab069>] generic_make_request+0x212/0x263
-[  487.675976]  [<c04a5670>] ? mempool_alloc_slab+0x13/0x15
-[  487.675978]  [<c04a5895>] ? mempool_alloc+0x5c/0xeb
-[  487.675980]  [<c05ab180>] submit_bio+0xc6/0xdf
-[  487.675984]  [<c04fa5d3>] ? bio_alloc_bioset+0x2a/0xc1
-[  487.675986]  [<c04f6a0f>] submit_bh+0xe7/0x107
-[  487.676011]  [<c04f7b9c>] ll_rw_block+0xab/0xe0
-[  487.676013]  [<c04f9126>] __breadahead+0x2d/0x37
-[  487.676016]  [<f747409c>] init_read+0x9c/0x10c [request_builder]
-[  487.676019]  [<f7474000>] ? init_read+0x0/0x10c [request_builder]
-[  487.676024]  [<c0401267>] do_one_initcall+0x4f/0x138
-[  487.676029]  [<c04599ff>] ? blocking_notifier_call_chain+0x11/0x13
-[  487.676033]  [<c046b575>] sys_init_module+0xae/0x1de
-[  487.676036]  [<c040339b>] sysenter_do_call+0x12/0x28
-[  487.676047] BUG: unable to handle kernel NULL pointer dereference at 00000004
-[  487.676050] IP: [<c05afadf>] blk_delete_timer+0x1b/0x2f
-[  487.676053] *pde = 00000000 
-[  487.676054] Oops: 0002 [#1] SMP 
-[  487.676056] last sysfs file: /sys/devices/system/cpu/cpu5/cache/index2/shared_cpu_map
-[  487.676059] Modules linked in: request_builder(+) ext2 sunrpc fuse ip6t_REJECT nf_conntrack_ipv6 ip6table_filter ip6_tables ipv6 uinput snd_ens1371 gameport snd_rawmidi snd_ac97_codec ac97_bus snd_seq snd_seq_device snd_pcm ppdev parport_pc i2c_piix4 snd_timer pcnet32 i2c_core snd soundcore snd_page_alloc mii parport microcode joydev pcspkr floppy mptspi mptscsih mptbase scsi_transport_spi [last unloaded: scsi_wait_scan]
-[  487.676075] 
-[  487.676078] Pid: 3428, comm: insmod Not tainted (2.6.32.60 #11) VMware Virtual Platform
-[  487.676080] EIP: 0060:[<c05afadf>] EFLAGS: 00210046 CPU: 4
-[  487.676082] EIP is at blk_delete_timer+0x1b/0x2f
-[  487.676083] EAX: f5dee120 EBX: 00000000 ECX: f5dee1d8 EDX: f5dee1cc
-[  487.676085] ESI: fffffffb EDI: f5a70a60 EBP: f4a11d98 ESP: f4a11d94
-[  487.676086]  DS: 007b ES: 007b FS: 00d8 GS: 00e0 SS: 0068
-[  487.676088] Process insmod (pid: 3428, ti=f4a10000 task=f2d6e580 task.ti=f4a10000)
-[  487.676090] Stack:
-[  487.676090]  f5dee120 f4a11dbc c05ab323 c0624890 fffffffb c05abeed f5dee120 f5dee120
-[  487.676094] <0> fffffffb f5a70a60 f4a11dcc c05abf2c f5dee120 f5a70a60 f4a11de4 c05ac662
-[  487.676097] <0> f5dee120 f5f1b000 f5f2d000 f5a70a60 f4a11e10 c066161c f4a11e04 c04486dd
-[  487.676101] Call Trace:
-[  487.676103]  [<c05ab323>] ? blk_finish_request+0x46/0x170
-[  487.676105]  [<c0624890>] ? add_disk_randomness+0x29/0x2b
-[  487.676107]  [<c05abeed>] ? blk_update_bidi_request+0x3f/0x46
-[  487.676110]  [<c05abf2c>] ? __blk_end_request_all+0x38/0x43
-[  487.676112]  [<c05ac662>] ? blk_peek_request+0xfa/0x15a
-[  487.676115]  [<c066161c>] ? scsi_request_fn+0x5b/0x3b9
-[  487.676117]  [<c04486dd>] ? del_timer+0x5e/0x66
-[  487.676119]  [<c05ac24a>] ? __generic_unplug_device+0x2b/0x2e
-[  487.676121]  [<c05a4d44>] ? elv_insert+0x16f/0x177
-[  487.676124]  [<c05a4dde>] ? __elv_add_request+0x92/0x99
-[  487.676126]  [<c05aab63>] ? drive_stat_acct+0x97/0xa1
-[  487.676128]  [<c05acac9>] ? __make_request+0x2ed/0x360
-[  487.676130]  [<c042af3d>] ? need_resched+0x19/0x23
-[  487.676133]  [<c05ab069>] ? generic_make_request+0x212/0x263
-[  487.676135]  [<c04a5670>] ? mempool_alloc_slab+0x13/0x15
-[  487.676137]  [<c04a5895>] ? mempool_alloc+0x5c/0xeb
-[  487.676139]  [<c05ab180>] ? submit_bio+0xc6/0xdf
-[  487.676142]  [<c04fa5d3>] ? bio_alloc_bioset+0x2a/0xc1
-[  487.676144]  [<c04f6a0f>] ? submit_bh+0xe7/0x107
-[  487.676146]  [<c04f7b9c>] ? ll_rw_block+0xab/0xe0
-[  487.676148]  [<c04f9126>] ? __breadahead+0x2d/0x37
-[  487.676150]  [<f747409c>] ? init_read+0x9c/0x10c [request_builder]
-[  487.676153]  [<f7474000>] ? init_read+0x0/0x10c [request_builder]
-[  487.676155]  [<c0401267>] ? do_one_initcall+0x4f/0x138
-[  487.676157]  [<c04599ff>] ? blocking_notifier_call_chain+0x11/0x13
-[  487.676159]  [<c046b575>] ? sys_init_module+0xae/0x1de
-[  487.676161]  [<c040339b>] ? sysenter_do_call+0x12/0x28
-[  487.676162] Code: 1f 44 00 00 f0 0f ba 68 2c 00 19 d2 89 d0 5d c3 55 89 e5 53 0f 1f 44 00 00 8b 98 ac 00 00 00 8b 88 b0 00 00 00 8d 90 ac 00 00 00 <89> 4b 04 89 19 89 90 ac 00 00 00 5b 89 90 b0 00 00 00 5d c3 55 
-[  487.676189] EIP: [<c05afadf>] blk_delete_timer+0x1b/0x2f SS:ESP 0068:f4a11d94
-[  487.676191] CR2: 0000000000000004
-[  487.676194] ---[ end trace edb2034068a493c8 ]---
+[  202.847843] SELinux: initialized (dev sdb1, type ext2), uses xattr
+[  203.861615] @ add 7192 , last_rq_pos 0    , end_sector 2056 
+[  203.861620] @ dispatch:7192 
+[  203.861621] queue after dispatch:
+[  203.861622] queue empty
+[  203.861624] dispatch_count:0    
+[  212.594825] init!!!
+[  212.594960] @ add 2048 , last_rq_pos 0    , end_sector 7200 
+[  212.594962] queue after list_add_tail:
+[  212.594963] 2048 
+[  212.594964] queue size:1    
+[  212.594965] min_req:2048 
+[  212.594966] Sorted queue:
+[  212.594967] 2048 
+[  212.594973] @ add 59392, last_rq_pos 0    , end_sector 7200 
+[  212.594974] queue after list_add_tail:
+[  212.594975] 2048 
+[  212.594976] 59392 
+[  212.594977] queue size:2    
+[  212.594978] min_req:2048 
+[  212.594979] have choose one:59392
+[  212.594980] chosen_req:59392
+[  212.594981] after move:
+[  212.594981] 59392 
+[  212.594982] 2048 
+[  212.594983] Sorted queue:
+[  212.594984] 59392 
+[  212.594985] 2048 
+[  212.594991] @ add 10240, last_rq_pos 0    , end_sector 7200 
+[  212.594992] queue after list_add_tail:
+[  212.594993] 59392 
+[  212.594993] 2048 
+[  212.594994] 10240 
+[  212.594995] queue size:3    
+[  212.594996] min_req:2048 
+[  212.594997] have choose one:59392
+[  212.594998] have choose one:10240
+[  212.594999] chosen_req:10240
+[  212.595000] after move:
+[  212.595001] 10240 
+[  212.595001] 2048 
+[  212.595002] 59392 
+[  212.595003] have choose one:59392
+[  212.595004] chosen_req:59392
+[  212.595005] after move:
+[  212.595005] 59392 
+[  212.595006] 10240 
+[  212.595007] 2048 
+[  212.595008] Sorted queue:
+[  212.595009] 59392 
+[  212.595009] 10240 
+[  212.595010] 2048 
+[  212.595014] @ add 26624, last_rq_pos 0    , end_sector 7200 
+[  212.595015] queue after list_add_tail:
+[  212.595016] 59392 
+[  212.595017] 10240 
+[  212.595018] 2048 
+[  212.595018] 26624 
+[  212.595019] queue size:4    
+[  212.595020] min_req:2048 
+[  212.595021] have choose one:59392
+[  212.595022] have choose one:10240
+[  212.595023] chosen_req:10240
+[  212.595024] after move:
+[  212.595025] 10240 
+[  212.595025] 2048 
+[  212.595026] 59392 
+[  212.595027] 26624 
+[  212.595028] have choose one:59392
+[  212.595029] have choose one:26624
+[  212.595030] chosen_req:26624
+[  212.595030] after move:
+[  212.595031] 26624 
+[  212.595032] 10240 
+[  212.595033] 2048 
+[  212.595033] 59392 
+[  212.595034] have choose one:59392
+[  212.595035] chosen_req:59392
+[  212.595036] after move:
+[  212.595037] 59392 
+[  212.595038] 26624 
+[  212.595038] 10240 
+[  212.595039] 2048 
+[  212.595040] Sorted queue:
+[  212.595041] 59392 
+[  212.595041] 26624 
+[  212.595042] 10240 
+[  212.595043] 2048 
+[  212.595045] @ dispatch:59392
+[  212.595046] queue after dispatch:
+[  212.595047] [26624], 
+[  212.595047] [10240], 
+[  212.595048] [2048 ], 
+[  212.595049] dispatch_count:1    
+[  212.595054] BUG: sleeping function called from invalid context at arch/x86/mm/fault.c:1078
+[  212.595057] in_atomic(): 0, irqs_disabled(): 1, pid: 3278, name: insmod
+[  212.595060] Pid: 3278, comm: insmod Not tainted 2.6.32.60 #13
+[  212.595062] Call Trace:
+[  212.595071]  [<c042e1a8>] __might_sleep+0xc3/0xca
+[  212.595077]  [<c0795d53>] do_page_fault+0x158/0x2aa
+[  212.595079]  [<c0795bfb>] ? do_page_fault+0x0/0x2aa
+[  212.595082]  [<c07943bb>] error_code+0x73/0x78
+[  212.595086]  [<c05afadf>] ? blk_delete_timer+0x1b/0x2f
+[  212.595090]  [<c05ab323>] blk_finish_request+0x46/0x170
+[  212.595093]  [<c0624860>] ? add_disk_randomness+0x29/0x2b
+[  212.595095]  [<c05abeed>] ? blk_update_bidi_request+0x3f/0x46
+[  212.595097]  [<c05abf2c>] __blk_end_request_all+0x38/0x43
+[  212.595100]  [<c05ac662>] blk_peek_request+0xfa/0x15a
+[  212.595103]  [<c06615ec>] scsi_request_fn+0x5b/0x3b9
+[  212.595106]  [<c04486dd>] ? del_timer+0x5e/0x66
+[  212.595109]  [<c05ac24a>] __generic_unplug_device+0x2b/0x2e
+[  212.595112]  [<c05a4d44>] elv_insert+0x16f/0x177
+[  212.595112]  [<c05a4dde>] __elv_add_request+0x92/0x99
+[  212.595112]  [<c05aab63>] ? drive_stat_acct+0x97/0xa1
+[  212.595112]  [<c05acac9>] __make_request+0x2ed/0x360
+[  212.595112]  [<c042af3d>] ? need_resched+0x19/0x23
+[  212.595112]  [<c05ab069>] generic_make_request+0x212/0x263
+[  212.595112]  [<c04a5670>] ? mempool_alloc_slab+0x13/0x15
+[  212.595112]  [<c04a5895>] ? mempool_alloc+0x5c/0xeb
+[  212.595112]  [<c05ab180>] submit_bio+0xc6/0xdf
+[  212.595112]  [<c04fa5d3>] ? bio_alloc_bioset+0x2a/0xc1
+[  212.595112]  [<c04f6a0f>] submit_bh+0xe7/0x107
+[  212.595112]  [<c04f7b9c>] ll_rw_block+0xab/0xe0
+[  212.595112]  [<c04f9126>] __breadahead+0x2d/0x37
+[  212.595112]  [<f747409c>] init_read+0x9c/0x10c [request_builder]
+[  212.595112]  [<f7474000>] ? init_read+0x0/0x10c [request_builder]
+[  212.595112]  [<c0401267>] do_one_initcall+0x4f/0x138
+[  212.595112]  [<c04599ff>] ? blocking_notifier_call_chain+0x11/0x13
+[  212.595112]  [<c046b575>] sys_init_module+0xae/0x1de
+[  212.595112]  [<c040339b>] sysenter_do_call+0x12/0x28
+[  212.595112] BUG: unable to handle kernel NULL pointer dereference at 00000004
+[  212.595112] IP: [<c05afadf>] blk_delete_timer+0x1b/0x2f
+[  212.595112] *pde = 00000000 
+[  212.595112] Oops: 0002 [#1] SMP 
+[  212.595112] last sysfs file: /sys/devices/system/cpu/cpu5/cache/index2/shared_cpu_map
+[  212.595112] Modules linked in: request_builder(+) ext2 sunrpc fuse ip6t_REJECT nf_conntrack_ipv6 ip6table_filter ip6_tables ipv6 uinput ppdev parport_pc parport snd_ens1371 gameport snd_rawmidi snd_ac97_codec ac97_bus snd_seq snd_seq_device pcnet32 snd_pcm mii microcode snd_timer pcspkr snd soundcore snd_page_alloc joydev i2c_piix4 i2c_core floppy mptspi mptscsih mptbase scsi_transport_spi [last unloaded: scsi_wait_scan]
+[  212.595112] 
+[  212.595112] Pid: 3278, comm: insmod Not tainted (2.6.32.60 #13) VMware Virtual Platform
+[  212.595112] EIP: 0060:[<c05afadf>] EFLAGS: 00210046 CPU: 1
+[  212.595112] EIP is at blk_delete_timer+0x1b/0x2f
+[  212.595112] EAX: f5d8f590 EBX: 00000000 ECX: f5d8f648 EDX: f5d8f63c
+[  212.595112] ESI: fffffffb EDI: f5908530 EBP: ed37bd98 ESP: ed37bd94
+[  212.595112]  DS: 007b ES: 007b FS: 00d8 GS: 00e0 SS: 0068
+[  212.595112] Process insmod (pid: 3278, ti=ed37a000 task=f46ff230 task.ti=ed37a000)
+[  212.595112] Stack:
+[  212.595112]  f5d8f590 ed37bdbc c05ab323 c0624860 fffffffb c05abeed f5d8f590 f5d8f590
+[  212.595112] <0> fffffffb f5908530 ed37bdcc c05abf2c f5d8f590 f5908530 ed37bde4 c05ac662
+[  212.595112] <0> f5d8f590 f5a68000 f5df8800 f5908530 ed37be10 c06615ec ed37be04 c04486dd
+[  212.595112] Call Trace:
+[  212.595112]  [<c05ab323>] ? blk_finish_request+0x46/0x170
+[  212.595112]  [<c0624860>] ? add_disk_randomness+0x29/0x2b
+[  212.595112]  [<c05abeed>] ? blk_update_bidi_request+0x3f/0x46
+[  212.595112]  [<c05abf2c>] ? __blk_end_request_all+0x38/0x43
+[  212.595112]  [<c05ac662>] ? blk_peek_request+0xfa/0x15a
+[  212.595112]  [<c06615ec>] ? scsi_request_fn+0x5b/0x3b9
+[  212.595112]  [<c04486dd>] ? del_timer+0x5e/0x66
+[  212.595112]  [<c05ac24a>] ? __generic_unplug_device+0x2b/0x2e
+[  212.595112]  [<c05a4d44>] ? elv_insert+0x16f/0x177
+[  212.595112]  [<c05a4dde>] ? __elv_add_request+0x92/0x99
+[  212.595112]  [<c05aab63>] ? drive_stat_acct+0x97/0xa1
+[  212.595112]  [<c05acac9>] ? __make_request+0x2ed/0x360
+[  212.595112]  [<c042af3d>] ? need_resched+0x19/0x23
+[  212.595112]  [<c05ab069>] ? generic_make_request+0x212/0x263
+[  212.595112]  [<c04a5670>] ? mempool_alloc_slab+0x13/0x15
+[  212.595112]  [<c04a5895>] ? mempool_alloc+0x5c/0xeb
+[  212.595112]  [<c05ab180>] ? submit_bio+0xc6/0xdf
+[  212.595112]  [<c04fa5d3>] ? bio_alloc_bioset+0x2a/0xc1
+[  212.595267]  [<c04f6a0f>] ? submit_bh+0xe7/0x107
+[  212.595267]  [<c04f7b9c>] ? ll_rw_block+0xab/0xe0
+[  212.595267]  [<c04f9126>] ? __breadahead+0x2d/0x37
+[  212.595267]  [<f747409c>] ? init_read+0x9c/0x10c [request_builder]
+[  212.595267]  [<f7474000>] ? init_read+0x0/0x10c [request_builder]
+[  212.595267]  [<c0401267>] ? do_one_initcall+0x4f/0x138
+[  212.595267]  [<c04599ff>] ? blocking_notifier_call_chain+0x11/0x13
+[  212.595267]  [<c046b575>] ? sys_init_module+0xae/0x1de
+[  212.595267]  [<c040339b>] ? sysenter_do_call+0x12/0x28
+[  212.595267] Code: 1f 44 00 00 f0 0f ba 68 2c 00 19 d2 89 d0 5d c3 55 89 e5 53 0f 1f 44 00 00 8b 98 ac 00 00 00 8b 88 b0 00 00 00 8d 90 ac 00 00 00 <89> 4b 04 89 19 89 90 ac 00 00 00 5b 89 90 b0 00 00 00 5d c3 55 
+[  212.595267] EIP: [<c05afadf>] blk_delete_timer+0x1b/0x2f SS:ESP 0068:ed37bd94
+[  212.595267] CR2: 0000000000000004
+[  212.595267] ---[ end trace 916b007d6b62df65 ]---
