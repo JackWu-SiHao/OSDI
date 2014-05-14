@@ -110,8 +110,9 @@ static void noop_add_request(struct request_queue *q, struct request *rq)
 
         /* find first request with mininum pos to the last time's dispathed request */
         if(!list_empty(&nd->queue)) {
-            /* default min_req set to first entry of queue */
-            min_req = list_entry(&nd->queue, struct request, queuelist);
+            /* default min_req set last request */
+            list_for_each_entry(req, &nd->queue, queuelist)
+                min_req = req;
 
             list_for_each_entry(req, &nd->queue, queuelist) {
                 if( get_diff_abs(blk_rq_pos(req), last_rq_pos) < curr_min ) {
@@ -142,7 +143,8 @@ static void noop_add_request(struct request_queue *q, struct request *rq)
                 /* set default value */
                 can_move = false;
                 curr_min = MAX_POS;
-                chosen_req = list_entry(&nd->queue, struct request, queuelist);
+                list_for_each_entry(req, &nd->queue, queuelist)
+                    chosen_req = req;
 
                 list_for_each_entry(req, &nd->queue, queuelist) {
 
@@ -165,7 +167,6 @@ static void noop_add_request(struct request_queue *q, struct request *rq)
 
                 /* should not enter this */
                 if(!chosen_req) {
-                    chosen_req = list_entry(&nd->queue, struct request, queuelist);
                     printk(KERN_INFO "Error chosen_req:%-5llu\n", blk_rq_pos(chosen_req));
                     BUG_ON(1);
                 } else {
