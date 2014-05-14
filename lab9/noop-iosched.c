@@ -59,13 +59,13 @@ static int noop_dispatch(struct request_queue *q, int force)
         /* TODO: we may need to modify this so as not to mess up the SSFT result */
         elv_dispatch_sort(q, rq);
 
-        printk(KERN_INFO "queue after elv_dispatch_sort:");
-        if(!list_empty(&nd->queue)) {
-            list_for_each_entry(rq, &nd->queue, queuelist) {
-                printk(KERN_INFO "[%-5llu], ", blk_rq_pos(rq));
-            }
-        } else
-            printk(KERN_INFO "queue empty\n");
+        // printk(KERN_INFO "queue after elv_dispatch_sort:");
+        // if(!list_empty(&nd->queue)) {
+        //     list_for_each_entry(rq, &nd->queue, queuelist) {
+        //         printk(KERN_INFO "[%-5llu], ", blk_rq_pos(rq));
+        //     }
+        // } else
+        //     printk(KERN_INFO "queue empty\n");
 
         if(is_first_dispatch) {
             last_rq_pos = 0;
@@ -102,8 +102,11 @@ static void noop_add_request(struct request_queue *q, struct request *rq)
     if(!is_first_dispatch) {
         /* get queue size */
         if(!list_empty(&nd->queue)) {
-            list_for_each_entry(req, &nd->queue, queuelist)
+            printk(KERN_INFO "queue after list_add_tail:");
+            list_for_each_entry(req, &nd->queue, queuelist) {
                 queue_size++;
+                printk(KERN_INFO "%llu ", blk_rq_pos(req));
+            }
         }
 
         printk(KERN_INFO "queue size:%-5u\n", queue_size);
@@ -138,13 +141,11 @@ static void noop_add_request(struct request_queue *q, struct request *rq)
         }
 
         if(!list_empty(&nd->queue)) {
-            for( i = 0; i < queue_size; ++i) {
+            for( i = 0; i < queue_size-1; ++i) {
 
                 /* set default value */
                 can_move = false;
                 curr_min = MAX_POS;
-                list_for_each_entry(req, &nd->queue, queuelist)
-                    chosen_req = req;
 
                 list_for_each_entry(req, &nd->queue, queuelist) {
 
@@ -167,6 +168,8 @@ static void noop_add_request(struct request_queue *q, struct request *rq)
 
                 /* should not enter this */
                 if(!chosen_req) {
+                    list_for_each_entry(req, &nd->queue, queuelist)
+                        chosen_req = req;
                     printk(KERN_INFO "Error chosen_req:%-5llu\n", blk_rq_pos(chosen_req));
                     BUG_ON(1);
                 } else {
