@@ -41,6 +41,7 @@ static int noop_dispatch(struct request_queue *q, int force)
     /* task queue: request_queue->elecator->elevator_data->queue */
     if (!list_empty(&nd->queue)) {
         struct request *rq;
+        struct request *req;
 
         rq = list_entry(nd->queue.next, struct request, queuelist);
         last_rq_pos = blk_rq_pos(rq);
@@ -48,24 +49,28 @@ static int noop_dispatch(struct request_queue *q, int force)
 
         list_del_init(&rq->queuelist);  // struct list_head queuelist;
 
+
         printk(KERN_INFO "queue after dispatch:");
         if(!list_empty(&nd->queue)) {
-            list_for_each_entry(rq, &nd->queue, queuelist) {
-                printk(KERN_INFO "[%-5llu], ", blk_rq_pos(rq));
+            list_for_each_entry(req, &nd->queue, queuelist) {
+                printk(KERN_INFO "[%-5llu], ", blk_rq_pos(req));
             }
         } else
             printk(KERN_INFO "queue empty\n");
 
+
         /* TODO: we may need to modify this so as not to mess up the SSFT result */
         elv_dispatch_sort(q, rq);
 
-        // printk(KERN_INFO "queue after elv_dispatch_sort:");
-        // if(!list_empty(&nd->queue)) {
-        //     list_for_each_entry(rq, &nd->queue, queuelist) {
-        //         printk(KERN_INFO "[%-5llu], ", blk_rq_pos(rq));
-        //     }
-        // } else
-        //     printk(KERN_INFO "queue empty\n");
+
+        printk(KERN_INFO "queue after elv_dispatch_sort:");
+        if(!list_empty(&nd->queue)) {
+            list_for_each_entry(req, &nd->queue, queuelist) {
+                printk(KERN_INFO "[%-5llu], ", blk_rq_pos(req));
+            }
+        } else
+            printk(KERN_INFO "queue empty\n");
+
 
         if(is_first_dispatch) {
             last_rq_pos = 0;

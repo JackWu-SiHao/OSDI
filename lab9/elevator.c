@@ -423,6 +423,7 @@ void elv_dispatch_sort(struct request_queue *q, struct request *rq)
     if (q->last_merge == rq)
         q->last_merge = NULL;
 
+    // printk(KERN_INFO "elv_dispatch_sort: before elv_rqhash_del\n");
     elv_rqhash_del(q, rq);
 
     q->nr_sorted--;
@@ -432,7 +433,8 @@ void elv_dispatch_sort(struct request_queue *q, struct request *rq)
 
     /* here it finds the suited entry request to add it to the */
     list_for_each_prev(entry, &q->queue_head) {
-        struct request *pos = list_entry_rq(entry);
+        break;
+        // struct request *pos = list_entry_rq(entry);
 
         // if (blk_discard_rq(rq) != blk_discard_rq(pos))
         //  break;
