@@ -157,20 +157,15 @@ static void noop_add_request(struct request_queue *q, struct request *rq)
 
                     /* start to move request until we reach the first min request(min_req)
                      */
-                    if( req == min_req ) {
-                        break;
-                        // can_move = true;
-                        // continue;
-                    }
+                if( req == min_req )
+                    break;
 
-                    // if( can_move ) {
-                        pos_diff = get_diff_abs(blk_rq_pos(req), prev_rq_pos);
-                        if( pos_diff < curr_min ) {
-                            printk(KERN_INFO "have choose one:%-5llu\n", blk_rq_pos(req));
-                            curr_min = pos_diff;
-                            chosen_req = req;
-                        }
-                    // }
+                    pos_diff = get_diff_abs(blk_rq_pos(req), prev_rq_pos);
+                    if( pos_diff < curr_min ) {
+                        printk(KERN_INFO "have choose one:%-5llu\n", blk_rq_pos(req));
+                        curr_min = pos_diff;
+                        chosen_req = req;
+                    }
                 }
 
                 /* should not enter this */

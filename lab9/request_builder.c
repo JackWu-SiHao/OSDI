@@ -22,7 +22,7 @@ static int __init init_read(void)
     }
 
     // Design your write pattern here!!
-    for (i = 0; i < 4; i+=4)
+    for (i = 0; i < 13; i+=4)
     {
         if (isAscending)
         {

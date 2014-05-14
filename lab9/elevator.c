@@ -432,26 +432,8 @@ void elv_dispatch_sort(struct request_queue *q, struct request *rq)
     stop_flags = REQ_SOFTBARRIER | REQ_HARDBARRIER | REQ_STARTED;
 
     /* here it finds the suited entry request to add it to the */
-    list_for_each_prev(entry, &q->queue_head) {
+    list_for_each_prev(entry, &q->queue_head)
         break;
-        // struct request *pos = list_entry_rq(entry);
-
-        // if (blk_discard_rq(rq) != blk_discard_rq(pos))
-        //  break;
-        // if (rq_data_dir(rq) != rq_data_dir(pos))
-        //  break;
-        // if (pos->cmd_flags & stop_flags)
-        //  break;
-        // if (blk_rq_pos(rq) >= boundary) {
-        //  if (blk_rq_pos(pos) < boundary)
-        //      continue;
-        // } else {
-        //  if (blk_rq_pos(pos) >= boundary)
-        //      break;
-        // }
-        // if (blk_rq_pos(rq) >= blk_rq_pos(pos))
-        //  break;
-    }
 
     list_add(&rq->queuelist, entry);
 }
