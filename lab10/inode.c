@@ -35,6 +35,7 @@
 #include <linux/sched.h>
 #include <linux/parser.h>
 #include <linux/magic.h>
+#include <linux/string.h>
 #include <asm/uaccess.h>
 #include "internal.h"
 
@@ -295,19 +296,45 @@ static struct file_system_type rootfs_fs_type = {
     .kill_sb    = kill_litter_super,
 };
 
-static int my_write_proc(struct file *file, const char *buf, int count, void *data)
+static int my_write_proc(struct file *file, const char *buf,
+    int count, void *data)
 {
     if(count > MAX_BUF_SIZE)
         count = MAX_BUF_SIZE;
-    if(copy_from_user(ram_buf, buf, count))
+
+    if( copy_from_user(ram_buf, buf, count) )
         return -EFAULT;
 
 
+    if( !strcmp(ram_buf, "1") )
+        enable_encryption = true;
+
+    else if( !strcmp(ram_buf, "0") )
+        enable_encryption = false;
+
+    else
+        enable_encryption = false;
+
+    printk(KERN_INFO "rams_flag: %-5d\n", enable_encryption);
 
     return count;
 }
 
-static void create_new_proc_entry()
+static int my_read_proc(char *buf, char **start, off_t offset,
+    int count, int *eof, void *data)
+{
+    /* check if bytes read exceed the MAX_BUF_SIZE */
+    if(count > MAX_BUF_SIZE)
+        count = MAX_BUF_SIZE;
+
+    if( copy_to_user(buf, ram_buf, count) )
+        return -EFAULT;
+
+    return count;
+
+}
+
+static void create_new_proc_entry(void)
 {
     proc_entry = create_proc_entry("flag", 0666, NULL);
     if(!proc_entry) {
@@ -319,6 +346,12 @@ static void create_new_proc_entry()
     printk(KERN_INFO "flag proc initialize!!!\n");
 }
 
+static void proc_cleanup(void)
+{
+    printk(KERN_INFO "flag proc exit!!!\n");
+    remove_proc_entry("flag", NULL);
+}
+
 static int __init init_ramfs_fs(void)
 {
     create_new_proc_entry();
@@ -327,8 +360,7 @@ static int __init init_ramfs_fs(void)
 
 static void __exit exit_ramfs_fs(void)
 {
-    printk(KERN_INFO "flag proc exit!!!\n");
-    remove_proc_entry("flag", NULL);
+    proc_cleanup();
     unregister_filesystem(&ramfs_fs_type);
 }
 
