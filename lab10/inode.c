@@ -36,6 +36,7 @@
 #include <linux/parser.h>
 #include <linux/magic.h>
 #include <linux/string.h>
+#include <linux/proc_fs.h>
 #include <asm/uaccess.h>
 #include "internal.h"
 
@@ -305,13 +306,8 @@ static int my_write_proc(struct file *file, const char *buf,
     if( copy_from_user(ram_buf, buf, count) )
         return -EFAULT;
 
-
-    if( !strcmp(ram_buf, "1") )
+    if( !strncmp(ram_buf, "1", 1) )
         enable_encryption = true;
-
-    else if( !strcmp(ram_buf, "0") )
-        enable_encryption = false;
-
     else
         enable_encryption = false;
 
@@ -323,18 +319,14 @@ static int my_write_proc(struct file *file, const char *buf,
 static int my_read_proc(char *buf, char **start, off_t offset,
     int count, int *eof, void *data)
 {
-    /* check if bytes read exceed the MAX_BUF_SIZE */
-    if(count > MAX_BUF_SIZE)
-        count = MAX_BUF_SIZE;
+    int len = 0;
+    len = sprintf(buf, "%s\n", ram_buf);
 
-    if( copy_to_user(buf, ram_buf, count) )
-        return -EFAULT;
-
-    return count;
+    return len;
 
 }
 
-static void create_new_proc_entry(void)
+static int create_new_proc_entry(void)
 {
     proc_entry = create_proc_entry("flag", 0666, NULL);
     if(!proc_entry) {
@@ -344,6 +336,7 @@ static void create_new_proc_entry(void)
     proc_entry->read_proc = my_read_proc;
     proc_entry->write_proc = my_write_proc;
     printk(KERN_INFO "flag proc initialize!!!\n");
+    return 0;
 }
 
 static void proc_cleanup(void)
@@ -354,7 +347,8 @@ static void proc_cleanup(void)
 
 static int __init init_ramfs_fs(void)
 {
-    create_new_proc_entry();
+    int ret;
+    ret = create_new_proc_entry();
     return register_filesystem(&ramfs_fs_type);
 }
 
