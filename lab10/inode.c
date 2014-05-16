@@ -46,8 +46,8 @@
 static const struct super_operations ramfs_ops;
 static const struct inode_operations ramfs_dir_inode_operations;
 static struct proc_dir_entry *proc_entry;
-static bool enable_encryption;
 static char ram_buf[MAX_BUF_SIZE];
+bool enable_encryption = false;
 
 static struct backing_dev_info ramfs_backing_dev_info = {
     .name       = "ramfs",
