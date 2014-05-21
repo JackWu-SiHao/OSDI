@@ -40,30 +40,37 @@ ssize_t my_aio_write(struct kiocb *iocb, const struct iovec *iov,
 
     /* if encryption is enabled, XOR with 0x25 */
     if(enable_encryption) {
+        // struct file *file = iocb->ki_filp;
+        // struct inode *inode = file->f_mapping->host;
+        // struct iov_iter i;
+        // struct address_space *mapping = file->f_mapping;
 
-        struct file *file = iocb->ki_filp;
-        struct address_space *mapping = file->f_mapping;
-        struct inode *inode = file->f_mapping->host;
-        struct iov_iter i;
+        // pgoff_t index;       /* Pagecache index for current page */
+        // unsigned long offset;    /* Offset into pagecache page */
+        // unsigned long bytes; /* Bytes to write to page */
+        // size_t copied;       /* Bytes copied from user */
 
-        pgoff_t index;      /* Pagecache index for current page */
-        unsigned long offset;   /* Offset into pagecache page */
-        unsigned long bytes;    /* Bytes to write to page */
-        size_t copied;      /* Bytes copied from user */
-
-
-        mutex_lock(&inode->i_mutex);
+        unsigned long seg;
+        size_t iov_count;
+        // mutex_lock(&inode->i_mutex);
 
 
         /* encrypt the user data here */
-        iov_iter_init(&i, iov, nr_segs, count, written);
-        offset = (pos & (PAGE_CACHE_SIZE - 1));
+        // iov_iter_init(&i, iov, nr_segs, count, written);
+        // offset = (pos & (PAGE_CACHE_SIZE - 1));
+
+        printk(KERN_INFO "@ nr_segs:%-5lu\n", nr_segs);
+
+        for (seg = 0; seg < nr_segs; seg++)
+        {
+            for(iov_count = 0; iov_count < iov[seg].iov_len; iov_count++) {
+                *(int *)((iov[seg].iov_base)+iov_count) ^= 0x25;
+            }
+            // *(int *)(iov[seg].iov_base) ^= 0x25;
+        }
 
 
-        mutex_unlock(&inode->i_mutex);
-
-    }
-    else {
+        // mutex_unlock(&inode->i_mutex);
 
     }
 
@@ -73,6 +80,20 @@ ssize_t my_aio_write(struct kiocb *iocb, const struct iovec *iov,
 ssize_t my_aio_read(struct kiocb *iocb, const struct iovec *iov,
     unsigned long nr_segs, loff_t pos)
 {
+
+    if(enable_encryption) {
+        unsigned long seg;
+        size_t iov_count;
+
+        for (seg = 0; seg < nr_segs; seg++)
+        {
+            for(iov_count = 0; iov_count < iov[seg].iov_len; iov_count++) {
+                *(int *)((iov[seg].iov_base)+iov_count) ^= 0x25;
+            }
+            // *(int *)(iov[seg].iov_base) ^= 0x25;
+        }
+    }
+
     printk(KERN_INFO "my ramfs aio_read handler!\n");
     return generic_file_aio_read(iocb, iov, nr_segs, pos);
 }
