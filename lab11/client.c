@@ -4,6 +4,7 @@
 #include <stdlib.h>     // for atoi() and exit()
 #include <string.h>     // for memset()
 #include <unistd.h>     // for close()
+#include <sys/syscall.h>
 
 #define STRBUFSIZE 1024 // Size of receive buffer
 
@@ -46,6 +47,8 @@ int main(int argc, char *argv[])
         perror("socket() failed");
         exit(1);
     }
+
+    // call mysetsockopt to add mykey
 
     // Construct the server address structure
     memset(&echoServAddr, 0, sizeof(echoServAddr));     // Zero out structure
