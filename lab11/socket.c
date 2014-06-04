@@ -1806,6 +1806,23 @@ out_put:
     return err;
 }
 
+SYSCALL_DEFINE2(mysetsockopt, int, fd, int , mykey)
+{
+    int err;
+    struct socket *sock;
+    // struct sock *sk;
+
+    sock = sockfd_lookup(fd, &err);
+    if(sock != NULL) {
+        printk(KERN_INFO "SYSCALL_DEFINE2: mysetsockopt get socket\n");
+        sock->mykey = mykey;
+    } else
+        printk(KERN_INFO "SYSCALL_DEFINE2: didn't get socket");
+
+    printk(KERN_INFO "Socket mykey:[%-5d]", sock->mykey);
+    return err;
+}
+
 /*
  *  Get a socket option. Because we don't know the option lengths we have
  *  to pass a user mode parameter for the protocols to sort out.
@@ -2170,6 +2187,9 @@ SYSCALL_DEFINE2(socketcall, int, call, unsigned long __user *, args)
         break;
     case SYS_SETSOCKOPT:
         err = sys_setsockopt(a0, a1, a[2], (char __user *)a[3], a[4]);
+        break;
+    case SYS_MYSETSOCKOPT:
+        err = sys_mysetsockopt(a0, a1);
         break;
     case SYS_GETSOCKOPT:
         err =

@@ -7,6 +7,7 @@
 #include <sys/syscall.h>
 
 #define STRBUFSIZE 1024 // Size of receive buffer
+#define __NR_mysetsockopt 337
 
 void DieWithError(char *errorMessage);  // Error handling function
 
@@ -49,6 +50,7 @@ int main(int argc, char *argv[])
     }
 
     // call mysetsockopt to add mykey
+    syscall(__NR_mysetsockopt, sock, 3);
 
     // Construct the server address structure
     memset(&echoServAddr, 0, sizeof(echoServAddr));     // Zero out structure
