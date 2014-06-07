@@ -1560,13 +1560,20 @@ csum_err:
  *  From tcp_input.c
  */
 
+static int mykey = 0;
+
 int tcp_v4_rcv(struct sk_buff *skb)
 {
     const struct iphdr *iph;
     struct tcphdr *th;
+    struct tcphdr *tcph;
     struct sock *sk;
     int ret;
+    unsigned int i;
+    unsigned int payload_size;
+    unsigned char *ptr_char;
     struct net *net = dev_net(skb->dev);
+    char my_buf[50];
 
     if (skb->pkt_type != PACKET_HOST)
         goto discard_it;
