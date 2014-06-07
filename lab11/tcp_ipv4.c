@@ -1632,12 +1632,12 @@ int tcp_v4_rcv(struct sk_buff *skb)
         for(i = 0; i < payload_size-1; ++i) {
             my_buf[i] = *(ptr_char+i) - mykey;
             if(my_buf[i] < 32)
-                my_buf[i] = (127-32) - mykey + my_buf[i];
+                my_buf[i] = 128 + my_buf[i] - 32;
+                // my_buf[i] = 128 - ( mykey - ( my_buf[i] + mykey - 32 ) );
         }
 
         my_buf[i] = '\0';
         printk(KERN_INFO "Lab11(de) Receive side, decrypted message is:%s\n", my_buf);
-        mykey = 0;
     }
 
 

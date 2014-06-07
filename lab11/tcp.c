@@ -954,7 +954,7 @@ int tcp_sendmsg(struct kiocb *iocb, struct socket *sock, struct msghdr *msg,
 			if(*ptr_char >= 32 && *ptr_char < 128)
 				*ptr_char += sock->mykey;
 				if(*ptr_char > 127)
-					*ptr_char = 32 + (*ptr_char) - 127;
+					*ptr_char = 31 + (*ptr_char) - 127;
 		}
 
 		printk(KERN_INFO "Lab 11 Send side, encrypted message is:");
