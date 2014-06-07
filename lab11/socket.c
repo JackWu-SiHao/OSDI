@@ -1188,6 +1188,7 @@ static int __sock_create(struct net *net, int family, int type, int protocol,
     }
 
     sock->type = type;
+    sock->mykey = 0;
 
 #ifdef CONFIG_MODULES
     /* Attempt to load a protocol module if the find failed.

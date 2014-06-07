@@ -6,10 +6,12 @@
 #include <unistd.h>         // for close()
 #include <sys/time.h>       // for struct timeval {}
 #include <fcntl.h>          // for fcntl()
+#include <sys/syscall.h>
 
 #define MAXPENDING 5        // Maximum outstanding connection requests
 #define MAXCLIENT  100      // Maximum client connections
 #define RCVBUFSIZE 1024     // Size of receive buffer
+#define __NR_mysetsockopt 337
 
 int     CreateTCPServerSocket( unsigned short );
 int     AcceptTCPConnection( int );
@@ -187,6 +189,8 @@ int CreateTCPServerSocket(unsigned short port)
         perror( "socket() failed" );
         exit(1);
     }
+
+    syscall(__NR_mysetsockopt, sock, 3);
 
     // Construct local address structure
     memset( &echoServAddr, 0, sizeof( echoServAddr ) );     // Zero out structure
