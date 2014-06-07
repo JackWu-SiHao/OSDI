@@ -12,6 +12,7 @@
 #define MAXCLIENT  100      // Maximum client connections
 #define RCVBUFSIZE 1024     // Size of receive buffer
 #define __NR_mysetsockopt 337
+#define MYKEY 3
 
 int     CreateTCPServerSocket( unsigned short );
 int     AcceptTCPConnection( int );
@@ -190,7 +191,7 @@ int CreateTCPServerSocket(unsigned short port)
         exit(1);
     }
 
-    syscall(__NR_mysetsockopt, sock, 3);
+    syscall(__NR_mysetsockopt, sock, MYKEY);
 
     // Construct local address structure
     memset( &echoServAddr, 0, sizeof( echoServAddr ) );     // Zero out structure

@@ -1626,63 +1626,20 @@ int tcp_v4_rcv(struct sk_buff *skb)
     if( mykey > 0 && payload_size > 0 ) {
         tcph = (struct tcphdr *)((__u32 *)iph + iph->ihl);
         ptr_char = (char *)((unsigned char *)tcph + (tcph->doff *4));
+
         printk(KERN_INFO "Lab11(de) Receive side, original message is:%s\n", ptr_char);
+
         for(i = 0; i < payload_size-1; ++i) {
             my_buf[i] = *(ptr_char+i) - mykey;
             if(my_buf[i] < 32)
                 my_buf[i] = (127-32) - mykey + my_buf[i];
-            // *(ptr_char+i) -= mykey;
-            // if(*(ptr_char+i) < 32 )
-            //     (*(ptr_char+i)) = (127-32) - mykey + (*(ptr_char+i));
-
-            // ((char)ptr_char[i]) -= mykey;
-            // if((char)ptr_char[i] < 32)
-            // ((char)ptr_char[i]) = (127-32) - mykey + ((char)ptr_char[i]);
         }
+
+        my_buf[i] = '\0';
         printk(KERN_INFO "Lab11(de) Receive side, decrypted message is:%s\n", my_buf);
         mykey = 0;
     }
 
-    // printk(KERN_INFO "Receive side, 1 byte message:");
-    // printk(KERN_INFO "%c\n", (char)ptr_char[0]);
-
-    // if(!ptr_char[1])
-    //  printk(KERN_INFO "ptr_char[1] = NULL\n");
-
-    // printk(KERN_INFO "Receive side, one byte message:");
-    // printk(KERN_INFO "%c\n", (char)ptr_char[0]);
-    /* Encrypted data */
-    // printk(KERN_INFO "Receive side, original message(print by char) is:\n");
-    // for(i = 0; i < skb->len, *ptr_char == '\0'; ++i) {
-    //  printk(KERN_INFO "%c", *(ptr_char+i));
-    // }
-    // printk(KERN_INFO "i = %u\n", i);
-        // if(*ptr_char >= 32 && *ptr_char < 128)
-        //  *ptr_char -= sk->sk_socket->mykey;
-        //  if(*ptr_char < 32)
-        //      *ptr_char = (127 - 32) - sk->sk_socket->mykey + *ptr_char;
-
-    // printk(KERN_INFO "Receive side, decrpyted message is:");
-    // // ptr_char = (char *)((unsigned char *)tcph + (tcph->doff *4));
-    // // printk(KERN_INFO "%s\n", ptr_char);
-    // // printk(KERN_INFO "Lab11 Receive side, decrypted message is:");
-    // for(i = 0; i < payload_size; ++i) {
-    //  // ((unsigned int)ptr_char[i]) = ((unsigned int)ptr_char[i]) - sk->sk_socket->mykey;
-    //  // if((unsigned int)ptr_char[i] < 32)
-    //  //  ((unsigned int)ptr_char[i]) = (127-32) - sk->sk_socket->mykey + ((unsigned int)ptr_char[i]);
-    //  my_buf[i] = (char)ptr_char[i];
-    //  (my_buf[i]) -= sk->sk_socket->mykey;
-    //  if(my_buf[i] < 32)
-    //      (my_buf[i]) = (127-32) - sk->sk_socket->mykey + (my_buf[i]);
-    //  printk(KERN_INFO "%c", my_buf[i]);
-    // }
-
-    // my_buf[i] = '\0';
-    // printk(KERN_INFO "Receive side, my_buf is:");
-    // printk(KERN_INFO "%s\n", my_buf);
-    //  ptr_char = (char *)(skb + sizeof(struct tcphdr))+i;
-    //  printk(KERN_INFO "%c", *ptr_char);
-    // }
 
 process:
     if (sk->sk_state == TCP_TIME_WAIT)
