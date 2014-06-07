@@ -1560,7 +1560,7 @@ csum_err:
  *  From tcp_input.c
  */
 
-static int mykey = 0;
+int mykey = 0;
 
 int tcp_v4_rcv(struct sk_buff *skb)
 {
@@ -1614,11 +1614,9 @@ int tcp_v4_rcv(struct sk_buff *skb)
 
     /* Lab11:receiver decrypt data here, do only when mykey is set*/
 
-    tcph = (struct tcphdr *)((__u32 *)iph + iph->ihl);
-    ptr_char = (char *)((unsigned char *)tcph + (tcph->doff *4));
     payload_size = skb->len - tcp_hdrlen(skb);
 
-    if(sk->sk_socket->mykey > 0 && sk->sk_socket->mykey < 128)
+    if(sk->sk_socket->mykey > 0)
         mykey = sk->sk_socket->mykey;
 
     printk(KERN_INFO "Lab11(de) mykey = %d\n", mykey);
@@ -1626,14 +1624,23 @@ int tcp_v4_rcv(struct sk_buff *skb)
 
     /* mykey is set and payload has message data */
     if( mykey > 0 && payload_size > 0 ) {
-        printk(KERN_INFO "Lab11(de) Receive side, original message is: %s\n", ptr_char);
-        printk(KERN_INFO "Lab11(de) Receive side, original message(byte) is:");
-        for(i = 0; i < payload_size; ++i) {
-            printk(KERN_INFO "%c", ptr_char[i]);
+        tcph = (struct tcphdr *)((__u32 *)iph + iph->ihl);
+        ptr_char = (char *)((unsigned char *)tcph + (tcph->doff *4));
+        printk(KERN_INFO "Lab11(de) Receive side, original message is:%s\n", ptr_char);
+        for(i = 0; i < payload_size-1; ++i) {
+            my_buf[i] = *(ptr_char+i) - mykey;
+            if(my_buf[i] < 32)
+                my_buf[i] = (127-32) - mykey + my_buf[i];
+            // *(ptr_char+i) -= mykey;
+            // if(*(ptr_char+i) < 32 )
+            //     (*(ptr_char+i)) = (127-32) - mykey + (*(ptr_char+i));
+
             // ((char)ptr_char[i]) -= mykey;
             // if((char)ptr_char[i] < 32)
             // ((char)ptr_char[i]) = (127-32) - mykey + ((char)ptr_char[i]);
         }
+        printk(KERN_INFO "Lab11(de) Receive side, decrypted message is:%s\n", my_buf);
+        mykey = 0;
     }
 
     // printk(KERN_INFO "Receive side, 1 byte message:");
