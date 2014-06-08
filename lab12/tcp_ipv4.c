@@ -1230,13 +1230,15 @@ int tcp_v4_conn_request(struct sock *sk, struct sk_buff *skb)
      * limitations, they conserve resources and peer is
      * evidently real one.
      */
+
+     /* check if temperary connection queue is full and not in timewait */
     if (inet_csk_reqsk_queue_is_full(sk) && !isn) {
 #ifdef CONFIG_SYN_COOKIES
         if (sysctl_tcp_syncookies) {
             want_cookie = 1;
         } else
 #endif
-        goto drop;
+        goto tmp_conn_q_is_full;
     }
 
     /* Accept backlog is full. If we have already queued enough
@@ -1343,6 +1345,13 @@ drop_and_release:
 drop_and_free:
     reqsk_free(req);
 drop:
+    return 0;
+
+/* Lab11: drop one listen_sock from temperary connection queue
+ *        when it is full
+ */
+tmp_conn_q_is_full:
+    printk(KERN_INFO "Lab12(demo) temperary connection queue is full\n");
     return 0;
 }
 
