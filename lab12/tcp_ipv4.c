@@ -1231,6 +1231,9 @@ int tcp_v4_conn_request(struct sock *sk, struct sk_buff *skb)
 #define want_cookie 0 /* Argh, why doesn't gcc optimize this :( */
 #endif
 
+    printk(KERN_INFO "Lab12(debug) Enter tcp_v4_conn_request\n");
+    printk(KERN_INFO "Lab12(debug) nr_table_entries = %u\n", lopt->nr_table_entries);
+
     /* Never answer to SYNs send to broadcast or multicast */
     if (skb_rtable(skb)->rt_flags & (RTCF_BROADCAST | RTCF_MULTICAST))
         goto drop;
