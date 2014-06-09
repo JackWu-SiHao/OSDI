@@ -1214,7 +1214,7 @@ int tcp_v4_conn_request(struct sock *sk, struct sk_buff *skb)
     struct request_sock *req;
 
     /* Lab11 : declaration */
-    const u32 hash_idx;
+    u32 hash_idx;
     const struct inet_connection_sock *icsk = inet_csk(sk);
     struct request_sock *req_drop, **prev;
     struct listen_sock *lopt = icsk->icsk_accept_queue.listen_opt;
@@ -1362,12 +1362,19 @@ drop:
 tmp_conn_q_is_full:
     printk(KERN_INFO "Lab12(demo) temperary connection queue is full\n");
 
-    for(prev = &lopt->syn_table[inet_synq_hash(daddr, th->dest, lopt->hash_rnd,
-                            lopt->nr_table_entries)]);
-        (req = *prev) != NULL; prev = &req->dl_next) {
+    for(prev = &lopt->syn_table[jhash_2words(
+            (__force u32)daddr,
+            (__force u32)th->dest,
+            lopt->hash_rnd) & (lopt->nr_table_entries - 1)];
+        (req_drop = *prev) != NULL;
+        prev = &req_drop->dl_next) {
 
-        hash_idx = inet_synq_hash(inet_rsk(req)->rmt_addr, inet_rsk(req)->rmt_port,
-            lopt->hash_rnd, lopt->nr_table_entries);
+        /* for each req_drop, get its hash index */
+        hash_idx = (jhash_2words(
+            (__force u32)inet_rsk(req_drop)->rmt_addr,
+            (__force u32)inet_rsk(req_drop)->rmt_port,
+            lopt->hash_rnd)) & (lopt->nr_table_entries - 1);
+
         printk(KERN_INFO "Lab12(debug) hash index = %u\n", hash_idx);
     }
 
