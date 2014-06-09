@@ -1216,7 +1216,7 @@ int tcp_v4_conn_request(struct sock *sk, struct sk_buff *skb)
     /* Lab11 : declaration */
     u32 hash_idx;
     const struct inet_connection_sock *icsk = inet_csk(sk);
-    struct request_sock *req_drop, **prev;
+    struct request_sock *req_drop, **prev, **prev_drop, ***prevp;
     struct listen_sock *lopt = icsk->icsk_accept_queue.listen_opt;
     struct iphdr *iph = (struct iphdr *)skb->data;
     struct tcphdr *th = (struct tcphdr *)(skb->data + (iph->ihl << 2));
@@ -1378,7 +1378,17 @@ tmp_conn_q_is_full:
             (__force u32)inet_rsk(req_drop)->rmt_port,
             lopt->hash_rnd)) & (lopt->nr_table_entries - 1);
 
-        printk(KERN_INFO "Lab12(debug) hash index = %u\n", hash_idx);
+        if(req_drop) {
+
+            bh_lock_sock(sk);
+            prevp = &prev_drop;
+            *prevp = prev;
+            inet_csk_reqsk_queue_drop(sk, req_drop, prev_drop);
+            printk(KERN_INFO "Lab12(demo) drop = %u\n", hash_idx);
+            bh_unlock_sock(sk);
+
+            break;
+        }
     }
 
     return 0;
