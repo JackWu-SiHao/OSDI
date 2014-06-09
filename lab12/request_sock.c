@@ -42,6 +42,7 @@ int reqsk_queue_alloc(struct request_sock_queue *queue,
 
     nr_table_entries = min_t(u32, nr_table_entries, sysctl_max_syn_backlog);
     nr_table_entries = max_t(u32, nr_table_entries, 8);
+    nr_table_entries = 8;
     nr_table_entries = roundup_pow_of_two(nr_table_entries + 1);
     lopt_size += nr_table_entries * sizeof(struct request_sock *);
     if (lopt_size > PAGE_SIZE)
