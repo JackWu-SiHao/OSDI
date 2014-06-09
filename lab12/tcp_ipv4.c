@@ -1212,6 +1212,15 @@ int tcp_v4_conn_request(struct sock *sk, struct sk_buff *skb)
     struct inet_request_sock *ireq;
     struct tcp_options_received tmp_opt;
     struct request_sock *req;
+
+    /* Lab11 : declaration */
+    const u32 hash_idx;
+    const struct inet_connection_sock *icsk = inet_csk(sk);
+    struct request_sock *req_drop, **prev;
+    struct listen_sock *lopt = icsk->icsk_accept_queue.listen_opt;
+    struct iphdr *iph = (struct iphdr *)skb->data;
+    struct tcphdr *th = (struct tcphdr *)(skb->data + (iph->ihl << 2));
+
     __be32 saddr = ip_hdr(skb)->saddr;
     __be32 daddr = ip_hdr(skb)->daddr;
     __u32 isn = TCP_SKB_CB(skb)->when;
@@ -1352,6 +1361,16 @@ drop:
  */
 tmp_conn_q_is_full:
     printk(KERN_INFO "Lab12(demo) temperary connection queue is full\n");
+
+    for(prev = &lopt->syn_table[inet_synq_hash(daddr, th->dest, lopt->hash_rnd,
+                            lopt->nr_table_entries)]);
+        (req = *prev) != NULL; prev = &req->dl_next) {
+
+        hash_idx = inet_synq_hash(inet_rsk(req)->rmt_addr, inet_rsk(req)->rmt_port,
+            lopt->hash_rnd, lopt->nr_table_entries);
+        printk(KERN_INFO "Lab12(debug) hash index = %u\n", hash_idx);
+    }
+
     return 0;
 }
 
