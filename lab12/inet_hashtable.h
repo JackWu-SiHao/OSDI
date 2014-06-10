@@ -154,6 +154,20 @@ struct inet_hashinfo {
     atomic_t            bsockets;
 };
 
+static inline void print_hash(u32 hash_ary[64])
+{
+    unsigned int i;
+
+    printk(KERN_INFO "Lab12(debug) Current syn_table hash values have:\n");
+
+    for (i = 0; i < 64; ++i)
+    {
+        if(hash_ary[i] == 0) break;
+        if(i % 10 == 0) printk(KERN_INFO "\n");
+        printk(KERN_INFO "%u ", hash_ary[i]);
+    }
+}
+
 static inline struct inet_ehash_bucket *inet_ehash_bucket(
     struct inet_hashinfo *hashinfo,
     unsigned int hash)
