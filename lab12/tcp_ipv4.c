@@ -1207,6 +1207,11 @@ static struct timewait_sock_ops tcp_timewait_sock_ops = {
     .twsk_destructor= tcp_twsk_destructor,
 };
 
+void drop_helper(struct request_sock ***prevp)
+{
+
+}
+
 int tcp_v4_conn_request(struct sock *sk, struct sk_buff *skb)
 {
     struct inet_request_sock *ireq;
@@ -1379,14 +1384,9 @@ tmp_conn_q_is_full:
             lopt->hash_rnd)) & (lopt->nr_table_entries - 1);
 
         if(req_drop) {
-
-            bh_lock_sock(sk);
-            prevp = &prev_drop;
-            *prevp = prev;
+            prev_drop = prev;
             inet_csk_reqsk_queue_drop(sk, req_drop, prev_drop);
             printk(KERN_INFO "Lab12(demo) drop = %u\n", hash_idx);
-            bh_unlock_sock(sk);
-
             break;
         }
     }
