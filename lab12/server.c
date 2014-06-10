@@ -12,9 +12,9 @@
 #define MAXCLIENT  100      // Maximum client connections
 #define RCVBUFSIZE 1024     // Size of receive buffer
 
-int     CreateTCPServerSocket( unsigned short );
-int     AcceptTCPConnection( int );
-int     HandleTCPClient( int );
+int CreateTCPServerSocket( unsigned short );
+int AcceptTCPConnection( int );
+int HandleTCPClient( int );
 
 int main( int argc, char *argv[] )
 {
