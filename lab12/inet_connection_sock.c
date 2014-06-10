@@ -430,7 +430,7 @@ struct request_sock *inet_csk_search_req(const struct sock *sk,
 EXPORT_SYMBOL_GPL(inet_csk_search_req);
 
 unsigned int hash_ary_curr = 0;
-u32 hash_ary[64] = {0};
+u32 hash_ary[HASH_ARY_SIZE] = {0};
 
 void inet_csk_reqsk_queue_hash_add(struct sock *sk, struct request_sock *req,
            unsigned long timeout)
@@ -442,7 +442,7 @@ void inet_csk_reqsk_queue_hash_add(struct sock *sk, struct request_sock *req,
 
   /* Lab12 */
   printk(KERN_INFO "Lab12(debug) hash add %u\n", h);
-  hash_ary[hash_ary_curr++ % 64] = h;
+  hash_ary[hash_ary_curr++ % HASH_ARY_SIZE] = h;
   print_hash(hash_ary);
 
   reqsk_queue_hash_req(&icsk->icsk_accept_queue, h, req, timeout);

@@ -36,6 +36,8 @@
 #include <asm/atomic.h>
 #include <asm/byteorder.h>
 
+#define HASH_ARY_SIZE 512
+
 /* This is for all connections with a full identity, no wildcards.
  * One chain is dedicated to TIME_WAIT sockets.
  * I'll experiment with dynamic table growth later.
@@ -160,12 +162,15 @@ static inline void print_hash(u32 hash_ary[64])
 
     printk(KERN_INFO "Lab12(debug) Current syn_table hash values have:\n");
 
-    for (i = 0; i < 64; ++i)
+    for (i = 0; i < HASH_ARY_SIZE; ++i)
     {
-        if(hash_ary[i] == 0) break;
-        if(i % 10 == 0) printk(KERN_INFO "\n");
-        printk(KERN_INFO "%u ", hash_ary[i]);
+        if(hash_ary[i] == 0)
+            continue;
+        if(i % 10 == 0)
+            printk(KERN_INFO "\n");
+        printk(KERN_CONT "%u ", hash_ary[i]);
     }
+    printk(KERN_INFO "==================================================\n");
 }
 
 static inline struct inet_ehash_bucket *inet_ehash_bucket(

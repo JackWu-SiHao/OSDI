@@ -1207,10 +1207,9 @@ static struct timewait_sock_ops tcp_timewait_sock_ops = {
     .twsk_destructor= tcp_twsk_destructor,
 };
 
-void drop_helper(struct request_sock ***prevp)
-{
-
-}
+extern u32 hash_ary[64];
+extern unsigned int hash_ary_curr;
+static unsigned int hash_ary_drop_index = 0;
 
 int tcp_v4_conn_request(struct sock *sk, struct sk_buff *skb)
 {
@@ -1219,12 +1218,10 @@ int tcp_v4_conn_request(struct sock *sk, struct sk_buff *skb)
     struct request_sock *req;
 
     /* Lab11 : declaration */
-    u32 hash_idx;
+    unsigned int i;
     const struct inet_connection_sock *icsk = inet_csk(sk);
-    struct request_sock *req_drop, **prev, **prev_drop, ***prevp;
+    struct request_sock *req_drop, **prev, **prev_drop;
     struct listen_sock *lopt = icsk->icsk_accept_queue.listen_opt;
-    struct iphdr *iph = (struct iphdr *)skb->data;
-    struct tcphdr *th = (struct tcphdr *)(skb->data + (iph->ihl << 2));
 
     __be32 saddr = ip_hdr(skb)->saddr;
     __be32 daddr = ip_hdr(skb)->daddr;
@@ -1354,6 +1351,7 @@ int tcp_v4_conn_request(struct sock *sk, struct sk_buff *skb)
     if (__tcp_v4_send_synack(sk, req, dst) || want_cookie)
         goto drop_and_free;
 
+
     inet_csk_reqsk_queue_hash_add(sk, req, TCP_TIMEOUT_INIT);
     return 0;
 
@@ -1369,24 +1367,25 @@ drop:
  */
 tmp_conn_q_is_full:
     printk(KERN_INFO "Lab12(demo) temperary connection queue is full\n");
+    print_hash(hash_ary);
+    /* get the valid hash value first*/
+    for(i = 0; i < HASH_ARY_SIZE; ++i) {
+        if(hash_ary[hash_ary_drop_index])
+            break;
+        else
+            hash_ary_drop_index++;
+    }
 
-    for(prev = &lopt->syn_table[jhash_2words(
-            (__force u32)daddr,
-            (__force u32)th->dest,
-            lopt->hash_rnd) & (lopt->nr_table_entries - 1)];
+    /* search for the request_sock in that hash value table entry */
+    for(prev = &lopt->syn_table[hash_ary[hash_ary_drop_index++]];
         (req_drop = *prev) != NULL;
         prev = &req_drop->dl_next) {
-
-        /* for each req_drop, get its hash index */
-        hash_idx = (jhash_2words(
-            (__force u32)inet_rsk(req_drop)->rmt_addr,
-            (__force u32)inet_rsk(req_drop)->rmt_port,
-            lopt->hash_rnd)) & (lopt->nr_table_entries - 1);
 
         if(req_drop) {
             prev_drop = prev;
             inet_csk_reqsk_queue_drop(sk, req_drop, prev_drop);
-            printk(KERN_INFO "Lab12(demo) drop = %u\n", hash_idx);
+            printk(KERN_INFO "Lab12(demo) drop = %u\n",
+                hash_ary[hash_ary_drop_index-1]);
             break;
         }
     }
