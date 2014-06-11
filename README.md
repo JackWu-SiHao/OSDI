@@ -16,6 +16,8 @@ Lab includes:
 - Lab7:  A Simple Page Frame Reclaiming Algorithm
 - Lab8:  Block Device - RamDisk snapshot and rollback
 - Lab9:  I/O scheduler - Shortest seek time first(SSTF)
-- Lab10: File system driver (Ramfs)
+- Lab10: File system driver - encrytption and decryption files in Ramfs
 - Lab11: Data encryption and decryption in the TCP layer
-- Lab12: DDoS Defence
+- Lab12: DDoS Defence - drop bad connection in the temperary connection queue
+
+Lab sildes : (https://drive.google.com/folderview?id=0B3JBuk1iiOfvLWNLdE1ueW5xQ1U&usp=sharing)
