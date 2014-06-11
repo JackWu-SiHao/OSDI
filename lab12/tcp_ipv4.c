@@ -1207,7 +1207,7 @@ static struct timewait_sock_ops tcp_timewait_sock_ops = {
     .twsk_destructor= tcp_twsk_destructor,
 };
 
-extern u32 hash_ary[64];
+extern u32 hash_ary[HASH_ARY_SIZE];
 extern unsigned int hash_ary_curr;
 static unsigned int hash_ary_drop_index = 0;
 
@@ -1367,17 +1367,18 @@ drop:
  */
 tmp_conn_q_is_full:
     printk(KERN_INFO "Lab12(demo) temperary connection queue is full\n");
-    print_hash(hash_ary);
+    // print_hash(hash_ary);
+
     /* get the valid hash value first*/
-    for(i = 0; i < HASH_ARY_SIZE; ++i) {
-        if(hash_ary[hash_ary_drop_index])
+    for(i = 0; i < hash_ary_curr; ++i) {
+        if(hash_ary[hash_ary_drop_index] != 0)
             break;
         else
             hash_ary_drop_index++;
     }
 
     /* search for the request_sock in that hash value table entry */
-    for(prev = &lopt->syn_table[hash_ary[hash_ary_drop_index++]];
+    for(prev = &lopt->syn_table[hash_ary[hash_ary_drop_index]];
         (req_drop = *prev) != NULL;
         prev = &req_drop->dl_next) {
 
@@ -1385,11 +1386,12 @@ tmp_conn_q_is_full:
             prev_drop = prev;
             inet_csk_reqsk_queue_drop(sk, req_drop, prev_drop);
             printk(KERN_INFO "Lab12(demo) drop = %u\n",
-                hash_ary[hash_ary_drop_index-1]);
+                hash_ary[hash_ary_drop_index]);
             break;
         }
     }
 
+    hash_ary_drop_index++;
     return 0;
 }
 

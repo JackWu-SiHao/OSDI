@@ -441,9 +441,7 @@ void inet_csk_reqsk_queue_hash_add(struct sock *sk, struct request_sock *req,
              lopt->hash_rnd, lopt->nr_table_entries);
 
   /* Lab12 */
-  printk(KERN_INFO "Lab12(debug) hash add %u\n", h);
   hash_ary[hash_ary_curr++ % HASH_ARY_SIZE] = h;
-  print_hash(hash_ary);
 
   reqsk_queue_hash_req(&icsk->icsk_accept_queue, h, req, timeout);
   inet_csk_reqsk_queue_added(sk, timeout);
